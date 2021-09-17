@@ -10,7 +10,17 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
+    require('bootstrap')
+    // require('tinymce')
+    require('jquery.nicescroll')
+    require('select2')
+    require('filepond');
+    require('filepond-plugin-image-preview');
+    require('filepond-plugin-file-validate-size');
+    require('filepond-plugin-file-validate-type');
+    require('filepond-plugin-image-resize');
+    require('filepond-plugin-image-validate-size');
+    require('filepond-plugin-file-encode');
 } catch (e) {}
 
 /**
