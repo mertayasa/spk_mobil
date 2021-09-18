@@ -1,0 +1,39 @@
+models:
+  Booking:
+    id_mobil: unsignedBigInteger foreign:mobil.id 
+    id_user: unsignedBigInteger foreign:user.id 
+    id_sopir: unsignedBigInteger foreign:user.id nullable
+    deskripsi: text
+    harga: integer
+    tgl_mulai_sewa: date
+    tgl_akhir_sewa: date
+    relationships:
+      belongsTo: Mobil
+      hasMany: User
+
+controllers:
+  BookingController:
+    index:
+      render: booking.index
+    
+    datatable:
+      query: all
+
+    create:
+      render: booking.create
+    
+    edit:
+      render: booking.edit with:booking
+
+    store:
+      validate: booking
+      save: booking
+      redirect: booking.index
+    
+    update:
+      validate: booking
+      update: booking
+      redirect: booking.index
+    
+    destroy:
+      delete: booking

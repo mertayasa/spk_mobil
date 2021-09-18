@@ -1,0 +1,35 @@
+models:
+  HasilSaw:
+    kriteria: string:50
+    id_mobil: unsignedBigInteger foreign:mobil.id
+    nilai_akhir: float
+    relationships:
+      belongsTo: Mobil
+      hasMany: DetailSaw
+
+controllers:
+  HasilSawController:
+    index:
+      render: hasil_saw.index
+    
+    datatable:
+      query: all
+
+    create:
+      render: hasil_saw.create
+    
+    edit:
+      render: hasil_saw.edit with:hasil_saw
+
+    store:
+      validate: hasil_saw
+      save: hasil_saw
+      redirect: hasil_saw.index
+    
+    update:
+      validate: hasil_saw
+      update: hasil_saw
+      redirect: hasil_saw.index
+    
+    destroy:
+      delete: hasil_saw

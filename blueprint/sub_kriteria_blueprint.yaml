@@ -1,0 +1,36 @@
+models:
+  SubKriteria:
+    kriteria: string:50
+    id_kriteria: unsignedBigInteger foreign:kriteria.id
+    sub_kriteria: string:50
+    skor: string:50
+    sifat: tinyInteger default:0
+    relationships:
+      belongsTo: Kriteria
+
+controllers:
+  SubKriteriaController:
+    index:
+      render: sub_kriteria.index
+    
+    datatable:
+      query: all
+
+    create:
+      render: sub_kriteria.create
+    
+    edit:
+      render: sub_kriteria.edit with:sub_kriteria
+
+    store:
+      validate: sub_kriteria
+      save: sub_kriteria
+      redirect: sub_kriteria.index
+    
+    update:
+      validate: sub_kriteria
+      update: sub_kriteria
+      redirect: sub_kriteria.index
+    
+    destroy:
+      delete: sub_kriteria

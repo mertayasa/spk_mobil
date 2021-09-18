@@ -1,0 +1,37 @@
+models:
+  Mobil:
+    nama: string:50
+    id_jenis_mobil: unsignedBigInteger foreign:jenis_mobil.id 
+    deskripsi: text
+    harga: integer
+    relationships:
+      belongsTo: JenisMobil
+      hasMany: Booking
+      hasOne: HasilSaw
+
+controllers:
+  MobilController:
+    index:
+      render: mobil.index
+    
+    datatable:
+      query: all
+
+    create:
+      render: mobil.create
+    
+    edit:
+      render: mobil.edit with:mobil
+
+    store:
+      validate: mobil
+      save: mobil
+      redirect: mobil.index
+    
+    update:
+      validate: mobil
+      update: mobil
+      redirect: mobil.index
+    
+    destroy:
+      delete: mobil

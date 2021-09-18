@@ -1,0 +1,32 @@
+models:
+  JenisMobil:
+    jenis_mobil: string:50
+    relationships:
+      hasMany: Mobil
+
+controllers:
+  JenisMobilController:
+    index:
+      render: jenis_mobil.index
+    
+    datatable:
+      query: all
+
+    create:
+      render: jenis_mobil.create
+    
+    edit:
+      render: jenis_mobil.edit with:jenis_mobil
+
+    store:
+      validate: jenis_mobil
+      save: jenis_mobil
+      redirect: jenis_mobil.index
+    
+    update:
+      validate: jenis_mobil
+      update: jenis_mobil
+      redirect: jenis_mobil.index
+    
+    destroy:
+      delete: jenis_mobil

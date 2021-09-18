@@ -1,0 +1,37 @@
+models:
+  Sopir:
+    nama: string:50
+    telpon: string:16
+    alamat: text
+    tempat_lahir: string:50
+    tanggal_lahir: date
+    no_ktp: string:16
+    relationships:
+      hasMany: Booking
+
+controllers:
+  SopirController:
+    index:
+      render: sopir.index
+    
+    datatable:
+      query: all
+
+    create:
+      render: sopir.create
+    
+    edit:
+      render: sopir.edit with:sopir
+
+    store:
+      validate: sopir
+      save: sopir
+      redirect: sopir.index
+    
+    update:
+      validate: sopir
+      update: sopir
+      redirect: sopir.index
+    
+    destroy:
+      delete: sopir

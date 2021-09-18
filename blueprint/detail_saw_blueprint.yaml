@@ -1,0 +1,33 @@
+models:
+  DeatailSaw:
+    id_hasil_saw: unsignedBigInteger foreign:hasil_saw.id
+    id_kriteria: unsignedBigInteger foreign:kriteria.id
+    relationships:
+      belongsTo: HasilSaw,Kriteria
+
+controllers:
+  DeatailSawController:
+    index:
+      render: detail_saw.index
+    
+    datatable:
+      query: all
+
+    create:
+      render: detail_saw.create
+    
+    edit:
+      render: detail_saw.edit with:detail_saw
+
+    store:
+      validate: detail_saw
+      save: detail_saw
+      redirect: detail_saw.index
+    
+    update:
+      validate: detail_saw
+      update: detail_saw
+      redirect: detail_saw.index
+    
+    destroy:
+      delete: detail_saw

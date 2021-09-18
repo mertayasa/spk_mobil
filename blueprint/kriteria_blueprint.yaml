@@ -1,0 +1,34 @@
+models:
+  Kriteria:
+    kriteria: string:50
+    bobot: float
+    sifat: tinyInteger default:0
+    relationships:
+      hasMany: SubKriteria,DetailSaw
+
+controllers:
+  KriteriaController:
+    index:
+      render: kriteria.index
+    
+    datatable:
+      query: all
+
+    create:
+      render: kriteria.create
+    
+    edit:
+      render: kriteria.edit with:kriteria
+
+    store:
+      validate: kriteria
+      save: kriteria
+      redirect: kriteria.index
+    
+    update:
+      validate: kriteria
+      update: kriteria
+      redirect: kriteria.index
+    
+    destroy:
+      delete: kriteria
