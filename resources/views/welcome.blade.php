@@ -48,10 +48,7 @@
 			<ul class="givusacall">
 				<li>Give us a call : +66666666 </li>
 			</ul>
-			<ul class="logreg">
-				<li><a href="#">Login </a> </li>
-				<li><a href="#"><span class="register">Register</span></a></li>
-			</ul>
+
 	</div>
 	<!-- Navbar Up -->
 	<nav class="topnavbar navbar-default topnav">
@@ -89,7 +86,18 @@
 					<a href="contact.html">CONTACT</a>
  
 				</li>
-				<button><span class="postnewcar">POST NEW CAR</span></button>
+				{{-- <button><span class="postnewcar">POST NEW CAR</span></button> --}}
+                @if (Route::has('login'))
+                    @auth
+                      <button><span class="postnewcar">  <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a></span></button>
+                    @else
+                       <button><span class="postnewcar"> <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a></span></button>
+
+                        @if (Route::has('register'))
+                        <button><span class="postnewcar">    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a></span></button>
+                        @endif
+                    @endauth
+                @endif
 			</ul>
 		</div>
 	</nav>
