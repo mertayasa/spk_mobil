@@ -29,8 +29,8 @@ class JenisMobil extends Model
     ];
 
 
-    public function mobils()
+    public function mobil()
     {
-        return $this->hasMany(\App\Models\Mobil::class);
+        return $this->hasMany(\App\Models\Mobil::class, 'id_jenis_mobil');
     }
 }

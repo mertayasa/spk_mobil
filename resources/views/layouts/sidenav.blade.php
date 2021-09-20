@@ -35,35 +35,21 @@
         <ul class="nav flex-column pt-3 pt-md-0">
             <li class="nav-item {{ isActive('dashboard') }}">
                 <a href="/dashboard" class="nav-link">
-                    <span class="sidebar-icon"> <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg></span></span>
+                    <span class="sidebar-icon"> <i class="fas fa-fire"></i> </span>
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('sopir') }}">
                 <a href="/dashboard" class="nav-link">
-                    <span class="sidebar-icon"> <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg></span></span>
+                    <span class="sidebar-icon"> <i class="fas fa-id-badge"></i> </span>
                     <span class="sidebar-text">Sopir</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('pengguna') }}">
                 <a href="/dashboard" class="nav-link">
-                    <span class="sidebar-icon"> 
-                      <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg>
-                      </span>
+                    <span class="sidebar-icon"> <i class="fas fa-users"></i> </span>
                     <span class="sidebar-text">Pengguna</span>
                 </a>
             </li>
@@ -76,56 +62,36 @@
             </li>
 
             <li class="nav-item {{ isActive('jenis-mobil') }}">
-                <a href="/dashboard" class="nav-link">
-                    <span class="sidebar-icon"> <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg></span></span>
+                <a href="{{route('jenis_mobil.index')}}" class="nav-link">
+                    <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Jenis Mobil</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('booking') }}">
                 <a href="/dashboard" class="nav-link">
-                    <span class="sidebar-icon"> <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg></span></span>
+                    <span class="sidebar-icon"> <i class="fas fa-calendar-check"></i> </span>
                     <span class="sidebar-text">Booking</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('kriteria') }}">
                 <a href="/dashboard" class="nav-link">
-                    <span class="sidebar-icon"> <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg></span></span>
+                    <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Kriteria</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('sub-kriteria') }}">
                 <a href="/dashboard" class="nav-link">
-                    <span class="sidebar-icon"> <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg></span></span>
+                    <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Sub Kriteria</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('hasil-saw') }}">
                 <a href="/dashboard" class="nav-link">
-                    <span class="sidebar-icon"> <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                        </svg></span></span>
+                    <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Hasil SAW</span>
                 </a>
             </li>

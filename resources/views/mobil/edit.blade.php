@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="py-4">
-        <h3>Tambah Mobil</h3>
+        <h3>Edit Mobil</h3>
     </div>
     <div class="row">
         <div class="col-12">

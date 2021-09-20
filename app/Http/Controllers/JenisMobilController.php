@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\JenisMobilControllerStoreRequest;
-use App\Http\Requests\JenisMobilControllerUpdateRequest;
+use App\DataTables\JenisMobilDataTable;
+use App\Http\Requests\JenisMobilStoreRequest;
+use App\Http\Requests\JenisMobilUpdateRequest;
 use App\Models\JenisMobil;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class JenisMobilController extends Controller
 {
@@ -24,7 +27,9 @@ class JenisMobilController extends Controller
      */
     public function datatable(Request $request)
     {
-        $jenisMobils = JenisMobil::all();
+        $jenis_mobil = JenisMobil::all();
+
+        return JenisMobilDataTable::set($jenis_mobil);
     }
 
     /**
@@ -38,44 +43,65 @@ class JenisMobilController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\JenisMobil $jenisMobil
+     * @param \App\Models\JenisMobil $jenis_mobil
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, JenisMobil $jenisMobil)
+    public function edit(Request $request, JenisMobil $jenis_mobil)
     {
         return view('jenis_mobil.edit', compact('jenis_mobil'));
     }
 
     /**
-     * @param \App\Http\Requests\JenisMobilControllerStoreRequest $request
+     * @param \App\Http\Requests\JenisMobilStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JenisMobilControllerStoreRequest $request)
+    public function store(JenisMobilStoreRequest $request)
     {
-        $jenisMobil = JenisMobil::create($request->validated());
+        try{
+            JenisMobil::create($request->validated());
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data jenis mobil');
+        }
 
-        return redirect()->route('jenis_mobil.index');
+        return redirect()->route('jenis_mobil.index')->with('success', 'Berhasil menambahkan data jenis mobil');
     }
 
     /**
-     * @param \App\Http\Requests\JenisMobilControllerUpdateRequest $request
-     * @param \App\Models\JenisMobil $jenisMobil
+     * @param \App\Http\Requests\JenisMobilUpdateRequest $request
+     * @param \App\Models\JenisMobil $jenis_mobil
      * @return \Illuminate\Http\Response
      */
-    public function update(JenisMobilControllerUpdateRequest $request, JenisMobil $jenisMobil)
+    public function update(JenisMobilUpdateRequest $request, JenisMobil $jenis_mobil)
     {
-        $jenisMobil->update($request->validated());
+        try{
+            $jenis_mobil->update($request->validated());
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data jenis mobil');
+        }
 
-        return redirect()->route('jenis_mobil.index');
+        return redirect()->route('jenis_mobil.index')->with('success', 'Berhasil menambahkan data jenis mobil');
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\JenisMobil $jenisMobil
+     * @param \App\Models\JenisMobil $jenis_mobil
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, JenisMobil $jenisMobil)
+    public function destroy(Request $request, JenisMobil $jenis_mobil)
     {
-        $jenisMobil->delete();
+        try {
+            if($jenis_mobil->mobil->count() > 0){
+                return response(['code' => 0, 'message' => 'Gagal menghapus data jenis mobil, data masih digunakan di tabel mobil']);
+            }
+
+            $jenis_mobil->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data jenis mobil']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data jenis mobil']);
     }
 }

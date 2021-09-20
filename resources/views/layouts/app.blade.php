@@ -113,7 +113,7 @@
                         data : {"_token": "{{ csrf_token() }}"},
                         method : "delete",
                         success:function(data){
-                            console.log(data)
+                            // console.log(data)
                             if(data.code == 1){
                                 Swal.fire(
                                     'Berhasil',

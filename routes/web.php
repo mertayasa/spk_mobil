@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JenisMobilController;
 use App\Http\Controllers\MobilController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,16 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{mobil}', [MobilController::class, 'update'])->name('update');
         Route::delete('destroy/{mobil}', [MobilController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [MobilController::class, 'datatable'])->name('datatable');
+    });
+    
+    Route::group(['prefix' => 'jenis-mobil', 'as' => 'jenis_mobil.'], function () {
+        Route::get('/', [JenisMobilController::class, 'index'])->name('index');
+        Route::get('create', [JenisMobilController::class, 'create'])->name('create');
+        Route::post('store', [JenisMobilController::class, 'store'])->name('store');
+        Route::get('edit/{jenis_mobil}', [JenisMobilController::class, 'edit'])->name('edit');
+        Route::patch('update/{jenis_mobil}', [JenisMobilController::class, 'update'])->name('update');
+        Route::delete('destroy/{jenis_mobil}', [JenisMobilController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [JenisMobilController::class, 'datatable'])->name('datatable');
     });
 
 });
