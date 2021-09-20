@@ -9,6 +9,7 @@ class Mobil extends Model
 {
     use HasFactory;
 
+    protected $table = 'mobil';
     /**
      * The attributes that are mass assignable.
      *
@@ -18,7 +19,9 @@ class Mobil extends Model
         'nama',
         'id_jenis_mobil',
         'deskripsi',
+        'jumlah_kursi',
         'harga',
+        'thumbnail'
     ];
 
     /**
@@ -34,12 +37,7 @@ class Mobil extends Model
 
     public function jenisMobil()
     {
-        return $this->belongsTo(\App\Models\JenisMobil::class);
-    }
-
-    public function idJenisMobil()
-    {
-        return $this->belongsTo(\App\Models\JenisMobil::class);
+        return $this->belongsTo(\App\Models\JenisMobil::class, 'id_jenis_mobil');
     }
 
     public function bookings()

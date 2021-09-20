@@ -31,8 +31,8 @@
     <!-- Notyf -->
     <link type="text/css" href="{{asset('vendor/notyf/notyf.min.css')}}" rel="stylesheet"> --}}
     
-    <link type="text/css" href="{{asset('css/app.css')}}" rel="stylesheet">
     <!-- Volt CSS -->
+    <link type="text/css" href="{{asset('css/app.css')}}" rel="stylesheet">
     <link type="text/css" href="{{asset('css/volt.css')}}" rel="stylesheet">
     
     <!-- Vendor JS -->
@@ -75,6 +75,10 @@
     <!-- Volt JS -->
     <script src="{{asset('assets/js/volt.js')}}"></script>
 
+    <link rel="stylesheet" href="{{asset('vendor/datatables/datatables.css')}}">
+    <script src="{{asset('vendor/datatables/datatables.js')}}" ></script>
+  
+
 </head>
 
 <body>
@@ -87,9 +91,57 @@
         
         @yield('content')
         
-        @include('layouts.footer')
+        {{-- @include('layouts.footer') --}}
     </main>
     
+    <script>
+        function deleteModel(deleteUrl, tableId, target = ''){
+            Swal.fire({
+                title: "Warning",
+                text: `Yakin menghapus data ${target}? Proses ini tidak dapat diulang kembali`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#169b6b',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url : deleteUrl,
+                        dataType : "Json",
+                        data : {"_token": "{{ csrf_token() }}"},
+                        method : "delete",
+                        success:function(data){
+                            console.log(data)
+                            if(data.code == 1){
+                                Swal.fire(
+                                    'Berhasil',
+                                    data.message,
+                                    'success'
+                            )
+                            }else{
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: data.message
+                                })
+                            }
+                            $('#'+tableId).DataTable().ajax.reload();
+                        }
+                    })
+                }
+            })
+          }
+    
+        // $(document).ready(function() {
+        //     $('select').select2();
+        // })
+          
+      </script>
+    
+      <!-- Page Specific JS File -->
+      {{-- <script src="{{asset('admin/js/page/index.js')}}"></script> --}}
+      @stack('scripts')
 </body>
-
 </html>

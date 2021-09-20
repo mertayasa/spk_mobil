@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MobilControllerStoreRequest;
-use App\Http\Requests\MobilControllerUpdateRequest;
+use App\DataTables\MobilDataTable;
+use App\Http\Requests\MobilStoreRequest;
+use App\Http\Requests\MobilUpdateRequest;
+use App\Models\JenisMobil;
 use App\Models\Mobil;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MobilController extends Controller
 {
@@ -24,7 +28,9 @@ class MobilController extends Controller
      */
     public function datatable(Request $request)
     {
-        $mobils = Mobil::all();
+        $mobil = Mobil::with('jenisMobil')->get();
+
+        return MobilDataTable::set($mobil);
     }
 
     /**
@@ -33,7 +39,8 @@ class MobilController extends Controller
      */
     public function create(Request $request)
     {
-        return view('mobil.create');
+        $jenis_mobil = JenisMobil::pluck('jenis_mobil', 'id');
+        return view('mobil.create', compact('jenis_mobil'));
     }
 
     /**
@@ -43,18 +50,35 @@ class MobilController extends Controller
      */
     public function edit(Request $request, Mobil $mobil)
     {
-        return view('mobil.edit', compact('mobil'));
+        $jenis_mobil = JenisMobil::pluck('jenis_mobil', 'id');
+        return view('mobil.edit', compact('mobil', 'jenis_mobil'));
     }
 
     /**
      * @param \App\Http\Requests\MobilControllerStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MobilControllerStoreRequest $request)
+    public function store(MobilStoreRequest $request)
     {
-        $mobil = Mobil::create($request->validated());
+        // dd($request->all());
+        try{
+            $data = $request->all();
+    
+            $base_64_foto = json_decode($request['thumbnail'], true);
+            $upload_image = uploadFile($base_64_foto);
+            if ($upload_image == 0) {
+                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            }
+    
+            $data['thumbnail'] = $upload_image;
+    
+            Mobil::create($data);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data mobil');
+        }
 
-        return redirect()->route('mobil.index');
+        return redirect()->route('mobil.index')->with('success', 'Berhasil menambahkan data mobil');
     }
 
     /**
@@ -62,11 +86,26 @@ class MobilController extends Controller
      * @param \App\Models\Mobil $mobil
      * @return \Illuminate\Http\Response
      */
-    public function update(MobilControllerUpdateRequest $request, Mobil $mobil)
+    public function update(MobilUpdateRequest $request, Mobil $mobil)
     {
-        $mobil->update($request->validated());
+        try{
+            $data = $request->all();
+            $base_64_foto = json_decode($request['thumbnail'], true);
+            $upload_image = uploadFile($base_64_foto);
+            if ($upload_image == 0) {
+                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            }
+    
+            $data['thumbnail'] = $upload_image;
+    
+            $mobil->update($data);
 
-        return redirect()->route('mobil.index');
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data mobil');
+        }
+
+        return redirect()->route('mobil.index')->with('success', 'Berhasil mengubah data mobil');
     }
 
     /**
@@ -76,6 +115,13 @@ class MobilController extends Controller
      */
     public function destroy(Request $request, Mobil $mobil)
     {
-        $mobil->delete();
+        try {
+            $mobil->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data Kegiatan']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data Kegiatan']);
     }
 }

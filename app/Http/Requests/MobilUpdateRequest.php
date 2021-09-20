@@ -25,9 +25,11 @@ class MobilUpdateRequest extends FormRequest
     {
         return [
             'nama' => ['required', 'string', 'max:50'],
-            'id_jenis_mobil' => ['required', 'integer', 'gt:0'],
+            'id_jenis_mobil' => ['required', 'integer', 'gt:0', 'exists:jenis_mobil,id'],
             'deskripsi' => ['required', 'string'],
             'harga' => ['required', 'integer'],
+            'jumlah_kursi' => ['required', 'integer'],
+            'thumbnail' => ['required', 'string'],
         ];
     }
 }

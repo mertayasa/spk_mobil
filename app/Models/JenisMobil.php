@@ -9,6 +9,7 @@ class JenisMobil extends Model
 {
     use HasFactory;
 
+    protected $table = "jenis_mobil";
     /**
      * The attributes that are mass assignable.
      *

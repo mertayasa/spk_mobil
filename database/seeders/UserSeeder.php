@@ -21,8 +21,13 @@ class UserSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'Admin',
+                'nama' => 'Admin',
+                'telpon' => $faker->e164PhoneNumber(),
                 'email' => 'admin@demo.com',
+                'jenis_kelamin' => rand(0,1),
+                'status_aktif' => 1,
+                'alamat' => $faker->address(),
+                'no_ktp' => '5105012105980001',
                 'level' => 0,
                 'email_verified_at' => now(),
                 'password' => bcrypt('asdasdasd'), // password
