@@ -9,6 +9,8 @@ class Sopir extends Model
 {
     use HasFactory;
 
+    protected $table = 'sopir';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +22,7 @@ class Sopir extends Model
         'alamat',
         'tempat_lahir',
         'tanggal_lahir',
+        'photo',
         'no_ktp',
     ];
 
@@ -30,12 +33,11 @@ class Sopir extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'tanggal_lahir' => 'date',
     ];
 
 
-    public function bookings()
+    public function booking()
     {
-        return $this->hasMany(\App\Models\Booking::class);
+        return $this->hasMany(\App\Models\Booking::class, 'id_sopir');
     }
 }

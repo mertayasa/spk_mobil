@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SopirControllerStoreRequest;
-use App\Http\Requests\SopirControllerUpdateRequest;
+use App\DataTables\SopirDataTable;
+use App\Http\Requests\SopirStoreRequest;
+use App\Http\Requests\SopirUpdateRequest;
 use App\Models\Sopir;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SopirController extends Controller
 {
@@ -24,7 +27,9 @@ class SopirController extends Controller
      */
     public function datatable(Request $request)
     {
-        $sopirs = Sopir::all();
+        $sopir = Sopir::all();
+        
+        return SopirDataTable::set($sopir);
     }
 
     /**
@@ -47,26 +52,57 @@ class SopirController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\SopirControllerStoreRequest $request
+     * @param \App\Http\Requests\SopirStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SopirControllerStoreRequest $request)
+    public function store(SopirStoreRequest $request)
     {
-        $sopir = Sopir::create($request->validated());
+        try{
+            $data = $request->all();
+            $base_64_foto = json_decode($request['photo'], true);
+            $upload_image = uploadFile($base_64_foto);
+            if ($upload_image == 0) {
+                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            }
+    
+            $data['photo'] = $upload_image;
+    
+            Sopir::create($data);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data sopir');
+        }
 
-        return redirect()->route('sopir.index');
+        return redirect()->route('sopir.index')->with('success', 'Berhasil menambahkan data sopir');
     }
 
     /**
-     * @param \App\Http\Requests\SopirControllerUpdateRequest $request
+     * @param \App\Http\Requests\SopirUpdateRequest $request
      * @param \App\Models\Sopir $sopir
      * @return \Illuminate\Http\Response
      */
-    public function update(SopirControllerUpdateRequest $request, Sopir $sopir)
+    public function update(SopirUpdateRequest $request, Sopir $sopir)
     {
-        $sopir->update($request->validated());
 
-        return redirect()->route('sopir.index');
+        try{
+            $data = $request->all();
+    
+            $base_64_foto = json_decode($request['photo'], true);
+            $upload_image = uploadFile($base_64_foto);
+            if ($upload_image == 0) {
+                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            }
+    
+            $data['photo'] = $upload_image;
+    
+            $sopir->update($data);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data sopir');
+        }
+
+        return redirect()->route('sopir.index')->with('success', 'Berhasil menambahkan data sopir');
+        
     }
 
     /**
@@ -76,6 +112,17 @@ class SopirController extends Controller
      */
     public function destroy(Request $request, Sopir $sopir)
     {
-        $sopir->delete();
+        try {
+            if($sopir->booking->count() > 0){
+                return response(['code' => 0, 'message' => 'Gagal menghapus data jenis sopir, data masih digunakan di tabel booking']);
+            }
+
+            $sopir->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data sopir']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data sopir']);
     }
 }

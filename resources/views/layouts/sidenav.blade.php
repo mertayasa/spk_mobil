@@ -41,7 +41,7 @@
             </li>
 
             <li class="nav-item {{ isActive('sopir') }}">
-                <a href="/dashboard" class="nav-link">
+                <a href="{{route('sopir.index')}}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-id-badge"></i> </span>
                     <span class="sidebar-text">Sopir</span>
                 </a>
