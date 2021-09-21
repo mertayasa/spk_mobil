@@ -23,12 +23,13 @@ class SopirFactory extends Factory
     public function definition()
     {
         return [
-            'nama' => $this->faker->regexify('[A-Za-z0-9]{50}'),
-            'telpon' => $this->faker->regexify('[A-Za-z0-9]{16}'),
-            'alamat' => $this->faker->text,
-            'tempat_lahir' => $this->faker->regexify('[A-Za-z0-9]{50}'),
+            'nama' => $this->faker->name(),
+            'telpon' => $this->faker->e164PhoneNumber(),
+            'alamat' => $this->faker->address(),
+            'tempat_lahir' => $this->faker->city(),
             'tanggal_lahir' => $this->faker->date(),
-            'no_ktp' => $this->faker->regexify('[A-Za-z0-9]{16}'),
+            'no_ktp' => '515001'.$this->faker->numberBetween(101060, 210598).'0001',
+            'photo' => 'default.jpeg',
         ];
     }
 }

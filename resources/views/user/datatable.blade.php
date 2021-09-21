@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped" width="100%" id="sopirDatatable">
+<table class="table table-hover table-striped" width="100%" id="userDatatable">
     <thead>
         <tr>
             <th>No</th>
@@ -7,6 +7,8 @@
             <th>Nama</th>
             <th>Telpon</th>
             <th>No KTP</th>
+            <th>Status Aktif</th>
+            <th>Jenis Kelamin</th>
             <th>Alamat</th>
             <th>Aksi</th>
         </tr>
@@ -17,13 +19,13 @@
 @push('scripts')
     <script>
         let table
-        let url = "{{ route('sopir.datatable') }}"
+        let url = "{{ route('user.datatable') }}"
 
         datatable(url)
 
         function datatable(url) {
 
-            table = $('#sopirDatatable').DataTable({
+            table = $('#userDatatable').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
@@ -57,6 +59,14 @@
                         name: 'no_ktp'
                     },
                     {
+                        data: 'status_aktif',
+                        name: 'status_aktif'
+                    },
+                    {
+                        data: 'jenis_kelamin',
+                        name: 'jenis_kelamin'
+                    },
+                    {
                         data: 'alamat',
                         name: 'alamat'
                     },
@@ -78,7 +88,7 @@
                     },
                     {
                         responsivePriority: 1,
-                        targets: 7
+                        targets: 9
                     },
                 ],
                 language: {

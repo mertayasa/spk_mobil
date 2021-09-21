@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisMobilController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\SopirController;
 use Illuminate\Support\Facades\Auth;
@@ -56,6 +57,16 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{sopir}', [SopirController::class, 'update'])->name('update');
         Route::delete('destroy/{sopir}', [SopirController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [SopirController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::post('store', [UserController::class, 'store'])->name('store');
+        Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
+        Route::patch('update/{user}', [UserController::class, 'update'])->name('update');
+        Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [UserController::class, 'datatable'])->name('datatable');
     });
 
 });

@@ -47,8 +47,8 @@
                 </a>
             </li>
 
-            <li class="nav-item {{ isActive('pengguna') }}">
-                <a href="/dashboard" class="nav-link">
+            <li class="nav-item {{ isActive('user') }}">
+                <a href="{{route('user.index')}}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-users"></i> </span>
                     <span class="sidebar-text">Pengguna</span>
                 </a>

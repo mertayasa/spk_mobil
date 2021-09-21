@@ -29,42 +29,45 @@ class UserSeeder extends Seeder
                 'alamat' => $faker->address(),
                 'no_ktp' => '5105012105980001',
                 'level' => 0,
+                'photo' => 'default.jpeg',
                 'email_verified_at' => now(),
                 'password' => bcrypt('asdasdasd'), // password
                 'remember_token' => Str::random(10),
             ],
-            // [
-            //     'name' => 'Sekretaris',
-            //     'email' => 'sekre@demo.com',
-            //     'phone' => $faker->e164PhoneNumber(),
-            //     'date_of_birth' => $faker->dateTimeBetween(Carbon::now()->subYear(30), Carbon::now()->subYear(18)),
-            //     'active_status' => 1,
-            //     'address' => $faker->address(),
-            //     'level' => 1,
-            //     'gender' => rand(0,1),
-            //     'photo' => 'blank_user.png',
-            //     'email_verified_at' => now(),
-            //     'password' => bcrypt('asdasdasd'), // password
-            //     'remember_token' => Str::random(10),
-            // ],
-            // [
-            //     'name' => 'Bendahara',
-            //     'email' => 'bendahara@demo.com',
-            //     'phone' => $faker->e164PhoneNumber(),
-            //     'date_of_birth' => $faker->dateTimeBetween(Carbon::now()->subYear(30), Carbon::now()->subYear(18)),
-            //     'active_status' => 1,
-            //     'address' => $faker->address(),
-            //     'level' => 2,
-            //     'gender' => rand(0,1),
-            //     'photo' => 'blank_user.png',
-            //     'email_verified_at' => now(),
-            //     'password' => bcrypt('asdasdasd'), // password
-            //     'remember_token' => Str::random(10),
-            // ]
+            [
+                'nama' => 'Owner',
+                'telpon' => $faker->e164PhoneNumber(),
+                'email' => 'owner@demo.com',
+                'jenis_kelamin' => rand(0,1),
+                'status_aktif' => 1,
+                'alamat' => $faker->address(),
+                'no_ktp' => '5105012105980001',
+                'level' => 1,
+                'photo' => 'default.jpeg',
+                'email_verified_at' => now(),
+                'password' => bcrypt('asdasdasd'), // password
+                'remember_token' => Str::random(10),
+            ],
+            [
+                'nama' => 'User',
+                'telpon' => $faker->e164PhoneNumber(),
+                'email' => 'user@demo.com',
+                'jenis_kelamin' => rand(0,1),
+                'status_aktif' => 1,
+                'alamat' => $faker->address(),
+                'no_ktp' => '5105012105980001',
+                'level' => 2,
+                'photo' => 'default.jpeg',
+                'email_verified_at' => now(),
+                'password' => bcrypt('asdasdasd'), // password
+                'remember_token' => Str::random(10),
+            ]
         ];
             
         foreach($users as $user){
             User::updateOrCreate(['email' => $user['email']], $user);
         }
+
+        User::factory()->count(10)->create();
     }
 }

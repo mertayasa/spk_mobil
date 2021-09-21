@@ -119,9 +119,9 @@ class MobilController extends Controller
             $mobil->delete();
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return response(['code' => 0, 'message' => 'Gagal menghapus data sopir']);
+            return response(['code' => 0, 'message' => 'Gagal menghapus data mobil']);
         }
 
-        return response(['code' => 1, 'message' => 'Berhasil menghapus data sopir']);
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data mobil']);
     }
 }
