@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Booking;
 use App\Models\Mobil;
+use App\Models\Sopir;
 use App\Models\User;
+use Carbon\Carbon;
 
 class BookingFactory extends Factory
 {
@@ -25,13 +27,13 @@ class BookingFactory extends Factory
     public function definition()
     {
         return [
-            'id_mobil' => Mobil::factory(),
-            'id_user' => User::factory(),
-            'id_sopir' => User::factory(),
+            'id_mobil' => Mobil::inRandomOrder()->first()->id,
+            'id_user' => User::where('level', 2)->inRandomOrder()->first()->id,
+            'id_sopir' => Sopir::inRandomOrder()->first()->id,
             'deskripsi' => $this->faker->text,
-            'harga' => $this->faker->numberBetween(-10000, 10000),
-            'tgl_mulai_sewa' => $this->faker->date(),
-            'tgl_akhir_sewa' => $this->faker->date(),
+            'harga' => $this->faker->numberBetween(150000, 500000),
+            'tgl_mulai_sewa' => Carbon::now(),
+            'tgl_akhir_sewa' => Carbon::now()->addDay(3),
         ];
     }
 }

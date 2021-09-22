@@ -69,7 +69,7 @@
             </li>
 
             <li class="nav-item {{ isActive('booking') }}">
-                <a href="/dashboard" class="nav-link">
+                <a href="{{route('booking.index')}}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-calendar-check"></i> </span>
                     <span class="sidebar-text">Booking</span>
                 </a>

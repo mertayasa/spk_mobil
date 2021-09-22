@@ -27,7 +27,7 @@ class CreateBookingsTable extends Migration
             $table->timestamps();
 
             $table->foreign('id_mobil')->references('id')->on('mobil')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_user')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_sopir')->references('id')->on('sopir')->onDelete('cascade')->onUpdate('cascade');
         });
 

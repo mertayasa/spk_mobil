@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BookingControllerStoreRequest;
-use App\Http\Requests\BookingControllerUpdateRequest;
+use App\DataTables\BookingDataTable;
+use App\Http\Requests\BookingStoreRequest;
+use App\Http\Requests\BookingUpdateRequest;
 use App\Models\Booking;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BookingController extends Controller
 {
@@ -24,7 +27,9 @@ class BookingController extends Controller
      */
     public function datatable(Request $request)
     {
-        $bookings = Booking::all();
+        $booking = Booking::all();
+
+        return BookingDataTable::set($booking);
     }
 
     /**
@@ -47,26 +52,36 @@ class BookingController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\BookingControllerStoreRequest $request
+     * @param \App\Http\Requests\BookingStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookingControllerStoreRequest $request)
+    public function store(BookingStoreRequest $request)
     {
-        $booking = Booking::create($request->validated());
+        try{
+            Booking::create($request->validated());
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
+        }
 
-        return redirect()->route('booking.index');
+        return redirect()->route('booking.index')->with('success', 'Berhasil menambahkan data booking');
     }
 
     /**
-     * @param \App\Http\Requests\BookingControllerUpdateRequest $request
+     * @param \App\Http\Requests\BookingUpdateRequest $request
      * @param \App\Models\Booking $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(BookingControllerUpdateRequest $request, Booking $booking)
+    public function update(BookingUpdateRequest $request, Booking $booking)
     {
-        $booking->update($request->validated());
+        try{
+            $booking->update($request->validated());
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
+        }
 
-        return redirect()->route('booking.index');
+        return redirect()->route('booking.index')->with('success', 'Berhasil menambahkan data booking');
     }
 
     /**
@@ -76,6 +91,13 @@ class BookingController extends Controller
      */
     public function destroy(Request $request, Booking $booking)
     {
-        $booking->delete();
+        try {
+            $booking->delete();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data booking']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data booking']);
     }
 }

@@ -36,33 +36,25 @@ class Booking extends Model
         'id_mobil' => 'integer',
         'id_user' => 'integer',
         'id_sopir' => 'integer',
-        'tgl_mulai_sewa' => 'date',
-        'tgl_akhir_sewa' => 'date',
+    ];
+
+    protected $with = [
+        'mobil', 'sopir', 'user'
     ];
 
 
     public function mobil()
     {
-        return $this->belongsTo(\App\Models\Mobil::class);
+        return $this->belongsTo(\App\Models\Mobil::class, 'id_mobil');
     }
 
-    public function idMobil()
+    public function sopir()
     {
-        return $this->belongsTo(\App\Models\Mobil::class);
+        return $this->belongsTo(\App\Models\Sopir::class, 'id_sopir');
     }
 
-    public function idUser()
+    public function user()
     {
-        return $this->belongsTo(\App\Models\User::class);
-    }
-
-    public function idSopir()
-    {
-        return $this->belongsTo(\App\Models\User::class);
-    }
-
-    public function users()
-    {
-        return $this->hasMany(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\User::class, 'id_user');
     }
 }

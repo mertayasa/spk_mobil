@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisMobilController;
 use App\Http\Controllers\UserController;
@@ -67,6 +68,16 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{user}', [UserController::class, 'update'])->name('update');
         Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [UserController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'booking', 'as' => 'booking.'], function () {
+        Route::get('/', [BookingController::class, 'index'])->name('index');
+        Route::get('create', [BookingController::class, 'create'])->name('create');
+        Route::post('store', [BookingController::class, 'store'])->name('store');
+        Route::get('edit/{booking}', [BookingController::class, 'edit'])->name('edit');
+        Route::patch('update/{booking}', [BookingController::class, 'update'])->name('update');
+        Route::delete('destroy/{booking}', [BookingController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [BookingController::class, 'datatable'])->name('datatable');
     });
 
 });
