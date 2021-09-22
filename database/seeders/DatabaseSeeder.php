@@ -19,5 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(MobilSeeder::class);
         $this->call(BookingSeeder::class);
         // \App\Models\User::factory(10)->create();
+        $this->call([
+            UserSeeder::class,
+            SopirSeeder::class,
+            JenisMobilSeeder::class
+        ]);
     }
 }
