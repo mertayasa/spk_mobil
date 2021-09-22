@@ -23,13 +23,15 @@ class BookingStoreRequest extends FormRequest
      */
     public function rules()
     {
+        $todayDate = date('m/d/Y');
+
         return [
             'id_mobil' => ['required', 'integer', 'gt:0'],
             'id_user' => ['required', 'integer', 'gt:0'],
+            'id_sopir' => ['required', 'integer', 'gt:0'],
             'deskripsi' => ['required', 'string'],
-            'harga' => ['required', 'integer'],
-            'tgl_mulai_sewa' => ['required', 'date'],
-            'tgl_akhir_sewa' => ['required', 'date'],
+            'tgl_mulai_sewa' => ['required', 'after_or_equal:'.$todayDate],
+            'tgl_akhir_sewa' => ['required', 'after_or_equal:tgl_mulai_sewa'],
         ];
     }
 }

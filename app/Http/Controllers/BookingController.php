@@ -6,6 +6,10 @@ use App\DataTables\BookingDataTable;
 use App\Http\Requests\BookingStoreRequest;
 use App\Http\Requests\BookingUpdateRequest;
 use App\Models\Booking;
+use App\Models\Mobil;
+use App\Models\Sopir;
+use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -38,7 +42,11 @@ class BookingController extends Controller
      */
     public function create(Request $request)
     {
-        return view('booking.create');
+        $user = User::where('level', 2)->where('status_aktif', 1)->pluck('nama', 'id');
+        $mobil = Mobil::pluck('nama', 'id');
+        $sopir = Sopir::pluck('nama', 'id');
+
+        return view('booking.create', compact('user', 'mobil', 'sopir'));
     }
 
     /**
@@ -48,7 +56,11 @@ class BookingController extends Controller
      */
     public function edit(Request $request, Booking $booking)
     {
-        return view('booking.edit', compact('booking'));
+        $user = User::where('level', 2)->where('status_aktif', 1)->pluck('nama', 'id');
+        $mobil = Mobil::pluck('nama', 'id');
+        $sopir = Sopir::pluck('nama', 'id');
+
+        return view('booking.edit', compact('booking', 'user', 'mobil', 'sopir'));
     }
 
     /**
@@ -58,7 +70,15 @@ class BookingController extends Controller
     public function store(BookingStoreRequest $request)
     {
         try{
-            Booking::create($request->validated());
+            $data = $request->all();
+            $mulai_sewa = Carbon::parse($data['tgl_mulai_sewa']);
+            $akhir_sewa = Carbon::parse($data['tgl_akhir_sewa']);
+            $durasi_sewa = $akhir_sewa->diffInDays($mulai_sewa);
+
+            $mobil = Mobil::find($data['id_mobil']);
+            $data['harga'] = $mobil->harga * $durasi_sewa;
+
+            Booking::create($data);
         }catch(Exception $e){
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
@@ -75,7 +95,15 @@ class BookingController extends Controller
     public function update(BookingUpdateRequest $request, Booking $booking)
     {
         try{
-            $booking->update($request->validated());
+            $data = $request->all();
+            $mulai_sewa = Carbon::parse($data['tgl_mulai_sewa']);
+            $akhir_sewa = Carbon::parse($data['tgl_akhir_sewa']);
+            $durasi_sewa = $akhir_sewa->diffInDays($mulai_sewa);
+
+            $mobil = Mobil::find($data['id_mobil']);
+            $data['harga'] = $mobil->harga * $durasi_sewa;
+
+            $booking->update($data);
         }catch(Exception $e){
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
