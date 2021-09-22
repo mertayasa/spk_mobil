@@ -149,16 +149,14 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="slider-content">
-                                    <h1 class="text-custom-white">Upto 25% off on first booking <span
-                                            class="text-custom-blue">Car</span>through your app!</h1>
+                                    <h1 class="text-custom-white">Upto 25% off on first booking <span class="text-custom-blue">Car</span>through your app!</h1>
                                     <ul class="custom">
-                                        <li class="text-custom-white"><i class="fas fa-dollar-sign"></i>Best Price
-                                            Guaranteed </li>
+                                        <li class="text-custom-white"><i class="fas fa-dollar-sign"></i>Best Price Guaranteed </li>
                                         <li class="text-custom-white"><i class="fas fa-car"></i>Home Pickups </li>
                                         <li class="text-custom-white"><i class="fas fa-laptop"></i>Easy Bookings </li>
-                                        <li class="text-custom-white"><i class="fas fa-headphones-alt"></i>24/7 Customer
-                                            Care </li>
-                                    </ul><a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
+                                        <li class="text-custom-white"><i class="fas fa-headphones-alt"></i>24/7 Customer Care </li>
+                                    </ul>
+									<a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
                                 </div>
                             </div>
                         </div>
@@ -172,13 +170,8 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="slider-content">
-                                    <h1 class="text-custom-white">Book your <span
-                                            class="text-custom-blue">Car</span>through your app!
-                                    </h1>
-                                    <p class="text-custom-white">Lorem Ipsum is simply dummy text of the printing and
-                                        typesetting
-                                        industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-
+                                    <h1 class="text-custom-white">Book your <span class="text-custom-blue">Car</span>through your app!</h1>
+                                    <p class="text-custom-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
                                     <a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
                                 </div>
                             </div>
@@ -190,150 +183,283 @@
     </div>
     <!-- End Slider -->
     <!-- Start Banner tabs -->
-    <div id="search-engine" class="banner-tabs">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="tabs">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="cars">
-                                <div class="tab-inner">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="form-group">
-                                                    <label class="fs-14 text-custom-white fw-600">Pick Up</label>
-                                                    <input type="text" name="#" class="form-control form-control-custom"
-                                                        placeholder="city, distirct or specific airpot">
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label class="fs-14 text-custom-white fw-600">Pick Up
-                                                                Date/Time</label>
-                                                            <div class="input-group group-form">
-                                                                <input type="text" name="#"
-                                                                    class="form-control form-control-custom datepickr"
-                                                                    placeholder="mm/dd/yy" readonly>
-                                                                <span class="input-group-append"> <i
-                                                                        class="far fa-calendar"></i> </span> </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label class="submit"></label>
-                                                            <div class="group-form">
-                                                                <select
-                                                                    class="custom-select form-control form-control-custom">
-                                                                    <option>Anytime</option>
-                                                                    <option>Morning</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="form-group">
-                                                    <label class="fs-14 text-custom-white fw-600">Drop Off</label>
-                                                    <input type="text" name="#" class="form-control form-control-custom"
-                                                        placeholder="city, distirct or specific airpot">
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label class="fs-14 text-custom-white fw-600">Drop Off
-                                                                Date/Time</label>
-                                                            <div class="input-group group-form">
-                                                                <input type="text" name="#"
-                                                                    class="form-control form-control-custom datepickr"
-                                                                    placeholder="mm/dd/yy" readonly>
-                                                                <span class="input-group-append"> <i
-                                                                        class="far fa-calendar"></i> </span> </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label class="submit"></label>
-                                                            <div class="group-form">
-                                                                <select
-                                                                    class="custom-select form-control form-control-custom">
-                                                                    <option>Anytime</option>
-                                                                    <option>Morning</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-12">
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="form-group">
-                                                            <label class="fs-14 text-custom-white fw-600">Adults</label>
-                                                            <div class="group-form">
-                                                                <select
-                                                                    class="custom-select form-control form-control-custom">
-                                                                    <option>01</option>
-                                                                    <option>02</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <div class="form-group">
-                                                            <label class="fs-14 text-custom-white fw-600">Kids</label>
-                                                            <div class="group-form">
-                                                                <select
-                                                                    class="custom-select form-control form-control-custom">
-                                                                    <option>01</option>
-                                                                    <option>02</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label
-                                                                class="fs-14 text-custom-white fw-600">Promocode</label>
-                                                            <input type="text" name="#"
-                                                                class="form-control form-control-custom"
-                                                                placeholder="type here">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label class="fs-14 text-custom-white fw-600">Car
-                                                                Type</label>
-                                                            <div class="group-form">
-                                                                <select
-                                                                    class="custom-select form-control form-control-custom">
-                                                                    <option>Economy</option>
-                                                                    <option>Compact</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label class="submit"></label>
-                                                            <button
-                                                                class="btn-first btn-submit full-width btn-height">Search</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="search-engine">
+		<div class="banner-tabs">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="tabs">
+							<div class="tab-content">
+								<div class="tab-pane active" id="cars">
+									<div class="tab-inner">
+										<form>
+											<div class="row">
+												<div class="col-lg-3 col-md-6">
+													<div class="form-group">
+														<label class="fs-14 text-custom-white fw-600">Category Cars</label>
+														<div class="group-form">
+															<select
+																class="custom-select form-control form-control-custom">
+																<option>Economy</option>
+																<option>Compact</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-5 col-md-6">
+													<div class="form-group">
+														<label class="fs-14 text-custom-white fw-600">Name Cars</label>
+														<input type="text" name="#" class="form-control form-control-custom"
+															placeholder="city, distirct or specific airpot">
+													</div>
+												</div>
+												<div class="col-lg-4 col-md-12">
+													<div class="row">
+														<div class="col-4">
+															<div class="form-group">
+																<label class="fs-14 text-custom-white fw-600">Passenger</label>
+																<div class="group-form">
+																	<select
+																		class="custom-select form-control form-control-custom">
+																		<option>01</option>
+																		<option>02</option>
+																	</select>
+																</div>
+															</div>
+														</div>
+														<div class="col-8">
+															<div class="form-group">
+																<label class="submit"></label>
+																<button
+																	class="btn-first btn-submit full-width btn-height">Search</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
     <!-- End Banner tabs -->
+	<!-- Start Blog -->
+	<section class="section-padding bg-light-white">
+		<div class="container">
+		  <div class="row">
+			<div class="col-12">
+			  <div class="listing-top-heading mb-xl-20">
+				<h6 class="no-margin text-custom-black">Showing 8 Results</h6>
+				<div class="sort-by"><span class="text-custom-black fs-14 fw-600">Sort by</span>
+				  <div class="group-form"><select class="form-control form-control-custom custom-select">
+					  <option>A to Z</option>
+					  <option>Z to A</option>
+					</select></div>
+				</div>
+			  </div>
+			</div>
+			<div class=" col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/1.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Economy<small class="text-light-dark">Per
+						  Day</small></a></h4><span class="price"><small>From</small>$18</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class=" col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/2.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Delux<small class="text-light-dark">2
+						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class=" col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/3.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Special offer<small
+						  class="text-light-dark">Per Day</small></a></h4><span class="price"><small>From</small>$28</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class=" col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/4.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Economy<small class="text-light-dark">Per
+						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/5.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Platinum<small class="text-light-dark">Per
+						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/6.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Super Gold<small
+						  class="text-light-dark">Per Day</small></a></h4><span class="price"><small>From</small>$158</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/7.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Economy<small class="text-light-dark">Per
+						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/8.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Duplex<small class="text-light-dark">Per
+						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+			  <div class="car-grid mb-md-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/9.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Economy<small class="text-light-dark">Per
+						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/10.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Gold<small class="text-light-dark">Per
+						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/11.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Platinum<small class="text-light-dark">Per
+						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+			  <div class="car-grid mb-xl-30">
+				<div class="car-grid-wrapper car-grid bx-wrapper">
+				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/12.png') }}" class="full-width"
+						alt="img"></a></div>
+				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					<h4 class="title fs-16"><a href="#" class="text-custom-black">Duplex<small class="text-light-dark">2
+						  Day</small></a></h4><span class="price"><small>From</small>$18</span>
+					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
+					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						href="#">Book</a></div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <div class="row">
+			<div class="col-12">
+			  <nav>
+				<ul class="pagination justify-content-center">
+				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+				  <li class="page-item"><a class="page-link" href="#">1</a></li>
+				  <li class="page-item active"><a class="page-link" href="#">2</a></li>
+				  <li class="page-item"><a class="page-link" href="#">3</a></li>
+				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+				</ul>
+			  </nav>
+			</div>
+		  </div>
+		</div>
+	</section>
+	<!-- End Blog -->
     <!-- Start About Us -->
     <section class="section-padding about-us">
         <div class="container">
@@ -348,19 +474,10 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                            Ipsum has
-                            been the industry's standard dummy text. Lorem Ipsum is simply dummy text of the printing
-                            and typesetting
-                            industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                        <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                            Ipsum has
-                            been the industry's standard dummy text.</p>
-                        <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                            Ipsum has
-                            been the industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy
-                            text. Lorem
-                            Ipsum is simply dummy.</p><a href="about.html" class="btn-first btn-submit">Reserve Now</a>
+                        <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                        <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                        <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum is simply dummy.</p>
+						<a href="about.html" class="btn-first btn-submit">Reserve Now</a>
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-6">
@@ -373,7 +490,8 @@
                 </div>
             </div>
         </div>
-    </section><!-- End About Us -->
+    </section>
+	<!-- End About Us -->
     <!-- Start Our work -->
     <section class="section-padding our-work-sec bg-light-white">
         <div class="container">
@@ -445,9 +563,7 @@
                 <div class="section-heading">
                     <h3 class="text-custom-black">Our <span class="text-custom-blue">Gallery</span></h3>
                     <div class="section-description">
-                        <p class="text-light-dark">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem
-                            Ipsum has been the industry's standard dummy text.</p>
+                        <p class="text-light-dark">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
                     </div>
                 </div>
             </div>
@@ -467,88 +583,88 @@
                     </div>
                     <div class="row gallery-grid">
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_1.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_1.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_1.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_1.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery-1">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_2.jp') }}g"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_2.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_2.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_2.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery-2">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_3.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_3.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_3.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_3.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box car-gallery">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_4.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_4.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_4.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_4.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_5.jp') }}g"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_5.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_5.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_5.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery-1">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_6.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_6.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_6.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_6.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery-2">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_7.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_7.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_7.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_7.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box car-gallery">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_8.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_8.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_8.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_8.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_9.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_9.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_9.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_9.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery-1">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_10.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_10.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_10.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_10.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box tab-gallery-2">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_11.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_11.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_11.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_11.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6 filter-box car-gallery">
-                            <div class="gallery-item mb-xl-30"><a
-                                    href="{{ asset('assets/frontend/assets/images/gallery/g_gal_12.jpg') }}"
-                                    class="popup"><img
-                                        src="{{ asset('assets/frontend/assets/images/gallery/g_gal_12.jpg') }}"
-                                        class="image-fit" alt="img"></a></div>
+                            <div class="gallery-item mb-xl-30">
+								<a href="{{ asset('assets/frontend/assets/images/gallery/g_gal_12.jpg') }}" class="popup">
+									<img src="{{ asset('assets/frontend/assets/images/gallery/g_gal_12.jpg') }}" class="image-fit" alt="img">
+								</a>
+							</div>
                         </div>
                     </div>
                 </div>
@@ -1250,7 +1366,9 @@
     <div id="back-top" class="back-top"> <a href="#top"><i class="flaticon-arrows"></i></a> </div>
     <!-- Place all Scripts Here -->
     <!-- jQuery -->
-    <script src="{{ asset('assets/frontend/assets/js/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/frontend/assets/js/jquery.min.js') }}"></script> --}}
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
     <!-- Popper -->
     <script src="{{ asset('assets/frontend/assets/js/popper.min.js') }}"></script>
     <!-- Bootstrap -->

@@ -76,10 +76,60 @@
         }
     })
     a(document).ready(function () {
-        a(".datepickr").datepicker({
-            timepicker: false,
-            minDate: new Date()
-        });
+        // let date = new Date();
+        // let date_off = new Date(Date.now() + (3600 * 1000 * 24));
+        // a(".datepickr").datepicker({
+        //     dateFormat: "dd-M-yy",
+        //     timepicker: false,
+        //     minDate: date,
+        //     onSelect: function (date) {
+        //         var date2 = a(".datepickr").datepicker('getDate');
+        //         console.log(new Date(date2.getDate()));
+        //         date2.setDate(date2.getDate() + 1);
+        //         a(".datepickr-off").datepicker('setDate', date2);
+        //         //sets minDate to dt1 date + 1
+        //         a(".datepickr-off").datepicker('option', 'minDate', date2);
+        //     }
+        // });
+        // a(".datepickr-off").datepicker({
+        //     dateFormat: "dd-M-yy",
+        //     timepicker: false,
+        //     minDate: date_off,
+        //     onClose: function () {
+        //         var dt1 = $(".datepickr").datepicker('getDate');
+        //         var dt2 = $(".datepickr-off").datepicker('getDate');
+        //         //check to prevent a user from entering a date below date of dt1
+        //         if (dt2 <= dt1) {
+        //             var minDate = $(".datepickr-off").datepicker('option', 'minDate');
+        //             $(".datepickr-off").datepicker('setDate', minDate);
+        //         }
+        //     }
+        // });
+        if (a("#search-engine").length) {
+            let $this        = a("#search-engine"),
+                $menunav     = a(".header").find(".navigation-wrapper").outerHeight(),
+                $this_search = a("#search-engine").find(".banner-tabs");
+            
+            $this.css("height", $this_search.outerHeight());
+
+            a(window).on( 'resize', function () {
+                $menunav     = a(".header").find(".navigation-wrapper").outerHeight();
+            })
+                
+            a(window).on( 'scroll', function () {
+                var currentScroll = a(window).scrollTop(),
+                    $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2,
+                    offset       = $thisoffset - $menunav;
+
+                    console.log(offset, currentScroll);
+
+                if ( currentScroll > offset ) {
+                    $this_search.addClass('scrolled').css("top", $menunav);
+                } else {
+                    $this_search.removeClass('scrolled').css("top", 0);
+                }
+            })
+        };
         a(".dob").datepicker({
             timepicker: false,
         });
