@@ -607,7 +607,7 @@ table {
 }
 
 .section-padding {
-    padding: 80px 0
+    padding: 65px 0
 }
 
 .section-padding-top {
@@ -672,10 +672,14 @@ table {
 }
 
 #search-engine .banner-tabs.scrolled {
+    animation-name: fadeHeaderInDown;
     position: fixed;
     right: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 11;
+    animation-duration: 1s;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    animation-fill-mode: both
 }
 
 .banner-tabs .form-control-custom:focus {
@@ -761,7 +765,7 @@ label.submit {
 }
 
 .group-form .custom-select {
-    padding: 0 30px 0 10px
+    padding: 0 30px 0 20px
 }
 
 .group-form .custom-select:after {
@@ -2661,7 +2665,7 @@ label.custom-checkbox .checkmark:after {
 }
 
 .banner-tabs .tab-content {
-    padding: 30px 0
+    padding: 20px 0
 }
 
 .quick-quote h5::after,

@@ -121,8 +121,6 @@
                     $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2,
                     offset       = $thisoffset - $menunav;
 
-                    console.log(offset, currentScroll);
-
                 if ( currentScroll > offset ) {
                     $this_search.addClass('scrolled').css("top", $menunav);
                 } else {

@@ -198,10 +198,10 @@
 													<div class="form-group">
 														<label class="fs-14 text-custom-white fw-600">Category Cars</label>
 														<div class="group-form">
-															<select
-																class="custom-select form-control form-control-custom">
-																<option>Economy</option>
-																<option>Compact</option>
+															<select class="custom-select form-control form-control-custom">
+																<option>Category 1</option>
+																<option>Category 2</option>
+																<option>Category 3</option>
 															</select>
 														</div>
 													</div>
@@ -210,7 +210,7 @@
 													<div class="form-group">
 														<label class="fs-14 text-custom-white fw-600">Name Cars</label>
 														<input type="text" name="#" class="form-control form-control-custom"
-															placeholder="city, distirct or specific airpot">
+															placeholder="Search Cars by Name">
 													</div>
 												</div>
 												<div class="col-lg-4 col-md-12">
@@ -221,8 +221,12 @@
 																<div class="group-form">
 																	<select
 																		class="custom-select form-control form-control-custom">
-																		<option>01</option>
-																		<option>02</option>
+																		<option>1</option>
+																		<option>2</option>
+																		<option>3</option>
+																		<option>4</option>
+																		<option>5</option>
+																		<option>6</option>
 																	</select>
 																</div>
 															</div>
@@ -230,8 +234,7 @@
 														<div class="col-8">
 															<div class="form-group">
 																<label class="submit"></label>
-																<button
-																	class="btn-first btn-submit full-width btn-height">Search</button>
+																<button class="btn-first btn-submit full-width btn-height">Search</button>
 															</div>
 														</div>
 													</div>
@@ -269,8 +272,12 @@
 				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/1.png') }}" class="full-width"
 						alt="img"></a></div>
 				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Economy<small class="text-light-dark">Per
-						  Day</small></a></h4><span class="price"><small>From</small>$18</span>
+					<h4 class="title fs-16">
+						<a href="#" class="text-custom-black">
+							Economy<small class="text-light-dark">Per Day</small>
+						</a>
+					</h4>
+					<span class="price"><small>From</small>$18</span>
 					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
 					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
 						href="#">Book</a></div>
@@ -284,8 +291,12 @@
 				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/2.png') }}" class="full-width"
 						alt="img"></a></div>
 				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Delux<small class="text-light-dark">2
-						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
+					<h4 class="title fs-16">
+						<a href="#" class="text-custom-black">
+							Delux<small class="text-light-dark">2 Day</small>
+						</a>
+					</h4>
+					<span class="price"><small>From</small>$58</span>
 					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
 					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
 						href="#">Book</a></div>
