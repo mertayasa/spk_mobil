@@ -29,7 +29,8 @@
     <!-- place -->
 </head>
 
-<body>
+<body style="position: relative">
+    <div class="loader go"></div>
     <!-- Header -->
     <!-- Start Topbar -->
     <header class="header">
@@ -192,36 +193,36 @@
 							<div class="tab-content">
 								<div class="tab-pane active" id="cars">
 									<div class="tab-inner">
-										<form>
+										<form method="get" action="{{ route('homepage', '#search') }}">
 											<div class="row">
 												<div class="col-lg-3 col-md-6">
 													<div class="form-group">
                                                         {!! Form::label('idCategory', 'Category Cars', ['class' => 'fs-14 text-custom-white fw-600']) !!}
 														<div class="group-form">
-                                                            {!! Form::select('id_category', ['all' => 'All', $navCategory], null, ['class' => 'custom-select form-control form-control-custom', 'id' => 'idCategory']) !!}
+                                                            {!! Form::select('id_category', ['all' => 'All', $navCategory], request()->input('id_category'), ['class' => 'custom-select form-control form-control-custom', 'id' => 'idCategory']) !!}
 														</div>
 													</div>
 												</div>
 												<div class="col-lg-5 col-md-6">
 													<div class="form-group">
                                                         {!! Form::label('idName', 'Name Cars', ['class' => 'fs-14 text-custom-white fw-600']) !!}
-                                                        {!! Form::text('id_name', null, ['class' => 'form-control form-control-custom', 'id' => 'idName', 'placeholder' => 'Search Cars by Name']) !!}
+                                                        {!! Form::text('id_name', request()->input('id_name'), ['class' => 'form-control form-control-custom', 'id' => 'idName', 'placeholder' => 'Search Cars by Name']) !!}
 													</div>
 												</div>
 												<div class="col-lg-4 col-md-12">
 													<div class="row">
 														<div class="col-4">
 															<div class="form-group">
-                                                                {!! Form::label('idJumlahKursi', 'Passenger', ['class' => 'fs-14 text-custom-white fw-600']) !!}
+                                                                {!! Form::label('idPassenger', 'Passenger', ['class' => 'fs-14 text-custom-white fw-600']) !!}
 																<div class="group-form">
-                                                                    {!! Form::select('id_jumlahkursi', ['all' => 'All', $navJumlahKursi], null, ['class' => 'custom-select form-control form-control-custom', 'id' => 'idJumlahKursi']) !!}
+                                                                    {!! Form::selectRange('id_passenger', 1, 10, request()->input('id_passenger'), ['class' => 'custom-select form-control form-control-custom', 'id' => 'idPassenger']) !!}
 																</div>
 															</div>
 														</div>
 														<div class="col-8">
 															<div class="form-group">
 																<label class="submit"></label>
-																<button class="btn-first btn-submit full-width btn-height">Search</button>
+																<button type="submit" class="btn-first btn-submit full-width btn-height">Search</button>
 															</div>
 														</div>
 													</div>
@@ -244,14 +245,17 @@
 		  <div class="row">
 			<div class="col-12">
 			  <div class="listing-top-heading mb-xl-20">
-				<h6 class="no-margin text-custom-black">Showing 8 Results</h6>
+				<h6 class="no-margin text-custom-black">Showing {{ $mobil->count() }} - {{ $countmobil }} Results</h6>
 				<div class="sort-by">
                     <span class="text-custom-black fs-14 fw-600">Sort by</span>
-				  <div class="group-form">
-                      <select class="form-control form-control-custom custom-select custom-az">
-					  <option>A to Z</option>
-					  <option>Z to A</option>
-					</select></div>
+                    <div class="group-form">
+                        <form method="get" action="{{ route('homepage', '#search') }}">
+                            <input type="hidden" name="id_category" value="{{ request()->input('id_category') }}">
+                            <input type="hidden" name="id_name" value="{{ request()->input('id_name') }}">
+                            <input type="hidden" name="id_passenger" value="{{ request()->input('id_passenger') }}">
+                            {!! Form::select('id_sort', ['asc' => 'A to Z', 'desc' => 'Z to A'], request()->input('id_sort'), ['class' => 'form-control form-control-custom custom-select custom-az', 'onchange' => 'this.form.submit()']) !!}
+                        </form>
+                    </div>
 				</div>
 			  </div>
 			</div>
@@ -281,189 +285,13 @@
 				</div>
 			  </div>
 			@empty
-				
+				Kosong ?
 			@endforelse
-{{-- 			
-			<div class=" col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/2.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16">
-						<a href="#" class="text-custom-black">
-							Delux<small class="text-light-dark">2 Day</small>
-						</a>
-					</h4>
-					<span class="price"><small>From</small>$58</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class=" col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/3.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Special offer<small
-						  class="text-light-dark">Per Day</small></a></h4><span class="price"><small>From</small>$28</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class=" col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/4.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Economy<small class="text-light-dark">Per
-						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/5.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Platinum<small class="text-light-dark">Per
-						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/6.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Super Gold<small
-						  class="text-light-dark">Per Day</small></a></h4><span class="price"><small>From</small>$158</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/7.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Economy<small class="text-light-dark">Per
-						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/8.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Duplex<small class="text-light-dark">Per
-						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-			  <div class="car-grid mb-md-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/9.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Economy<small class="text-light-dark">Per
-						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/10.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Gold<small class="text-light-dark">Per
-						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/11.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Platinum<small class="text-light-dark">Per
-						  Day</small></a></h4><span class="price"><small>From</small>$58</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/12.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16"><a href="#" class="text-custom-black">Duplex<small class="text-light-dark">2
-						  Day</small></a></h4><span class="price"><small>From</small>$18</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
-				  </div>
-				</div>
-			  </div>
-			</div> --}}
 		  </div>
 		  <div class="row">
 			<div class="col-12">
 			  <nav>
-				<ul class="pagination justify-content-center">
-				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
+                {{ $mobil->appends(request()->input())->links('pagination::spk-pagination') }}
 			  </nav>
 			</div>
 		  </div>
@@ -1400,6 +1228,21 @@
     <script src="http://www.google.cn/maps/api/js?key=AIzaSyDnd9JwZvXty-1gHZihMoFhJtCXmHfeRQg"></script>
     <!-- Custom Js -->
     <script src="{{ asset('assets/frontend/assets/js/custom.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $(window).on('load', function () {
+                if (this.location.hash == "#search") {
+                    $("html,body").animate({
+                        scrollTop : $('#search-engine').offset().top - $('.header .navigation-wrapper').outerHeight()
+                    }, {
+                        complete : function () {
+                            $('.loader').removeClass('go');
+                        }
+                    })
+                }
+            })
+        })
+    </script>
 	<!-- /Place all Scripts Here -->
 </body>
 
