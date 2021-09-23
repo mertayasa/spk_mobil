@@ -9,6 +9,8 @@ class Kriteria extends Model
 {
     use HasFactory;
 
+    protected $table = 'kriteria';
+
     /**
      * The attributes that are mass assignable.
      *

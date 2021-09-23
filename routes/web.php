@@ -4,9 +4,11 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\JenisMobilController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\SopirController;
+use App\Http\Controllers\SubKriteriaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +58,26 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{sopir}', [SopirController::class, 'update'])->name('update');
         Route::delete('destroy/{sopir}', [SopirController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [SopirController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'kriteria', 'as' => 'kriteria.'], function () {
+        Route::get('/', [KriteriaController::class, 'index'])->name('index');
+        Route::get('create', [KriteriaController::class, 'create'])->name('create');
+        Route::post('store', [KriteriaController::class, 'store'])->name('store');
+        Route::get('edit/{kriteria}', [KriteriaController::class, 'edit'])->name('edit');
+        Route::patch('update/{kriteria}', [KriteriaController::class, 'update'])->name('update');
+        Route::delete('destroy/{kriteria}', [KriteriaController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [KriteriaController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'sub_kriteria', 'as' => 'sub_kriteria.'], function () {
+        Route::get('/', [SubKriteriaController::class, 'index'])->name('index');
+        Route::get('create', [SubKriteriaController::class, 'create'])->name('create');
+        Route::post('store', [SubKriteriaController::class, 'store'])->name('store');
+        Route::get('edit/{sub_kriteria}', [SubKriteriaController::class, 'edit'])->name('edit');
+        Route::patch('update/{sub_kriteria}', [SubKriteriaController::class, 'update'])->name('update');
+        Route::delete('destroy/{sub_kriteria}', [SubKriteriaController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [SubKriteriaController::class, 'datatable'])->name('datatable');
     });
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

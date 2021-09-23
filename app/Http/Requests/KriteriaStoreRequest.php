@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class KriteriumUpdateRequest extends FormRequest
+class KriteriaStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,8 @@ class KriteriumUpdateRequest extends FormRequest
     {
         return [
             'kriteria' => ['required', 'string', 'max:50'],
+            'bobot' => ['required'],
+            'sifat' => ['required', 'numeric'],
         ];
     }
 }
