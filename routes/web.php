@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [BookingController::class, 'index'])->name('index');
         Route::get('create', [BookingController::class, 'create'])->name('create');
         Route::post('store', [BookingController::class, 'store'])->name('store');
+        Route::get('show/{booking}', [BookingController::class, 'show'])->name('show');
         Route::get('edit/{booking}', [BookingController::class, 'edit'])->name('edit');
         Route::patch('update/{booking}', [BookingController::class, 'update'])->name('update');
         Route::delete('destroy/{booking}', [BookingController::class, 'destroy'])->name('destroy');
