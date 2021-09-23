@@ -59,6 +59,30 @@
             }
         }]
     });
+    
+    function ubahKeRupiah() {
+        let rupiah_angka = $(".js-harga");
+        for (let i = 0; i < rupiah_angka.length; i++) {
+            const element = $(".js-harga.harga-"+i);
+            element.html(formatRupiah(element[0].innerHTML, 'Rp. '))
+        }
+        function formatRupiah(angka, prefix){
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split   		  = number_string.split(','),
+            sisa     		  = split[0].length % 3,
+            rupiah     		  = split[0].substr(0, sisa),
+            ribuan     		  = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if(ribuan){
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : prefix + rupiah;
+        }
+    }
+
     a(document).ready(function () {
         a(window).on('load', function () {
             a(".main-banner").css("height", "calc(100vh - " + a(".header").outerHeight() + "px)");
@@ -71,8 +95,10 @@
                 a("html, body").animate({
                     scrollTop: a(a(this).data("id")).offset().top / 1.5
                 }, 1e3);
-                console.log(a(this).data("id"));
             })
+        }
+        if(a(".js-harga").length) {
+            ubahKeRupiah(); // utk ajax nnti mngkin
         }
     })
     a(document).ready(function () {
@@ -114,7 +140,7 @@
 
             a(window).on( 'resize', function () {
                 $menunav     = a(".header").find(".navigation-wrapper").outerHeight();
-            })
+            });
                 
             a(window).on( 'scroll', function () {
                 var currentScroll = a(window).scrollTop(),
@@ -126,7 +152,9 @@
                 } else {
                     $this_search.removeClass('scrolled').css("top", 0);
                 }
-            })
+            });
+
+            // $("html,body").scrollTop($('#search-engine').offset().top - $('.header .navigation-wrapper').outerHeight());
         };
         a(".dob").datepicker({
             timepicker: false,

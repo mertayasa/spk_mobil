@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\JenisMobilController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MobilController;
@@ -20,10 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return redirect('/login');
-    return view('welcome2');
-});
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
 Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {

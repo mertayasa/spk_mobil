@@ -196,38 +196,25 @@
 											<div class="row">
 												<div class="col-lg-3 col-md-6">
 													<div class="form-group">
-														<label class="fs-14 text-custom-white fw-600">Category Cars</label>
+                                                        {!! Form::label('idCategory', 'Category Cars', ['class' => 'fs-14 text-custom-white fw-600']) !!}
 														<div class="group-form">
-															<select class="custom-select form-control form-control-custom">
-																<option>Category 1</option>
-																<option>Category 2</option>
-																<option>Category 3</option>
-															</select>
+                                                            {!! Form::select('id_category', ['all' => 'All', $navCategory], null, ['class' => 'custom-select form-control form-control-custom', 'id' => 'idCategory']) !!}
 														</div>
 													</div>
 												</div>
 												<div class="col-lg-5 col-md-6">
 													<div class="form-group">
-														<label class="fs-14 text-custom-white fw-600">Name Cars</label>
-														<input type="text" name="#" class="form-control form-control-custom"
-															placeholder="Search Cars by Name">
+                                                        {!! Form::label('idName', 'Name Cars', ['class' => 'fs-14 text-custom-white fw-600']) !!}
+                                                        {!! Form::text('id_name', null, ['class' => 'form-control form-control-custom', 'id' => 'idName', 'placeholder' => 'Search Cars by Name']) !!}
 													</div>
 												</div>
 												<div class="col-lg-4 col-md-12">
 													<div class="row">
 														<div class="col-4">
 															<div class="form-group">
-																<label class="fs-14 text-custom-white fw-600">Passenger</label>
+                                                                {!! Form::label('idJumlahKursi', 'Passenger', ['class' => 'fs-14 text-custom-white fw-600']) !!}
 																<div class="group-form">
-																	<select
-																		class="custom-select form-control form-control-custom">
-																		<option>1</option>
-																		<option>2</option>
-																		<option>3</option>
-																		<option>4</option>
-																		<option>5</option>
-																		<option>6</option>
-																	</select>
+                                                                    {!! Form::select('id_jumlahkursi', ['all' => 'All', $navJumlahKursi], null, ['class' => 'custom-select form-control form-control-custom', 'id' => 'idJumlahKursi']) !!}
 																</div>
 															</div>
 														</div>
@@ -258,33 +245,45 @@
 			<div class="col-12">
 			  <div class="listing-top-heading mb-xl-20">
 				<h6 class="no-margin text-custom-black">Showing 8 Results</h6>
-				<div class="sort-by"><span class="text-custom-black fs-14 fw-600">Sort by</span>
-				  <div class="group-form"><select class="form-control form-control-custom custom-select">
+				<div class="sort-by">
+                    <span class="text-custom-black fs-14 fw-600">Sort by</span>
+				  <div class="group-form">
+                      <select class="form-control form-control-custom custom-select custom-az">
 					  <option>A to Z</option>
 					  <option>Z to A</option>
 					</select></div>
 				</div>
 			  </div>
 			</div>
+			@forelse ($mobil as $index => $item)
 			<div class=" col-lg-4 col-md-6">
-			  <div class="car-grid mb-xl-30">
-				<div class="car-grid-wrapper car-grid bx-wrapper">
-				  <div class="image-sec animate-img"><a href="#"><img src="{{ asset('assets/frontend/assets/images/cars/1.png') }}" class="full-width"
-						alt="img"></a></div>
-				  <div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					<h4 class="title fs-16">
-						<a href="#" class="text-custom-black">
-							Economy<small class="text-light-dark">Per Day</small>
+				<div class="car-grid mb-xl-30">
+				  <div class="car-grid-wrapper car-grid bx-wrapper">
+					<div class="image-sec animate-img">
+						<a href="#">
+							<img src="{{ asset('assets/frontend/assets/images/cars/1.png') }}" class="full-width" alt="img">
 						</a>
-					</h4>
-					<span class="price"><small>From</small>$18</span>
-					<p>Grate explorer of tha truth tha master-bulder of human happines.</p>
-					<div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						href="#">Book</a></div>
+					</div>
+					<div class="car-grid-caption padding-20 bg-custom-white p-relative">
+					  <h4 class="title fs-16">
+						  <a href="#" class="text-custom-black">
+							  {{ $item->nama }}<small class="text-light-dark">Per Day</small>
+						  </a>
+					  </h4>
+					  <span class="price from"><small>From</small></span>
+					  <span class="js-harga harga-{{ $index }} price">{{ $item->harga }}</span>
+					  <p>{{ $item->jenisMobil->jenis_mobil }}</p>
+					  <p>{{ $item->deskripsi }}</p>
+					  <div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
+						  href="#">Book</a></div>
+					</div>
 				  </div>
 				</div>
 			  </div>
-			</div>
+			@empty
+				
+			@endforelse
+{{-- 			
 			<div class=" col-lg-4 col-md-6">
 			  <div class="car-grid mb-xl-30">
 				<div class="car-grid-wrapper car-grid bx-wrapper">
@@ -453,7 +452,7 @@
 				  </div>
 				</div>
 			  </div>
-			</div>
+			</div> --}}
 		  </div>
 		  <div class="row">
 			<div class="col-12">
@@ -1400,7 +1399,8 @@
     <!-- Maps -->
     <script src="http://www.google.cn/maps/api/js?key=AIzaSyDnd9JwZvXty-1gHZihMoFhJtCXmHfeRQg"></script>
     <!-- Custom Js -->
-    <script src="{{ asset('assets/frontend/assets/js/custom.js') }}"></script><!-- /Place all Scripts Here -->
+    <script src="{{ asset('assets/frontend/assets/js/custom.js') }}"></script>
+	<!-- /Place all Scripts Here -->
 </body>
 
 </html>

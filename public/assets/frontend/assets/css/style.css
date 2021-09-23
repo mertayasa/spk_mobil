@@ -607,7 +607,7 @@ table {
 }
 
 .section-padding {
-    padding: 65px 0
+    padding: 35px 0
 }
 
 .section-padding-top {
@@ -765,7 +765,11 @@ label.submit {
 }
 
 .group-form .custom-select {
-    padding: 0 30px 0 20px
+    padding: 0 30px 0 15px
+}
+
+.group-form .custom-select.custom-az {
+    padding-left: 10px;
 }
 
 .group-form .custom-select:after {
@@ -1526,12 +1530,11 @@ label.custom-checkbox .checkmark:after {
     color: #f00;
     font-size: 18px;
     font-weight: 600;
-    text-transform: uppercase;
     text-align: right;
     line-height: 1;
     display: block;
     position: absolute;
-    top: 20px;
+    top: 33px;
     right: 20px
 }
 
@@ -1540,6 +1543,10 @@ label.custom-checkbox .checkmark:after {
     color: #838383;
     font-size: .5em;
     margin-bottom: 5px
+}
+
+.car-grid .car-grid-wrapper .car-grid-caption .price.from {
+    top: 20px;
 }
 
 .car-grid .car-grid-wrapper .car-grid-caption .feedback {
