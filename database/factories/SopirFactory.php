@@ -29,7 +29,7 @@ class SopirFactory extends Factory
             'tempat_lahir' => $this->faker->city(),
             'tanggal_lahir' => $this->faker->date(),
             'no_ktp' => '515001'.$this->faker->numberBetween(101060, 210598).'0001',
-            'photo' => 'default.jpeg',
+            'photo' => 'default/default.jpeg',
         ];
     }
 }

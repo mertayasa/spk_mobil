@@ -18,7 +18,7 @@ class MobilDataTable
             })
 
             ->editColumn('thumbnail', function ($mobil) {
-                return '<img src="' . asset('images/uploaded/' . $mobil->thumbnail) . '" alt="" width="100px">';
+                return '<img src="' . asset('images/' . $mobil->thumbnail) . '" alt="" width="100px">';
             })
 
             ->addColumn('action', function ($mobil) {

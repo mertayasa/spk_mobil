@@ -14,7 +14,7 @@ class SopirDataTable
         // 
         return Datatables::of($sopir)
             ->editColumn('photo', function ($sopir) {
-                return '<img src="' . asset('images/uploaded/' . $sopir->photo) . '" alt="" width="100px">';
+                return '<img src="' . asset('images/' . $sopir->photo) . '" alt="" width="100px">';
             })
 
             ->addColumn('action', function ($sopir) {

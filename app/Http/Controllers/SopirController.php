@@ -60,8 +60,8 @@ class SopirController extends Controller
         try{
             $data = $request->all();
             $base_64_foto = json_decode($request['photo'], true);
-            $upload_image = uploadFile($base_64_foto);
-            if ($upload_image == 0) {
+            $upload_image = uploadFile($base_64_foto, 'sopir');
+            if ($upload_image === 0) {
                 return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
             }
     
@@ -88,8 +88,8 @@ class SopirController extends Controller
             $data = $request->all();
     
             $base_64_foto = json_decode($request['photo'], true);
-            $upload_image = uploadFile($base_64_foto);
-            if ($upload_image == 0) {
+            $upload_image = uploadFile($base_64_foto, 'sopir');
+            if ($upload_image === 0) {
                 return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
             }
     

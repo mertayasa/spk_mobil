@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'alamat' => $faker->address(),
                 'no_ktp' => '5105012105980001',
                 'level' => 0,
-                'photo' => 'default.jpeg',
+                'photo' => 'default/default.jpeg',
                 'email_verified_at' => now(),
                 'password' => bcrypt('asdasdasd'), // password
                 'remember_token' => Str::random(10),
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
                 'alamat' => $faker->address(),
                 'no_ktp' => '5105012105980001',
                 'level' => 1,
-                'photo' => 'default.jpeg',
+                'photo' => 'default/default.jpeg',
                 'email_verified_at' => now(),
                 'password' => bcrypt('asdasdasd'), // password
                 'remember_token' => Str::random(10),
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
                 'alamat' => $faker->address(),
                 'no_ktp' => '5105012105980001',
                 'level' => 2,
-                'photo' => 'default.jpeg',
+                'photo' => 'default/default.jpeg',
                 'email_verified_at' => now(),
                 'password' => bcrypt('asdasdasd'), // password
                 'remember_token' => Str::random(10),

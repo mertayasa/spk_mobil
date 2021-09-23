@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'telpon' => $this->faker->e164PhoneNumber(),
             'alamat' => $this->faker->address(),
             'no_ktp' => '515001'.$this->faker->numberBetween(101060, 210598).'0001',
-            'photo' => 'default.jpeg',
+            'photo' => 'default/default.jpeg',
             'status_aktif' => 1,
             'level' => 2
         ];

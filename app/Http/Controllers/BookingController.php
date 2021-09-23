@@ -63,6 +63,12 @@ class BookingController extends Controller
         return view('booking.edit', compact('booking', 'user', 'mobil', 'sopir'));
     }
 
+
+    public function show(Booking $booking)
+    {
+        return view('booking.show', compact('booking'));
+    }
+
     /**
      * @param \App\Http\Requests\BookingStoreRequest $request
      * @return \Illuminate\Http\Response

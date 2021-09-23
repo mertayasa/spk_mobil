@@ -51,15 +51,17 @@ class UserController extends Controller
             $data = $request->all();
             if($request['photo']){
                 $base_64_foto = json_decode($request['photo'], true);
-                $upload_image = uploadFile($base_64_foto);
-                if ($upload_image == 0) {
+                $upload_image = uploadFile($base_64_foto, 'user');
+                
+                if ($upload_image === 0) {
                     return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
                 }
         
                 $data['photo'] = $upload_image;
             }else{
-                $data['photo'] = 'default.jpeg';
+                $data['photo'] = 'default/default.jpeg';
             }
+
 
             $data['password'] = bcrypt($data['password']);
 
@@ -111,8 +113,8 @@ class UserController extends Controller
     
             if($request['photo']){
                 $base_64_foto = json_decode($request['photo'], true);
-                $upload_image = uploadFile($base_64_foto);
-                if ($upload_image == 0) {
+                $upload_image = uploadFile($base_64_foto, 'user');
+                if ($upload_image === 0) {
                     return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
                 }
         

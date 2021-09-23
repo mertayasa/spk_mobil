@@ -76,7 +76,7 @@
             </li>
 
             <li class="nav-item {{ isActive('kriteria') }}">
-                <a href="/dashboard" class="nav-link">
+                <a href="{{route('kriteria.index')}}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Kriteria</span>
                 </a>

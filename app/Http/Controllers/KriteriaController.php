@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KriteriaControllerStoreRequest;
-use App\Http\Requests\KriteriaControllerUpdateRequest;
+use App\DataTables\KriteriaDataTable;
+use App\Http\Requests\KriteriaStoreRequest;
+use App\Http\Requests\KriteriaUpdateRequest;
 use App\Models\Kriteria;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class KriteriaController extends Controller
 {
@@ -24,7 +27,9 @@ class KriteriaController extends Controller
      */
     public function datatable(Request $request)
     {
-        $kriteria = Kriterium::all();
+        $kriteria = Kriteria::all();
+
+        return KriteriaDataTable::set($kriteria);
     }
 
     /**
@@ -38,43 +43,53 @@ class KriteriaController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Kriteria $kriterium
+     * @param \App\Models\Kriteria $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Kriterium $kriterium)
+    public function edit(Request $request, Kriteria $kriteria)
     {
         return view('kriteria.edit', compact('kriteria'));
     }
 
     /**
-     * @param \App\Http\Requests\KriteriaControllerStoreRequest $request
+     * @param \App\Http\Requests\KriteriaStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(KriteriaControllerStoreRequest $request)
+    public function store(KriteriaStoreRequest $request)
     {
-        $kriteria = Kriteria::create($request->validated());
+        try{
+            Kriteria::create($request->validated());
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data kriteria');
+        }
 
-        return redirect()->route('kriteria.index');
+        return redirect()->route('kriteria.index')->with('success', 'Berhasil menambahkan data kriteria');
     }
 
     /**
-     * @param \App\Http\Requests\KriteriaControllerUpdateRequest $request
-     * @param \App\Models\Kriteria $kriterium
+     * @param \App\Http\Requests\KriteriaUpdateRequest $request
+     * @param \App\Models\Kriteria $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function update(KriteriaControllerUpdateRequest $request, Kriterium $kriterium)
+    public function update(KriteriaUpdateRequest $request, Kriteria $kriteria)
     {
-        $kriteria->update($request->validated());
+        try{
+            $kriteria->update($request->validated());
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data kriteria');
+        }
 
-        return redirect()->route('kriteria.index');
+        return redirect()->route('kriteria.index')->with('success', 'Berhasil mengubah data kriteria');
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Kriteria $kriterium
+     * @param \App\Models\Kriteria $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Kriterium $kriterium)
+    public function destroy(Request $request, Kriteria $kriteria)
     {
         $kriteria->delete();
     }
