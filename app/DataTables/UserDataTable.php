@@ -14,7 +14,7 @@ class UserDataTable
         // 
         return Datatables::of($user)
             ->editColumn('photo', function ($user) {
-                return '<img src="' . asset('images/uploaded/' . $user->photo) . '" alt="" width="100px">';
+                return '<img src="' . asset('images/' . $user->photo) . '" alt="" width="100px">';
             })
             
             ->editColumn('status_aktif', function ($user) {

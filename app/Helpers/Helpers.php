@@ -5,6 +5,30 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
+function uploadFile($base_64_foto, $folder)
+{
+    try {
+        $foto = base64_decode($base_64_foto['data']);
+        $folderName = 'images/'.$folder;
+        
+        if (!file_exists($folderName)) {
+            mkdir($folderName, 0755, true); 
+        }
+
+        // return $folderName;
+
+        $safeName = time() . $base_64_foto['name'];
+        $inventoriePath = public_path() . '/' . $folderName;
+        file_put_contents($inventoriePath. '/' . $safeName, $foto);
+        // return 'fcuk';
+    } catch (Exception $e) {
+        Log::info($e->getMessage());
+        return 0;
+    }
+
+    return $folder.'/'.$safeName;
+}
+
 function formatPrice($value)
 {
     return 'Rp ' . number_format($value, 0, ',', '.');
@@ -69,22 +93,6 @@ function getStatus($active_status)
 function getLevel($level)
 {
     return $level == 0 ? '<span>Ketua</span>' : ($level == 1 ? '<span">Sekretaris</span>' : ($level == 2 ? '<span">Bendahara</span>' : '<span">Anggota </span>'));
-}
-
-function uploadFile($base_64_foto)
-{
-    try {
-        $foto = base64_decode($base_64_foto['data']);
-        $folderName = 'images/uploaded/';
-        $safeName = time() . $base_64_foto['name'];
-        $inventoriePath = public_path() . '/' . $folderName;
-        file_put_contents($inventoriePath . $safeName, $foto);
-    } catch (Exception $e) {
-        Log::info($e->getMessage());
-        return 0;
-    }
-
-    return $safeName;
 }
 
 function isActive($param)

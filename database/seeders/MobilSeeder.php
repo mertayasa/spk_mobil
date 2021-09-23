@@ -26,7 +26,7 @@ class MobilSeeder extends Seeder
                 'id_jenis_mobil' => JenisMobil::inRandomOrder()->first()->id,
                 'deskripsi' => $faker->text(),
                 'harga' => rand(150000, 500000),
-                'thumbnail' => 'mobil.jpeg',
+                'thumbnail' => 'default/mobil.jpeg',
                 'jumlah_kursi' => $kursi[rand(0,3)],
             ],
             [
@@ -34,7 +34,7 @@ class MobilSeeder extends Seeder
                 'id_jenis_mobil' => JenisMobil::inRandomOrder()->first()->id,
                 'deskripsi' => $faker->text(),
                 'harga' => rand(150000, 500000),
-                'thumbnail' => 'mobil.jpeg',
+                'thumbnail' => 'default/mobil.jpeg',
                 'jumlah_kursi' => $kursi[rand(0,3)],
             ],
             [
@@ -42,7 +42,7 @@ class MobilSeeder extends Seeder
                 'id_jenis_mobil' => JenisMobil::inRandomOrder()->first()->id,
                 'deskripsi' => $faker->text(),
                 'harga' => rand(150000, 500000),
-                'thumbnail' => 'mobil.jpeg',
+                'thumbnail' => 'default/mobil.jpeg',
                 'jumlah_kursi' => $kursi[rand(0,3)],
             ],
             [
@@ -50,7 +50,7 @@ class MobilSeeder extends Seeder
                 'id_jenis_mobil' => JenisMobil::inRandomOrder()->first()->id,
                 'deskripsi' => $faker->text(),
                 'harga' => rand(150000, 500000),
-                'thumbnail' => 'mobil.jpeg',
+                'thumbnail' => 'default/mobil.jpeg',
                 'jumlah_kursi' => $kursi[rand(0,3)],
             ],
         ];
