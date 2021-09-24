@@ -63,10 +63,10 @@
                         <div class="rightside full-height">
                             <ul class="custom-flex full-height">
                                 <li class="book-appointment">
-                                    <a href="booking.html">Login</a>
+                                    <a href="{{ route('login') }}"><i class="fa fa-user-alt"></i>Login</a>
                                 </li>
                                 <li class="book-appointment">
-                                    <a href="booking.html">Register</a>
+                                    <a href="{{ route('register') }}"><i class="fa fa-key"></i>Register</a>
                                 </li>
                             </ul>
                         </div>
@@ -206,9 +206,7 @@
     <div id="back-top" class="back-top"> <a href="#top"><i class="flaticon-arrows"></i></a> </div>
     <!-- Place all Scripts Here -->
     <!-- jQuery -->
-    {{-- <script src="{{ asset('assets/frontend/assets/js/jquery.min.js') }}"></script> --}}
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+    <script src="{{ asset('assets/frontend/assets/js/jquery.min.js') }}"></script>
     <!-- Popper -->
     <script src="{{ asset('assets/frontend/assets/js/popper.min.js') }}"></script>
     <!-- Bootstrap -->
@@ -230,8 +228,8 @@
     <script src="http://www.google.cn/maps/api/js?key=AIzaSyDnd9JwZvXty-1gHZihMoFhJtCXmHfeRQg"></script>
     <!-- Custom Js -->
     <script src="{{ asset('assets/frontend/assets/js/custom.js') }}"></script>
-    @stack('scriptplus')
 	<!-- /Place all Scripts Here -->
+    @stack('scriptplus')
 </body>
 
 </html>
