@@ -8,6 +8,8 @@
     <meta name="keywords" content="#">
     <meta name="description" content="#">
     <title>Rumble - Car Rental Booking HTML Template | @yield('title-menu')</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fav and touch icons -->
     {{-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon.ico">

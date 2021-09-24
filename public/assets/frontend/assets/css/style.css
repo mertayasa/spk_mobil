@@ -813,7 +813,7 @@ label.submit {
 
 textarea.form-control {
     height: auto;
-    padding: 20px 15px 0
+    padding: 10px 15px 0
 }
 
 label.custom-checkbox input {
@@ -1121,7 +1121,7 @@ label.custom-checkbox .checkmark:after {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 22;
+    z-index: 999;
     background: #fff;
     animation-duration: 1s;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
@@ -1501,6 +1501,25 @@ label.custom-checkbox .checkmark:after {
     margin: 4px 0
 }
 
+.js-produk-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.js-produk-scroll.scrolled {
+    animation-name: fadeHeaderInDown;
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 11;
+    animation-duration: 1s;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    animation-fill-mode: both
+}
+
 .car-grid {
     position: relative;
     overflow: hidden
@@ -1569,7 +1588,8 @@ label.custom-checkbox .checkmark:after {
     justify-content: space-between
 }
 
-.car-grid .car-grid-wrapper .car-grid-caption .action a {
+.car-grid .car-grid-wrapper .car-grid-caption .action a,
+.car-grid .car-grid-wrapper .car-grid-caption .action button {
     padding: 0 20px
 }
 

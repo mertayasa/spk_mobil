@@ -129,14 +129,14 @@
 		  <div class="row">
 			<div class="col-12">
 			  <div class="listing-top-heading mb-xl-20">
-				<h6 class="no-margin text-custom-black">Showing {{ $mobil->count() }} - {{ $countmobil }} Results</h6>
+				<h6 class="no-margin text-custom-black">Showing {{ $mobil->count() }} from {{ $countmobil }} Results on {{ request()->input('page') ? "Page - ".request()->input('page') : "Page - 1" }} </h6>
 				<div class="sort-by">
                     <span class="text-custom-black fs-14 fw-600">Sort by</span>
                     <div class="group-form">
                         <form method="get" action="{{ route('homepage', '#search') }}">
-                            <input type="hidden" name="id_category" value="{{ request()->input('id_category') }}">
-                            <input type="hidden" name="id_name" value="{{ request()->input('id_name') }}">
-                            <input type="hidden" name="id_passenger" value="{{ request()->input('id_passenger') }}">
+                            {!! Form::hidden('id_category', request()->input('id_category')) !!}
+                            {!! Form::hidden('id_name', request()->input('id_name')) !!}
+                            {!! Form::hidden('id_passenger', request()->input('id_passenger')) !!}
                             {!! Form::select('id_sort', ['asc' => 'A to Z', 'desc' => 'Z to A'], request()->input('id_sort'), ['class' => 'form-control form-control-custom custom-select custom-az', 'onchange' => 'this.form.submit()']) !!}
                         </form>
                     </div>
@@ -144,30 +144,35 @@
 			  </div>
 			</div>
 			@forelse ($mobil as $index => $item)
-			<div class=" col-lg-4 col-md-6">
-				<div class="car-grid mb-xl-30">
-				  <div class="car-grid-wrapper car-grid bx-wrapper">
-					<div class="image-sec animate-img">
-						<a href="#">
-							<img src="{{ asset('assets/frontend/assets/images/cars/1.png') }}" class="full-width" alt="img">
-						</a>
-					</div>
-					<div class="car-grid-caption padding-20 bg-custom-white p-relative">
-					  <h4 class="title fs-16">
-						  <a href="#" class="text-custom-black">
-							  {{ $item->nama }}<small class="text-light-dark">Per Day</small>
-						  </a>
-					  </h4>
-					  <span class="price from"><small>From</small></span>
-					  <span class="js-harga harga-{{ $index }} price">{{ $item->harga }}</span>
-					  <p>{{ $item->jenisMobil->jenis_mobil }}</p>
-					  <p>{{ $item->deskripsi }}</p>
-					  <div class="action"><a class="btn-second btn-small" href="#">View</a><a class="btn-first btn-submit"
-						  href="#">Book</a></div>
-					</div>
-				  </div>
-				</div>
-			  </div>
+                <div class=" col-lg-4 col-md-6">
+                    <div class="car-grid mb-xl-30">
+                        <div class="car-grid-wrapper car-grid bx-wrapper">
+                            <div class="image-sec animate-img">
+                                <a href="#">
+                                    <img src="{{ asset('images/' . $item->thumbnail) }}" class="full-width" alt="img">
+                                </a>
+                            </div>
+                            <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+                                <h4 class="title fs-16">
+                                    <a href="#" class="text-custom-black">
+                                        {{ $item->nama }}<small class="text-light-dark">Per Day</small>
+                                    </a>
+                                </h4>
+                                <span class="price from"><small>From</small></span>
+                                <span class="js-harga harga-{{ $index }} price">{{ $item->harga }}</span>
+                                <p>{{ $item->jenisMobil->jenis_mobil }}</p>
+                                <p>{{ $item->deskripsi }}</p>
+                                <div class="action">
+                                    <a class="btn-second btn-small" href="#">View</a>
+                                    <form action="{{ route('bookingcar.index') }}" method="post">
+                                        @csrf
+                                        <button name="id_mobil" type="submit" value="{{ $item->id }}" class="btn-first btn-submit">Book</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			@empty
 				Kosong ?
 			@endforelse
