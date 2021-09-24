@@ -41,6 +41,6 @@ class HomepageController extends Controller
         
         $mobil = $mobil->paginate(6);
 
-        return view('welcome2', compact('mobil', 'countmobil', 'navJumlahKursi', 'navCategory'));
+        return view('frontend.welcome', compact('mobil', 'countmobil', 'navJumlahKursi', 'navCategory'));
     }
 }
