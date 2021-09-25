@@ -207,4 +207,5 @@
             })
         })
     </script>
+    @include('frontend.layouts.flash')
 @endpush

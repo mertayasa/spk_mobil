@@ -3,7 +3,7 @@
         a(window).on('load', function () {
             a(".custom-select").niceSelect();
         });
-        a("td:empty").addClass("no-bg")
+        a("td:empty").addClass("no-bg");
     });
     a(window).scroll(function () {
         var f = a(".header .navigation-wrapper"),

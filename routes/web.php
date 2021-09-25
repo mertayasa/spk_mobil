@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
         Route::post('/', [BookingcarController::class, 'index'])->name('index');
         Route::get('/', function () {
-            return redirect()->route('homepage', '#search');
+            return redirect()->route('homepage', '#search')->with('info', 'Silahkan pilih dulu mobil yang ingin disewa');
         });
         Route::post('store', [BookingcarController::class, 'store'])->name('store');
     });

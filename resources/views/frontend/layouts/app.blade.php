@@ -32,8 +32,9 @@
     <link href="{{ asset('assets/frontend/assets/css/magnific-popup.css') }}" rel="stylesheet">
     <!-- Nice Select -->
     <link href="{{ asset('assets/frontend/assets/css/nice-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
     <!-- Custom Stylesheet -->
-    <link href="{{ asset('assets/frontend/assets/css/style.cs') }}s" rel="stylesheet">
+    <link href="{{ asset('assets/frontend/assets/css/style.css') }}" rel="stylesheet">
     <!-- Custom Responsive -->
     <link href="{{ asset('assets/frontend/assets/css/responsive.css') }}" rel="stylesheet">
     <!-- CSS for IE -->
@@ -226,8 +227,9 @@
     <script src="{{ asset('assets/frontend/assets/js/jquery.nice-select.js') }}"></script>
     <!-- magnific popup -->
     <script src="{{ asset('assets/frontend/assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <!-- Maps -->
-    <script src="http://www.google.cn/maps/api/js?key=AIzaSyDnd9JwZvXty-1gHZihMoFhJtCXmHfeRQg"></script>
+    {{-- <script src="http://www.google.cn/maps/api/js?key=AIzaSyDnd9JwZvXty-1gHZihMoFhJtCXmHfeRQg"></script> --}}
     <!-- Custom Js -->
     <script src="{{ asset('assets/frontend/assets/js/custom.js') }}"></script>
 	<!-- /Place all Scripts Here -->

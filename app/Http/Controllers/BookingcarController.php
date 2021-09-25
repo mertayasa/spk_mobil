@@ -51,10 +51,10 @@ class BookingcarController extends Controller
             ]);
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return redirect()->route('booking.index')->withInput()->with('error', 'Gagal menambahkan data booking');
+            return redirect()->route('homepage', '#search')->withInput()->with('error', 'Gagal mengirim Data Booking');
         }
 
-        return redirect()->route('booking.index')->with('success', 'Berhasil menambahkan data booking');
+        return redirect()->route('homepage')->with('success', 'Data Booking anda sudah kami terima');
     }
-    
+
 }
