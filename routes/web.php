@@ -25,12 +25,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
-Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
-    Route::post('/', [BookingcarController::class, 'index'])->name('index');
-    Route::get('/', function () {
-        return redirect()->route('homepage', '#search');
+
+Route::middleware(['auth'])->group(function () {
+    Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
+        Route::post('/', [BookingcarController::class, 'index'])->name('index');
+        Route::get('/', function () {
+            return redirect()->route('homepage', '#search');
+        });
+        Route::post('store', [BookingcarController::class, 'store'])->name('store');
     });
-    Route::post('store', [BookingcarController::class, 'store'])->name('store');
 });
 
 
