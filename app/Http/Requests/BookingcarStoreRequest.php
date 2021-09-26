@@ -34,4 +34,21 @@ class BookingcarStoreRequest extends FormRequest
             'id_date_to' => ['required', 'after_or_equal:id_date_to'],
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'id_mobil.required' => 'Mohon tidak melakukan hal yang aneh',
+            'id_user.required' => 'Mohon tidak melakukan hal yang aneh',
+            'id_driver.required' => 'Mohon pilih sopir anda',
+            'id_catatan.required' => 'Mohon catatan diisi',
+            'id_date_from.required' => 'Mohon mengisi tanggal mulai sewa',
+            'id_date_to.required' => 'Mohon mengisi tanggal berakhir sewa'
+        ];
+    }
 }

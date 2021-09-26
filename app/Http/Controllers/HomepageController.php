@@ -10,6 +10,10 @@ class HomepageController extends Controller
 {
     public function index(Request $request)
     {
+        if ($request->session()->has('id_mobil')) {
+            $request->session()->forget('id_mobil');
+        }
+
         $category = $request->input('id_category');
         $name = $request->input('id_name');
         $passenger = $request->input('id_passenger');
