@@ -12,6 +12,9 @@
                         </div>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
+                            {!! Form::hidden('status_aktif', 1, []) !!}
+                            {!! Form::hidden('level', 2, []) !!}
+                            {!! Form::hidden('photo', 'default/default.jpeg', []) !!}
                             <!-- Form -->
                             <div class="form-group mb-4">
                                 <label for="name">{{ __('Name') }}</label>
@@ -97,6 +100,68 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Form Tambahan -->
+                            <div class="form-group mb-4">
+                                <label for="telepon">{{ __('Telephone') }}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon2">
+                                        <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                            </path>
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                        </svg>
+                                    </span>
+                                    {!! Form::text('telpon', null, ['class'=> 'form-control', 'id' => 'telepon', 'required']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="jenis_kelamin">{{ __('Gender') }}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon2">
+                                        <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                            </path>
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                        </svg>
+                                    </span>
+                                    {!! Form::select('jenis_kelamin', ['Pilih jenis kelamin', '0' => 'Laki-laki', '1' => 'Perempuan'], null, ['class'=> 'custom-select', 'id' => 'jenis_kelamin', 'required']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="alamat">{{ __('Address') }}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon2">
+                                        <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                            </path>
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                        </svg>
+                                    </span>
+                                    {!! Form::textarea('alamat', null, ['class'=> 'form-control', 'id' => 'alamat', 'rows' => '1', 'required']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="no_ktp">{{ __('Number Identity') }}</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon2">
+                                        <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                            </path>
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                        </svg>
+                                    </span>
+                                    {!! Form::text('no_ktp', null, ['class'=> 'form-control', 'id' => 'no_ktp', 'required']) !!}
+                                </div>
+                            </div>
+                            <!-- End of Form Tambahan -->
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-gray-800">{{ __('Register') }}</button>
                             </div>

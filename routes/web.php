@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
         Route::post('/', [BookingcarController::class, 'index'])->name('index');
         Route::get('/', [BookingcarController::class, 'cek'])->name('cekIndex');
@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
     });
@@ -114,6 +114,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
