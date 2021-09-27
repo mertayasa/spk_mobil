@@ -58,7 +58,8 @@ class RegisterController extends Controller
             'status_aktif' => ['required'],
             'alamat' => ['required'],
             'no_ktp' => ['required'],
-            'level' => ['required']
+            'level' => ['required'],
+            'photo' => ['required']
         ]);
     }
 
@@ -79,7 +80,8 @@ class RegisterController extends Controller
             'status_aktif' => $data['status_aktif'],
             'alamat' => $data['alamat'],
             'no_ktp' => $data['no_ktp'],
-            'level' => $data['level']
+            'level' => $data['level'],
+            'photo' => $data['photo']
         ]);
     }
 }
