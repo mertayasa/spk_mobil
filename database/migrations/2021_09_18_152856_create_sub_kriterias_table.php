@@ -17,11 +17,9 @@ class CreateSubKriteriasTable extends Migration
 
         Schema::create('sub_kriteria', function (Blueprint $table) {
             $table->id();
-            $table->string('kriteria', 50);
             $table->unsignedBigInteger('id_kriteria');
             $table->string('sub_kriteria', 50);
-            $table->string('skor', 50);
-            $table->tinyInteger('sifat')->default(0);
+            $table->integer('skor');
             $table->timestamps();
 
             $table->foreign('id_kriteria')->references('id')->on('kriteria')->onDelete('cascade')->onUpdate('cascade');

@@ -9,38 +9,26 @@ class SubKriteria extends Model
 {
     use HasFactory;
 
+    protected $table = 'sub_kriteria';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'kriteria',
         'id_kriteria',
         'sub_kriteria',
         'skor',
-        'sifat',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'integer',
-        'id_kriteria' => 'integer',
-        'sifat' => 'integer',
+    protected $with = [
+        'kriteria'
     ];
-
 
     public function kriteria()
     {
-        return $this->belongsTo(\App\Models\Kriteria::class);
+        return $this->belongsTo(\App\Models\Kriteria::class, 'id_kriteria');
     }
 
-    public function idKriteria()
-    {
-        return $this->belongsTo(\App\Models\Kriteria::class);
-    }
 }

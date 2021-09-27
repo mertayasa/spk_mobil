@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SubKriteriaControllerStoreRequest;
-use App\Http\Requests\SubKriteriaControllerUpdateRequest;
+use App\DataTables\SubKriteriaDataTable;
+use App\Http\Requests\SubKriteriaStoreRequest;
+use App\Http\Requests\SubKriteriaUpdateRequest;
+use App\Models\Kriteria;
 use App\Models\SubKriteria;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SubKriteriaController extends Controller
 {
@@ -13,9 +18,30 @@ class SubKriteriaController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(SubKriteriaDataTable $subKriteriaDataTable)
     {
-        return view('sub_kriteria.index');
+        $is_same = $this->checkSubKriteriaLength();
+        // dd($is_same);
+
+        // SubKriteria::all()->dd();
+        
+        return $subKriteriaDataTable->render('sub_kriteria.index', compact('is_same'));
+    }
+
+    public function checkSubKriteriaLength()
+    {
+        $sub_kriteria = DB::table('sub_kriteria')
+                 ->select(DB::raw('count(*) as total'))
+                 ->groupBy('id_kriteria')
+                 ->get();
+
+        foreach($sub_kriteria as $key => $sub){
+            if($sub->total != $sub_kriteria[0]->total){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -24,7 +50,9 @@ class SubKriteriaController extends Controller
      */
     public function datatable(Request $request)
     {
-        $subKriteria = SubKriterium::all();
+        $subKriteria = SubKriteria::all();
+
+        // return SubKriteriaDataTable::set($subKriteria);
     }
 
     /**
@@ -33,49 +61,84 @@ class SubKriteriaController extends Controller
      */
     public function create(Request $request)
     {
-        return view('sub_kriteria.create');
+        $kriteria = Kriteria::all();
+
+        return view('sub_kriteria.create', compact('kriteria'));
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\SubKriteria $subKriterium
+     * @param \App\Models\SubKriteria $subKriteria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, SubKriterium $subKriterium)
+    public function edit(Request $request, SubKriteria $sub_kriteria)
     {
         return view('sub_kriteria.edit', compact('sub_kriteria'));
     }
 
     /**
-     * @param \App\Http\Requests\SubKriteriaControllerStoreRequest $request
+     * @param \App\Http\Requests\SubKriteriaStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SubKriteriaControllerStoreRequest $request)
+    public function store(Request $request)
     {
-        $subKriteria = SubKriteria::create($request->validated());
+        $new_sub = $request->all();
+        unset($new_sub['_token']);
+        unset($new_sub['/sub-kriteria/store']);
+        
+        try{
+            $asd = [];
+            foreach($new_sub as $sub){
+                if(!in_array(null, $sub, true)){
+                    SubKriteria::create($sub);
+                }
+            }
+            
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            dd($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data sub kriteria');
+        }
 
-        return redirect()->route('sub_kriteria.index');
+        return redirect()->route('sub_kriteria.index')->with('success', 'Berhasil menambahkan data sub kriteria');
     }
 
     /**
-     * @param \App\Http\Requests\SubKriteriaControllerUpdateRequest $request
-     * @param \App\Models\SubKriteria $subKriterium
+     * @param \App\Http\Requests\SubKriteriaUpdateRequest $request
+     * @param \App\Models\SubKriteria $subKriteria
      * @return \Illuminate\Http\Response
      */
-    public function update(SubKriteriaControllerUpdateRequest $request, SubKriterium $subKriterium)
+    public function update(Request $request, SubKriteria $subKriteria)
     {
-        $subKriteria->update($request->validated());
+        $data = $request->all();
 
-        return redirect()->route('sub_kriteria.index');
+        try{
+            $subKriteria->update($data);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data sub kriteria');
+        }
+
+        return redirect()->route('sub_kriteria.index')->with('success', 'Berhasil mengubah data sub kriteria');
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\SubKriteria $subKriterium
+     * @param \App\Models\SubKriteria $subKriteria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, SubKriterium $subKriterium)
+    public function destroy(Request $request, SubKriteria $subKriteria)
     {
-        $subKriteria->delete();
+        
+        try {
+            $subKriteria->delete();
+
+            $is_same = $this->checkSubKriteriaLength();
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal menghapus data sopir', 'is_same' => $is_same]);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil menghapus data sopir', 'is_same' => $is_same]);
     }
 }

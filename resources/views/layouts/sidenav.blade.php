@@ -83,7 +83,7 @@
             </li>
 
             <li class="nav-item {{ isActive('sub-kriteria') }}">
-                <a href="/dashboard" class="nav-link">
+                <a href="{{route('sub_kriteria.index')}}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Sub Kriteria</span>
                 </a>

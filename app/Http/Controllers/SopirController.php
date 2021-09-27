@@ -98,10 +98,10 @@ class SopirController extends Controller
             $sopir->update($data);
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data sopir');
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data sopir');
         }
 
-        return redirect()->route('sopir.index')->with('success', 'Berhasil menambahkan data sopir');
+        return redirect()->route('sopir.index')->with('success', 'Berhasil mengubah data sopir');
         
     }
 

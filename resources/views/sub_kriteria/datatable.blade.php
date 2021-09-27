@@ -1,10 +1,11 @@
-<table class="table table-hover table-striped" width="100%" id="jenisMobilDatatable">
+<table class="table table-hover table-striped" width="100%" id="subKriteriaDatatable">
     <thead>
         <tr>
             <th>No</th>
             <th></th>
-            <th>Jenis Mobil</th>
-            <th>Aksi</th>
+            <th>Sub Kriteria</th>
+            <th>Skor</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -13,18 +14,19 @@
 @push('scripts')
     <script>
         let table
-        let url = "{{ route('jenis_mobil.datatable') }}"
+        let url = "{{ route('sub_kriteria.datatable') }}"
 
         datatable(url)
 
         function datatable(url) {
 
-            table = $('#jenisMobilDatatable').DataTable({
+            table = $('#subKriteriaDatatable').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
                 ajax: url,
-                columns: [{
+                columns: [
+                    {
                         data: 'DT_RowIndex',
                         name: 'no',
                         orderable: false,
@@ -36,8 +38,12 @@
                         visible: false
                     },
                     {
-                        data: 'jenis_mobil',
-                        name: 'jenis_mobil',
+                        data: 'sub_kriteria',
+                        name: 'sub_kriteria',
+                    },
+                    {
+                        data: 'skor',
+                        name: 'skor',
                     },
                     {
                         data: 'action',
@@ -47,7 +53,7 @@
                     }
                 ],
                 order: [
-                    [1, "desc"]
+                    // [1, "desc"]
                 ],
                 columnDefs: [
                     // { width: 300, targets: 1 },

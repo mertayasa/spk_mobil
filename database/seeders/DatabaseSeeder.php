@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SopirSeeder::class);
         $this->call(MobilSeeder::class);
         $this->call(BookingSeeder::class);
+        $this->call(KriteriaSeeder::class);
+        $this->call(SubKriteriaSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

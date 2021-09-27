@@ -27,8 +27,15 @@
               My Profile
             </a>
             <div role="separator" class="dropdown-divider my-1"></div>
-            <a class="dropdown-item d-flex align-items-center">
-              <livewire:logout /></a>
+              <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                  <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+              </form>
           </div>
         </li>
       </ul>

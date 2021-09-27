@@ -17,7 +17,7 @@ class CreateKriteriasTable extends Migration
             $table->id();
             $table->string('kriteria', 50);
             $table->float('bobot');
-            $table->tinyInteger('sifat')->default(0);
+            $table->enum('sifat', ['cost', 'benefit']);
             $table->timestamps();
         });
     }

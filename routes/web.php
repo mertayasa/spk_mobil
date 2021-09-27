@@ -80,7 +80,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('datatable', [KriteriaController::class, 'datatable'])->name('datatable');
     });
 
-    Route::group(['prefix' => 'sub_kriteria', 'as' => 'sub_kriteria.'], function () {
+    Route::group(['prefix' => 'sub-kriteria', 'as' => 'sub_kriteria.'], function () {
         Route::get('/', [SubKriteriaController::class, 'index'])->name('index');
         Route::get('create', [SubKriteriaController::class, 'create'])->name('create');
         Route::post('store', [SubKriteriaController::class, 'store'])->name('store');
