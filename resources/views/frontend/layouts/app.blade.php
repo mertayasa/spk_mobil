@@ -65,12 +65,23 @@
                     <div class="col-lg-6 col-md-7">
                         <div class="rightside full-height">
                             <ul class="custom-flex full-height">
-                                <li class="book-appointment">
-                                    <a href="{{ route('login') }}"><i class="fa fa-user-alt"></i>Login</a>
-                                </li>
-                                <li class="book-appointment">
-                                    <a href="{{ route('register') }}"><i class="fa fa-key"></i>Register</a>
-                                </li>
+                                @guest
+                                    <li class="book-appointment">
+                                        <a href="{{ route('login') }}"><i class="fa fa-user-alt"></i>Login</a>
+                                    </li>
+                                    @if (Route::has('register'))
+                                        <li class="book-appointment">
+                                            <a href="{{ route('register') }}"><i class="fa fa-key"></i>Register</a>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li class="book-appointment">
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-unlock"></i>Log Out</a>
+                                        <form action="{{ route('logout') }}" method="post" id="logout-form" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                @endguest
                             </ul>
                         </div>
                     </div>

@@ -63,10 +63,11 @@
                                                             {!! Form::label('idDateFrom', 'Tanggal Sewa', ['class' => 'fs-14 text-custom-black fw-500']) !!}
                                                             <div class="input-group group-form">
                                                                 {!! Form::text('id_date_from', null, ['class' => 'form-control form-control-custom datepickr' . ($errors->has('id_date_from') ? ' is-invalid' : null), 'id' => 'idDateFrom', 'placeholder' => 'mm/dd/yyyy', 'readonly' => 'readonly', 'required' => 'required']) !!}
-                                                                <div class="invalid-feedback">Mohon pilih tgl mulai sewa</div>
                                                                 <div class="valid-feedback">Good</div>
                                                                 @error('id_date_from')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
+                                                                @else
+                                                                    <div class="invalid-feedback">Mohon pilih tgl mulai sewa</div>
                                                                 @enderror
                                                                 <span class="input-group-append"> <i class="far fa-calendar"></i> </span>
                                                             </div>
@@ -77,10 +78,11 @@
                                                             {!! Form::label('idDateTo', 'Tanggal Kembali', ['class' => 'fs-14 text-custom-black fw-500']) !!}
                                                             <div class="input-group group-form">
                                                                 {!! Form::text('id_date_to', null, ['class' => 'form-control form-control-custom datepickr-off' . ($errors->has('id_date_to') ? ' is-invalid' : null), 'id' => 'idDateTo', 'placeholder' => 'mm/dd/yyyy', 'readonly' => 'readonly', 'required' => 'required']) !!}
-                                                                <div class="invalid-feedback">Mohon pilih tgl berakhir sewa</div>
                                                                 <div class="valid-feedback">Good</div>
                                                                 @error('id_date_to')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
+                                                                @else
+                                                                    <div class="invalid-feedback">Mohon pilih tgl berakhir sewa</div>
                                                                 @enderror
                                                                 <span class="input-group-append spantgloff"> <i class="far fa-calendar"></i> </span>
                                                             </div>
@@ -90,10 +92,11 @@
                                                         <div class="form-group group-form">
                                                             {!! Form::label('idDriver', 'Pilih Sopir', ['class' => 'fs-14 text-custom-black fw-500']) !!}
                                                             {!! Form::select('id_driver', [null => 'Pilih Sopir', $navSopir], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idDriver']) !!}
-                                                            <div class="invalid-feedback">Mohon pilih sopir anda</div>
                                                             <div class="valid-feedback">Good</div>
                                                             @error('id_driver')
                                                                 <div class="invalid-feedback">{{ $message }}</div>
+                                                            @else
+                                                                <div class="invalid-feedback">Mohon pilih sopir anda</div>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -101,10 +104,11 @@
                                                         <div class="form-group">
                                                             {!! Form::label('idCatatan', 'Catatan', ['class' => 'mb-1']) !!}
                                                             {!! Form::textarea('id_catatan', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_catatan') ? ' is-invalid' : null), 'id' => 'idCatatan', 'rows' => '5' ]) !!}
-                                                            <div class="invalid-feedback">Mohon isi catatan untuk kami</div>
                                                             <div class="valid-feedback">Good</div>
                                                             @error('id_catatan')
                                                                 <div class="invalid-feedback">{{ $message }}</div>
+                                                            @else
+                                                                <div class="invalid-feedback">Mohon isi catatan untuk kami</div>
                                                             @enderror
                                                         </div>
                                                     </div>
