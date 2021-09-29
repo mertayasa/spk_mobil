@@ -163,7 +163,7 @@
                                 <p>{{ $item->jenisMobil->jenis_mobil }}</p>
                                 <p>{{ $item->deskripsi }}</p>
                                 <div class="action">
-                                    <a class="btn-second btn-small" href="#">View</a>
+                                    <a class="btn-second btn-small mobil-view-ajax" href="#" data-id="{{ $item->id }}" data-toggle="modal" data-target="#exampleModal">View</a>
                                     <form action="{{ route('bookingcar.index') }}" method="post">
                                         @csrf
                                         <button name="id_mobil" type="submit" value="{{ $item->id }}" class="btn-first btn-submit">Book</button>
@@ -187,6 +187,7 @@
 		</div>
 	</section>
 	<!-- End Blog -->
+    @include('frontend.layouts.modal')
 @endsection
 
 @push('scriptplus')
@@ -204,6 +205,29 @@
                 } else {
                     $('.loader').removeClass('go');
                 }
+            });
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.mobil-view-ajax').on('click', function (e) {
+                e.preventDefault();
+                let data = $(this).data('id');
+                const modal = $(this).data('target');
+                let url = "{{ route('datamobil', ':id') }}";
+                url = url.replace(':id', data);
+                $.get(url, function (data) {
+                    $('#judul-modal').html("Mobil Details");
+                    $(modal).modal('show');
+                    $(modal).find('#nama-mobil').html(data.nama);
+                    $(modal).find('#harga-mobil').html(data.harga);
+                    $(modal).find('#capacity-mobil').html(data.jumlah_kursi);
+                    $(modal).find('#description-mobil').html(data.deskripsi);
+                });
+                console.log(url);
             })
         })
     </script>
