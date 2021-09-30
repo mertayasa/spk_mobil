@@ -9,9 +9,9 @@
         <div class="row">
             <div class="col-12 mb-4">
               @include('layouts.flash')
-                <div class="alert alert-danger alert-block {{$is_same == true ? 'd-none' : ''}}" id="alertNotSame">
+                {{-- <div class="alert alert-danger alert-block {{$is_same == true ? 'd-none' : ''}}" id="alertNotSame">
                     <strong>Jumlah sub kriteria tidak sama, perhitungan SAW tidak dapat dilakukan</strong>
-                </div>
+                </div> --}}
                 <div class="card border-0 shadow">
                     <div class="card-header">
                         <div class="row align-items-center">
