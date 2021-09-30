@@ -9,6 +9,8 @@ class HasilSaw extends Model
 {
     use HasFactory;
 
+    protected $table = 'hasil_saw';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -34,16 +36,11 @@ class HasilSaw extends Model
 
     public function mobil()
     {
-        return $this->belongsTo(\App\Models\Mobil::class);
+        return $this->belongsTo(\App\Models\Mobil::class, 'id_mobil');
     }
 
-    public function idMobil()
+    public function detailSaw()
     {
-        return $this->belongsTo(\App\Models\Mobil::class);
-    }
-
-    public function detailSaws()
-    {
-        return $this->hasMany(\App\Models\DetailSaw::class);
+        return $this->hasMany(\App\Models\DetailSaw::class, 'id_hasil_saw');
     }
 }

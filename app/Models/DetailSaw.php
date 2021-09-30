@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DeatailSaw extends Model
+class DetailSaw extends Model
 {
     use HasFactory;
+
+    protected $table = 'detail_saw';
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +19,7 @@ class DeatailSaw extends Model
     protected $fillable = [
         'id_hasil_saw',
         'id_kriteria',
+        'id_sub_kriteria',
     ];
 
     /**
@@ -28,25 +31,10 @@ class DeatailSaw extends Model
         'id' => 'integer',
         'id_hasil_saw' => 'integer',
         'id_kriteria' => 'integer',
+        'id_sub_kriteria' => 'integer',
     ];
 
-
-    public function hasilSaw()
-    {
-        return $this->belongsTo(\App\Models\HasilSaw::class);
-    }
-
     public function kriteria()
-    {
-        return $this->belongsTo(\App\Models\Kriteria::class);
-    }
-
-    public function idHasilSaw()
-    {
-        return $this->belongsTo(\App\Models\HasilSaw::class);
-    }
-
-    public function idKriteria()
     {
         return $this->belongsTo(\App\Models\Kriteria::class);
     }

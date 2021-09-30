@@ -49,4 +49,17 @@ class Mobil extends Model
     {
         return $this->hasOne(\App\Models\HasilSaw::class);
     }
+
+    public function findKriteriaAndSub($id_mobil, $id_kriteria)
+    {
+        $hasil_saw = HasilSaw::with('detailSaw')->where('id_mobil', $id_mobil)->get();
+
+        if(!$hasil_saw){
+            return null;
+        }
+
+        $detail = $hasil_saw[0]->detailSaw()->where('id_kriteria', $id_kriteria)->get();
+
+        return $detail[0]->id_sub_kriteria;
+    }
 }

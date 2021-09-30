@@ -8,6 +8,7 @@ use App\Http\Controllers\JenisMobilController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MobilController;
+use App\Http\Controllers\SAWController;
 use App\Http\Controllers\SopirController;
 use App\Http\Controllers\SubKriteriaController;
 use Illuminate\Support\Facades\Auth;
@@ -109,6 +110,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('update/{booking}', [BookingController::class, 'update'])->name('update');
         Route::delete('destroy/{booking}', [BookingController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [BookingController::class, 'datatable'])->name('datatable');
+    });
+
+    Route::group(['prefix' => 'saw', 'as' => 'saw.'], function () {
+        Route::get('/', [SAWController::class, 'index'])->name('index');
+        Route::get('create', [SAWController::class, 'create'])->name('create');
+        Route::post('store', [SAWController::class, 'store'])->name('store');
+        Route::get('show/{saw}', [SAWController::class, 'show'])->name('show');
+        Route::get('edit/{saw}', [SAWController::class, 'edit'])->name('edit');
+        Route::patch('update', [SAWController::class, 'update'])->name('update');
+        Route::delete('destroy/{saw}', [SAWController::class, 'destroy'])->name('destroy');
+        Route::get('datatable', [SAWController::class, 'datatable'])->name('datatable');
     });
 
 });

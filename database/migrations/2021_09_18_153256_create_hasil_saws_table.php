@@ -17,7 +17,6 @@ class CreateHasilSawsTable extends Migration
 
         Schema::create('hasil_saw', function (Blueprint $table) {
             $table->id();
-            $table->string('kriteria', 50);
             $table->unsignedBigInteger('id_mobil');
             $table->float('nilai_akhir');
             $table->timestamps();

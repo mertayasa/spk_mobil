@@ -22,7 +22,7 @@ class SubKriteriaSeeder extends Seeder
             foreach($sub as $key => $value){
                 $sub_kriteria = [
                     'id_kriteria' => $krite->id,
-                    'sub_kriteria' => 'Sub Kriteria '.($key+1),
+                    'sub_kriteria' => 'Sub Kriteria ' . ($krite->id) . ($key+1),
                     'skor' => ($key+1),
                 ];
 

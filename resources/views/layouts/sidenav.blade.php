@@ -89,13 +89,13 @@
                 </a>
             </li>
 
-            <li class="nav-item {{ isActive('hasil-saw') }}">
-                <a href="/dashboard" class="nav-link">
+            <li class="nav-item {{ isActive('saw') }}">
+                <a href="{{route('saw.index')}}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
-                    <span class="sidebar-text">Hasil SAW</span>
+                    <span class="sidebar-text">Perhitungan SAW</span>
                 </a>
             </li>
-
+            
             {{-- Dropdown --}}
               {{-- <li class="nav-item">
                   <span

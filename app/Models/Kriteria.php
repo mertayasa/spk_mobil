@@ -30,13 +30,12 @@ class Kriteria extends Model
     protected $casts = [
         'id' => 'integer',
         'bobot' => 'float',
-        'sifat' => 'integer',
     ];
 
 
-    public function subKriterias()
+    public function subKriteria()
     {
-        return $this->hasMany(\App\Models\SubKriteria::class);
+        return $this->hasMany(\App\Models\SubKriteria::class, 'id_kriteria');
     }
 
     public function detailSaws()
