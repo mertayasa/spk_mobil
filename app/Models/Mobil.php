@@ -54,7 +54,7 @@ class Mobil extends Model
     {
         $hasil_saw = HasilSaw::with('detailSaw')->where('id_mobil', $id_mobil)->get();
 
-        if(!$hasil_saw){
+        if($hasil_saw->count() == 0){
             return null;
         }
 
