@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mobil;
 use App\Models\JenisMobil;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class HomepageController extends Controller
 {
@@ -46,5 +47,16 @@ class HomepageController extends Controller
         $mobil = $mobil->paginate(6);
 
         return view('frontend.welcome', compact('mobil', 'countmobil', 'navJumlahKursi', 'navCategory'));
+    }
+
+    public function getmobil(Request $request, $data)
+    {
+        if ($request->ajax()) {
+            // dd($data);
+            $mobilnya = Mobil::where('id', '=', $data)->first();
+            return response()->json($mobilnya);
+        }
+
+        return redirect()->back();
     }
 }

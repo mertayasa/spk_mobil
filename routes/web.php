@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+Route::get('mobilnya/{data}', [HomepageController::class, 'getmobil'])->name('datamobil');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
