@@ -216,7 +216,6 @@
                 }
 
                 if (wrong > 0) {
-                    console.log(wrong);
                     wrong = 0;
                     return false;
                 } else {
@@ -262,7 +261,7 @@
                 $(this).val() ? $(this).removeClass('is-invalid').addClass('is-valid') : $(this).removeClass('is-valid').addClass('is-invalid');
             })
             $(window).on('load', function () {
-                $(".nice-select.select-sopir .list").on('click', function () {
+                $(".select-sopir .list").on('click', function () {
                     $(".select-sopir").removeClass('is-invalid').addClass('is-valid');
                 })
                 $('.loader').removeClass('go');

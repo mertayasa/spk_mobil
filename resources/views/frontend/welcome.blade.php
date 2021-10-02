@@ -227,7 +227,6 @@
                     $(modal).find('#capacity-mobil').html(data.jumlah_kursi);
                     $(modal).find('#description-mobil').html(data.deskripsi);
                 });
-                console.log(url);
             })
         })
     </script>
