@@ -6,64 +6,31 @@
     <!-- Start Slider -->
     <div id="home-slider" class="slider p-relative">
         <div class="main-banner arrow-layout-1 ">
-            <div class="slide-item">
-                <img src="{{ asset('assets/frontend/assets/images/car-1.jpg') }}" class="image-fit" alt="Slider">
-                <div class="transform-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="slider-content">
-                                    <h1 class="text-custom-white">Upto 25% off on first booking <span class="text-custom-blue">Car</span>through your app!</h1>
-                                    <ul class="custom">
-                                        <li class="text-custom-white"><i class="fas fa-dollar-sign"></i>Best Price Guaranteed </li>
-                                        <li class="text-custom-white"><i class="fas fa-car"></i>Home Pickups </li>
-                                        <li class="text-custom-white"><i class="fas fa-laptop"></i>Easy Bookings </li>
-                                        <li class="text-custom-white"><i class="fas fa-headphones-alt"></i>24/7 Customer Care </li>
-                                    </ul>
-									<a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
+            @foreach ($mobil as $mob)
+                <div class="slide-item">
+                    <img src="{{ asset('images/'.$mob->thumbnail) }}" class="image-fit" alt="Slider">
+                    <div class="transform-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="slider-content">
+                                        {{-- <h1 class="text-custom-white">Upto 25% off on first booking <span class="text-custom-blue">Car</span>through your app!</h1> --}}
+                                        <h1 class="text-custom-white">{{$mob->nama}}</h1>
+                                        <ul class="custom">
+                                            <li class="text-custom-white"> {{formatPrice($mob->harga)}} </li>
+                                            <li class="text-custom-white"><i class="fas fa-car"></i> {{$mob->jumlah_kursi}} Kursi</li>
+                                            <li class="text-custom-white"><i class="fas fa-laptop"></i> {{$mob->jenisMobil->jenis_mobil}} </li>
+                                            <li class="text-custom-white"><i class="fas fa-headphones-alt"></i> {{ \Illuminate\Support\Str::limit($mob->deskripsi, 50) }} </li>
+                                        </ul>
+                                        {{-- <a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="slide-item">
-                <img src="{{ asset('assets/frontend/assets/images/car-1.jpg') }}" class="image-fit" alt="Slider">
-                <div class="transform-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="slider-content">
-                                    <h1 class="text-custom-white">Upto 25% off on first booking <span class="text-custom-blue">Car</span>through your app!</h1>
-                                    <ul class="custom">
-                                        <li class="text-custom-white"><i class="fas fa-dollar-sign"></i>Best Price Guaranteed </li>
-                                        <li class="text-custom-white"><i class="fas fa-car"></i>Home Pickups </li>
-                                        <li class="text-custom-white"><i class="fas fa-laptop"></i>Easy Bookings </li>
-                                        <li class="text-custom-white"><i class="fas fa-headphones-alt"></i>24/7 Customer Care </li>
-                                    </ul>
-									<a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <img src="{{ asset('assets/frontend/assets/images/car-1.jpg') }}" class="image-fit" alt="Slider">
-                <div class="transform-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="slider-content">
-                                    <h1 class="text-custom-white">Book your <span class="text-custom-blue">Car</span>through your app!</h1>
-                                    <p class="text-custom-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                                    <a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
     <!-- End Slider -->
