@@ -201,46 +201,22 @@
                                         @csrf
                                         <div class="row mb-md-80">
                                             <div class="col-12">
-                                                <div class="form-group group-form">
-                                                    {!! Form::label('idKriteria1', 'Kriteria 1', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                    {!! Form::select('id_kriteria_1', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria1']) !!}
-                                                    <div class="valid-feedback">Good</div>
-                                                    @error('id_driver')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @else
-                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group group-form">
-                                                    {!! Form::label('idKriteria2', 'Kriteria 2', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                    {!! Form::select('id_kriteria_2', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria2']) !!}
-                                                    <div class="valid-feedback">Good</div>
-                                                    @error('id_driver')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @else
-                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group group-form">
-                                                    {!! Form::label('idKriteria3', 'Kriteria 3', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                    {!! Form::select('id_kriteria_3', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria3']) !!}
-                                                    <div class="valid-feedback">Good</div>
-                                                    @error('id_driver')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @else
-                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group group-form">
-                                                    {!! Form::label('idKriteria4', 'Kriteria 4', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                    {!! Form::select('id_kriteria_4', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria4']) !!}
-                                                    <div class="valid-feedback">Good</div>
-                                                    @error('id_driver')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @else
-                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                    @enderror
-                                                </div>
+                                                @foreach ($kriteria as $krite)
+                                                    @php
+                                                        $sub_kriteria = $krite->subKriteria->pluck('sub_kriteria', 'id')->toArray();
+                                                        $with_default_opt =  array_merge([0 => 'Pilih '.$krite->kriteria], $sub_kriteria);
+                                                    @endphp
+                                                    <div class="form-group group-form">
+                                                        {!! Form::label('idKriteria1', $krite->kriteria, ['class' => 'fs-14 text-custom-black fw-500']) !!}
+                                                        {!! Form::select('id_kriteria_1', $with_default_opt, null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria1']) !!}
+                                                        <div class="valid-feedback">Good</div>
+                                                        @error('id_driver')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @else
+                                                            <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
+                                                        @enderror
+                                                    </div>
+                                                @endforeach
                                             </div>
                                             <div class="col-12">
                                                 <hr class="mt-0">
