@@ -207,8 +207,8 @@
                                                         $with_default_opt =  array_merge([0 => 'Pilih '.$krite->kriteria], $sub_kriteria);
                                                     @endphp
                                                     <div class="form-group group-form">
-                                                        {!! Form::label('idKriteria1', $krite->kriteria, ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                        {!! Form::select('id_kriteria_1', $with_default_opt, null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria1']) !!}
+                                                        {!! Form::label('idKriteria'.$krite->id, $krite->kriteria, ['class' => 'fs-14 text-custom-black fw-500']) !!}
+                                                        {!! Form::select('kriteria'.$krite->id, $with_default_opt, null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria'.$krite->id]) !!}
                                                         <div class="valid-feedback">Good</div>
                                                         @error('id_driver')
                                                             <div class="invalid-feedback">{{ $message }}</div>
