@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mobil;
 use App\Models\JenisMobil;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -11,6 +12,16 @@ class HomepageController extends Controller
 {
     public function index(Request $request)
     {
+        $kriteria_new = [];
+
+        $kriteria = Kriteria::with('subKriteria')->get();
+
+        // foreach($kriteria as $key => $krite){
+        //     $kriteria_new += [$krite->id => $krite->subKriteria->pluck('sub_kriteria', 'id')];
+        // }
+
+        // dd($kriteria_new);
+
         if ($request->session()->has('id_mobil')) {
             $request->session()->forget('id_mobil');
         }
@@ -46,7 +57,7 @@ class HomepageController extends Controller
         
         $mobil = $mobil->paginate(6);
 
-        return view('frontend.welcome', compact('mobil', 'countmobil', 'navJumlahKursi', 'navCategory'));
+        return view('frontend.welcome', compact('mobil', 'countmobil', 'navJumlahKursi', 'navCategory', 'kriteria'));
     }
 
     public function getmobil(Request $request, $data)

@@ -6,64 +6,31 @@
     <!-- Start Slider -->
     <div id="home-slider" class="slider p-relative">
         <div class="main-banner arrow-layout-1 ">
-            <div class="slide-item">
-                <img src="{{ asset('assets/frontend/assets/images/car-1.jpg') }}" class="image-fit" alt="Slider">
-                <div class="transform-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="slider-content">
-                                    <h1 class="text-custom-white">Upto 25% off on first booking <span class="text-custom-blue">Car</span>through your app!</h1>
-                                    <ul class="custom">
-                                        <li class="text-custom-white"><i class="fas fa-dollar-sign"></i>Best Price Guaranteed </li>
-                                        <li class="text-custom-white"><i class="fas fa-car"></i>Home Pickups </li>
-                                        <li class="text-custom-white"><i class="fas fa-laptop"></i>Easy Bookings </li>
-                                        <li class="text-custom-white"><i class="fas fa-headphones-alt"></i>24/7 Customer Care </li>
-                                    </ul>
-									<a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
+            @foreach ($mobil as $mob)
+                <div class="slide-item">
+                    <img src="{{ asset('images/'.$mob->thumbnail) }}" class="image-fit" alt="Slider">
+                    <div class="transform-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="slider-content">
+                                        {{-- <h1 class="text-custom-white">Upto 25% off on first booking <span class="text-custom-blue">Car</span>through your app!</h1> --}}
+                                        <h1 class="text-custom-white">{{$mob->nama}}</h1>
+                                        <ul class="custom">
+                                            <li class="text-custom-white"> {{formatPrice($mob->harga)}} </li>
+                                            <li class="text-custom-white"><i class="fas fa-car"></i> {{$mob->jumlah_kursi}} Kursi</li>
+                                            <li class="text-custom-white"><i class="fas fa-laptop"></i> {{$mob->jenisMobil->jenis_mobil}} </li>
+                                            <li class="text-custom-white"><i class="fas fa-headphones-alt"></i> {{ \Illuminate\Support\Str::limit($mob->deskripsi, 50) }} </li>
+                                        </ul>
+                                        {{-- <a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="slide-item">
-                <img src="{{ asset('assets/frontend/assets/images/car-1.jpg') }}" class="image-fit" alt="Slider">
-                <div class="transform-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="slider-content">
-                                    <h1 class="text-custom-white">Upto 25% off on first booking <span class="text-custom-blue">Car</span>through your app!</h1>
-                                    <ul class="custom">
-                                        <li class="text-custom-white"><i class="fas fa-dollar-sign"></i>Best Price Guaranteed </li>
-                                        <li class="text-custom-white"><i class="fas fa-car"></i>Home Pickups </li>
-                                        <li class="text-custom-white"><i class="fas fa-laptop"></i>Easy Bookings </li>
-                                        <li class="text-custom-white"><i class="fas fa-headphones-alt"></i>24/7 Customer Care </li>
-                                    </ul>
-									<a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <img src="{{ asset('assets/frontend/assets/images/car-1.jpg') }}" class="image-fit" alt="Slider">
-                <div class="transform-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="slider-content">
-                                    <h1 class="text-custom-white">Book your <span class="text-custom-blue">Car</span>through your app!</h1>
-                                    <p class="text-custom-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                                    <a href="#" data-id="#search-engine" class="btn-first btn-small go-id">Find Out More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
     <!-- End Slider -->
@@ -201,46 +168,22 @@
                                         @csrf
                                         <div class="row mb-md-80">
                                             <div class="col-12">
-                                                <div class="form-group group-form">
-                                                    {!! Form::label('idKriteria1', 'Kriteria 1', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                    {!! Form::select('id_kriteria_1', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir', 'id' => 'idKriteria1']) !!}
-                                                    <div class="valid-feedback">Good</div>
-                                                    @error('id_driver')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @else
-                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group group-form">
-                                                    {!! Form::label('idKriteria2', 'Kriteria 2', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                    {!! Form::select('id_kriteria_2', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir', 'id' => 'idKriteria2']) !!}
-                                                    <div class="valid-feedback">Good</div>
-                                                    @error('id_driver')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @else
-                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group group-form">
-                                                    {!! Form::label('idKriteria3', 'Kriteria 3', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                    {!! Form::select('id_kriteria_3', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir', 'id' => 'idKriteria3']) !!}
-                                                    <div class="valid-feedback">Good</div>
-                                                    @error('id_driver')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @else
-                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group group-form">
-                                                    {!! Form::label('idKriteria4', 'Kriteria 4', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                    {!! Form::select('id_kriteria_4', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir', 'id' => 'idKriteria4']) !!}
-                                                    <div class="valid-feedback">Good</div>
-                                                    @error('id_driver')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @else
-                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                    @enderror
-                                                </div>
+                                                @foreach ($kriteria as $krite)
+                                                    @php
+                                                        $sub_kriteria = $krite->subKriteria->pluck('sub_kriteria', 'id')->toArray();
+                                                        $with_default_opt =  array_merge([0 => 'Pilih '.$krite->kriteria], $sub_kriteria);
+                                                    @endphp
+                                                    <div class="form-group group-form">
+                                                        {!! Form::label('idKriteria'.$krite->id, $krite->kriteria, ['class' => 'fs-14 text-custom-black fw-500']) !!}
+                                                        {!! Form::select('kriteria'.$krite->id, $with_default_opt, null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria'.$krite->id]) !!}
+                                                        <div class="valid-feedback">Good</div>
+                                                        @error('id_driver')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @else
+                                                            <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
+                                                        @enderror
+                                                    </div>
+                                                @endforeach
                                             </div>
                                             <div class="col-12">
                                                 <hr class="mt-0">
