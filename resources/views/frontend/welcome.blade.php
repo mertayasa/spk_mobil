@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Start Slider -->
-    <div class="slider p-relative">
+    <div id="home-slider" class="slider p-relative">
         <div class="main-banner arrow-layout-1 ">
             <div class="slide-item">
                 <img src="{{ asset('assets/frontend/assets/images/car-1.jpg') }}" class="image-fit" alt="Slider">
@@ -123,7 +123,7 @@
 		</div>
     </div>
     <!-- End Banner tabs -->
-	<!-- Start Blog -->
+	<!-- Start Product -->
 	<section class="section-padding bg-light-white">
 		<div class="container">
 		  <div class="row">
@@ -186,13 +186,122 @@
 		  </div>
 		</div>
 	</section>
-	<!-- End Blog -->
+	<!-- End Product -->
+    <!-- Start Form -->
+    <section id="kriteria-section" class="section-padding section-padding-bottom bg-light-white kategori-form">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-12">
+                    <div class="tabs">
+                        <div class="tab-content bg-custom-white bx-wrapper padding-20">
+                            <div class="tab-pane fade active show">
+                                <div class="tab-inner">
+                                    <h4 class="text-custom-black text-uppercase">Sesuaikan Mobil yang Kamu Cari</h4>
+                                    <form action="#" method="post">
+                                        @csrf
+                                        <div class="row mb-md-80">
+                                            <div class="col-12">
+                                                <div class="form-group group-form">
+                                                    {!! Form::label('idKriteria1', 'Kriteria 1', ['class' => 'fs-14 text-custom-black fw-500']) !!}
+                                                    {!! Form::select('id_kriteria_1', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria1']) !!}
+                                                    <div class="valid-feedback">Good</div>
+                                                    @error('id_driver')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @else
+                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group group-form">
+                                                    {!! Form::label('idKriteria2', 'Kriteria 2', ['class' => 'fs-14 text-custom-black fw-500']) !!}
+                                                    {!! Form::select('id_kriteria_2', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria2']) !!}
+                                                    <div class="valid-feedback">Good</div>
+                                                    @error('id_driver')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @else
+                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group group-form">
+                                                    {!! Form::label('idKriteria3', 'Kriteria 3', ['class' => 'fs-14 text-custom-black fw-500']) !!}
+                                                    {!! Form::select('id_kriteria_3', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria3']) !!}
+                                                    <div class="valid-feedback">Good</div>
+                                                    @error('id_driver')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @else
+                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group group-form">
+                                                    {!! Form::label('idKriteria4', 'Kriteria 4', ['class' => 'fs-14 text-custom-black fw-500']) !!}
+                                                    {!! Form::select('id_kriteria_4', [null => 'Pilih Sub Kriteria', 'apa' => 'apanya'], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria4']) !!}
+                                                    <div class="valid-feedback">Good</div>
+                                                    @error('id_driver')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @else
+                                                        <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <hr class="mt-0">
+                                                <button type="submit" class="btn-first btn-submit">Cari Mobil berdasar kategori</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Form -->
+    <!-- Start About Us -->
+    <section id="tentang-section" class="section-padding about-us">
+        <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-6 pl-2 pr-2 align-self-center text-left">
+            <div class="about-left-side mb-md-80">
+                <div class="section-header style-left">
+                <div class="section-heading">
+                    <h3 class="text-custom-black">Tentang Kami</h3>
+                    {{-- <div class="section-description">
+                        <div class="car-price"><strong>$125</strong><span>/Day</span></div>
+                    </div> --}}
+                </div>
+                </div>
+                <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                been the industry's standard dummy text.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text.</p>
+                <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                been the industry's standard dummy text.</p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum is
+                simply dummy.</p>
+                <a href="#" data-id="#search-engine" class="btn-first btn-submit go-id">Reserve Now</a>
+            </div>
+            </div>
+            <div class="col-xl-5 col-lg-6">
+            <div class="about-right-side full-height">
+                <div class="about-img full-height"> 
+                    <img src="{{ asset('assets/frontend/assets/images/about.jpg') }}" class="img-fluid image-fit" alt="img"> 
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- End About Us -->
     @include('frontend.layouts.modal')
 @endsection
 
 @push('scriptplus')
     <script>
         $(document).ready(function () {
+            $('.js-select-first-disabled').find('option:first').attr('disabled', true);
+
             $(window).on('load', function () {
                 if (this.location.hash == "#search") {
                     $("html,body").animate({

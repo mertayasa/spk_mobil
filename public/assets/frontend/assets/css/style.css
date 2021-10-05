@@ -662,6 +662,15 @@ table {
 #search-engine {
     position: relative;
     height: 100%;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity ease 1s, visibility ease 1s;
+    z-index: 5;
+}
+
+#search-engine.hilang {
+    opacity: 0;
+    visibility: hidden;
 }
 
 #search-engine .banner-tabs {
@@ -1461,6 +1470,10 @@ label.custom-checkbox .checkmark:after {
 
 .tabs .nav-tabs .nav-item .nav-link:hover:after {
     width: 100%
+}
+
+.about-us {
+    padding: 60px 0;
 }
 
 .about-us .about-left-side .section-header {

@@ -1,11 +1,5 @@
 (function (a) {
-    a(document).ready(function () {
-        a(window).on('load', function () {
-            a(".custom-select").niceSelect();
-        });
-        a("td:empty").addClass("no-bg");
-    });
-    a(window).scroll(function () {
+    function navSticky() {
         var f = a(".header .navigation-wrapper"),
             e = a(window).scrollTop();
         if (e >= 100) {
@@ -13,6 +7,16 @@
         } else {
             f.removeClass("sticky")
         }
+    }
+    a(document).ready(function () {
+        a(window).on('load', function () {
+            a(".custom-select").niceSelect();
+        });
+        a("td:empty").addClass("no-bg");
+    });
+    navSticky();
+    a(window).scroll(function () {
+        navSticky();
     });
     a(document).ready(function () {
         a(".hamburger-menu").click(function () {
@@ -99,6 +103,14 @@
                 }, 1e3);
             })
         }
+        if(a(".go-to-id").length) {
+            a(".go-to-id").on('click', function (e) {
+                e.preventDefault();
+                a("html, body").animate({
+                    scrollTop: a(a(this).data("id")).offset().top - a('.header .navigation-wrapper').outerHeight()
+                }, 1e3);
+            })
+        }
         if(a(".js-harga").length) {
             ubahKeRupiah(); // utk ajax nnti mngkin
         }
@@ -114,20 +126,47 @@
             a(window).on('resize', function () {
                 $menunav     = a(".header").find(".navigation-wrapper").outerHeight();
             });
+
+            var currentScroll = a(window).scrollTop(),
+                $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2,
+                offset       = $thisoffset - $menunav,
+                offset_search_nav = $menunav + $this_search.outerHeight() + ($this_search.outerHeight() / 2),
+                offset_end   = a('#kriteria-section').offset().top - offset_search_nav;
+            
+                console.log(offset_end);
+
+            if ( currentScroll > offset && currentScroll < offset_end) {
+                $this_search.addClass('scrolled').css("top", $menunav);
+            } else {
+                $this_search.removeClass('scrolled').css("top", 0);
+            }
+            
+            if (currentScroll < offset_end) {
+                $this.removeClass('hilang');
+            } else {
+                $this.addClass('hilang');
+            }
                 
             a(window).on('scroll', function () {
-                var currentScroll = a(window).scrollTop(),
-                    $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2,
-                    offset       = $thisoffset - $menunav;
+                currentScroll = a(window).scrollTop();
+                $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2;
+                offset       = $thisoffset - $menunav;
 
-                if ( currentScroll > offset ) {
+                if (currentScroll > offset) {
                     $this_search.addClass('scrolled').css("top", $menunav);
                 } else {
+                    // $this.addClass('hilang');
                     $this_search.removeClass('scrolled').css("top", 0);
+                    // setTimeout(function () {
+                    // }, 1000);
+                }
+
+                if (currentScroll < offset_end) {
+                    $this.removeClass('hilang');
+                } else {
+                    $this.addClass('hilang');
                 }
             });
-
-            // $("html,body").scrollTop($('#search-engine').offset().top - $('.header .navigation-wrapper').outerHeight());
         };
         a(".dob").datepicker({
             timepicker: false,
