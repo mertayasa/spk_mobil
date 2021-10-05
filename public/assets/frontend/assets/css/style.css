@@ -664,7 +664,7 @@ table {
     height: 100%;
     opacity: 1;
     visibility: visible;
-    transition: opacity ease 1s, visibility ease 1s;
+    transition: opacity ease .5s, visibility ease .5s;
     z-index: 5;
 }
 
@@ -1470,6 +1470,10 @@ label.custom-checkbox .checkmark:after {
 
 .tabs .nav-tabs .nav-item .nav-link:hover:after {
     width: 100%
+}
+
+.kategori-form {
+    padding-top: 60px;
 }
 
 .about-us {

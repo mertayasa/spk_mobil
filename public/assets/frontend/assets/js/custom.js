@@ -133,7 +133,6 @@
                 offset_search_nav = $menunav + $this_search.outerHeight() + ($this_search.outerHeight() / 2),
                 offset_end   = a('#kriteria-section').offset().top - offset_search_nav;
             
-                console.log(offset_end);
 
             if ( currentScroll > offset && currentScroll < offset_end) {
                 $this_search.addClass('scrolled').css("top", $menunav);

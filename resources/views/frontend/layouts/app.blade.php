@@ -95,7 +95,7 @@
                         <nav>
                             <div class="main-navigation">
                                 <div class="logo d-flex align-items-center">
-                                    <a href="#" data-id="#home-slider" class="go-id">
+                                    <a href="#" data-id="#home-slider" class="go-to-id">
                                         <img src="{{ asset('assets/frontend/assets/images/logo.png') }}" class="img-fluid" alt="logo">
                                     </a>
                                 </div>
