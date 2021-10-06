@@ -11,7 +11,7 @@
                     <h1 class="text-custom-white">Booking</h1>
                     <ul class="custom-flex justify-content-center">
                         <li class="fw-500">
-                            <a href="index.html" class="text-custom-white">Home</a>
+                            <a href="{{route('homepage')}}" class="text-custom-white">Home</a>
                         </li>
                         <li class="active fw-500">Booking</li>
                     </ul>
@@ -128,26 +128,9 @@
                                         <div class="col-lg-4">
                                             <div class="row">
                                                 <div class="col-12">
-                                                <div class="car-grid mb-xl-30">
-                                                    <div class="car-grid-wrapper bx-wrapper">
-                                                        <div class="image-sec animate-img"> 
-                                                            <a href="#"> <img src="{{ asset('images/' . $mobil->thumbnail) }}" class="full-width" alt="img"></a> 
-                                                        </div>
-                                                        <div class="car-grid-caption padding-20 bg-custom-white p-relative mt-2">
-                                                            <h4 class="title fs-16">
-                                                                <a href="#" class="text-custom-black">
-                                                                    {{ $mobil->nama }}<small class="text-light-dark mt-3">Per Hari</small>
-                                                                </a>
-                                                            </h4>
-                                                            <span class="price from"><small>Mulai</small></span>
-                                                            <span class="js-harga harga-0 price mt-3">{{ $mobil->harga }}</span>
-                                                            {{-- <div class="action"> 
-                                                                <a class="btn-second btn-small" href="#">View</a> 
-                                                                <a class="btn-first btn-submit" href="#">Book</a> 
-                                                            </div> --}}
-                                                        </div>
+                                                    <div class="car-grid mb-xl-30">
+                                                        @include('frontend.layouts.card_car', ['item' => $mobil, 'hide_description' => true])
                                                     </div>
-                                                </div>
                                                 <div class="need-help bx-wrapper padding-20">
                                                     <h5 class="text-custom-black">Butuh Bantuan</h5>
                                                     <p class="text-light-dark">Tim kami siap membantu anda 24/7</p>

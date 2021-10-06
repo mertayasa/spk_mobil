@@ -102,7 +102,7 @@
                                 <div class="main-menu">
                                     <ul class="custom-flex">
                                         <li class="menu-item active">
-                                            <a href="#" data-id="#home-slider" class="go-to-id">Home</a>
+                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#home-slider" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Home</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#" data-id="#search-engine" class="go-to-id">Mobil</a>

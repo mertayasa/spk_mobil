@@ -1370,13 +1370,13 @@ label.custom-checkbox .checkmark:after {
 .slider-content ul li {
     display: flex;
     align-items: center;
-    font-size: 20px;
+    font-size: 1rem;
     margin-bottom: 10px
 }
 
 .slider-content ul li i {
     color: #f00;
-    font-size: 22px;
+    font-size: 1rem;
     margin-right: 15px;
     width: 27px;
     height: 22px;
