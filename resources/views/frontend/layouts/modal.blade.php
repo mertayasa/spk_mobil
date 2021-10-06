@@ -15,9 +15,18 @@
                     </div>
                     <div class="col-lg-7 col-12">
                         <h4 id="nama-mobil"></h4>
-                        <p id="jenis-mobil"></p>
-                        <p id="harga-mobil"></p>
-                        <p id="capacity-mobil"></p>
+                        <div>
+                            <strong>Jenis Mobil : </strong>
+                            <span id="jenis-mobil"></span>
+                        </div>
+                        <div>
+                            <strong>Harga / Hari :</strong>
+                            <span id="harga-mobil"></span>
+                        </div>
+                        <div>
+                            <strong>Jumlah Kursi : </strong>
+                            <span id="capacity-mobil"></span>
+                        </div>
                     </div>
                     <div class="col-12">
                         <p id="description-mobil"></p>
@@ -25,8 +34,12 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                {{-- <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Tutup</button> --}}
+                <button class="btn-second" data-dismiss="modal">Tutup</button>
+                <form action="{{ route('bookingcar.index') }}" method="post">
+                    @csrf
+                    <button name="id_mobil" id="id-mobil" type="submit" value="" class="btn-first btn-sm btn-submit">Booking Sekarang</button>
+                </form>
             </div>
         </div>
     </div>

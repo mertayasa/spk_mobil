@@ -122,18 +122,18 @@
                             <div class="car-grid-caption padding-20 bg-custom-white p-relative">
                                 <h4 class="title fs-16">
                                     <a href="#" class="text-custom-black">
-                                        {{ $item->nama }}<small class="text-light-dark">Per Day</small>
+                                        {{ $item->nama }}<small class="text-light-dark">Per Hari</small>
                                     </a>
                                 </h4>
-                                <span class="price from"><small>From</small></span>
+                                <span class="price from"><small>Mulai</small></span>
                                 <span class="js-harga harga-{{ $index }} price">{{ $item->harga }}</span>
                                 <p>{{ $item->jenisMobil->jenis_mobil }}</p>
                                 <p>{{ $item->deskripsi }}</p>
                                 <div class="action">
-                                    <a class="btn-second btn-small mobil-view-ajax" href="#" data-id="{{ $item->id }}" data-toggle="modal" data-target="#exampleModal">View</a>
+                                    <a class="btn-second btn-small mobil-view-ajax" href="#" data-id="{{ $item->id }}" data-toggle="modal" data-target="#exampleModal">Detail</a>
                                     <form action="{{ route('bookingcar.index') }}" method="post">
                                         @csrf
-                                        <button name="id_mobil" type="submit" value="{{ $item->id }}" class="btn-first btn-submit">Book</button>
+                                        <button name="id_mobil" type="submit" value="{{ $item->id }}" class="btn-first btn-submit">Booking</button>
                                     </form>
                                 </div>
                             </div>
@@ -277,9 +277,10 @@
                 let url = "{{ route('datamobil', ':id') }}";
                 url = url.replace(':id', data);
                 $.get(url, function (data) {
-                    $('#judul-modal').html("Mobil Details");
+                    $('#judul-modal').html("Detail Mobil");
                     $(modal).find('#thumbnail-mobil').attr("src", "{{ asset('images') }}/" + data.thumbnail);
                     $(modal).modal('show');
+                    $(modal).find('#id-mobil').val(data.id);
                     $(modal).find('#nama-mobil').html(data.nama);
                     $(modal).find('#jenis-mobil').html(data.jenis_mobil.jenis_mobil);
                     $(modal).find('#harga-mobil').html(formatRupiah(data.harga));

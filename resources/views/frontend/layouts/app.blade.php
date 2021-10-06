@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="keywords" content="#">
     <meta name="description" content="#">
-    <title>Rumble - Car Rental Booking HTML Template | @yield('title-menu')</title>
+    <title>Rental Mobil | @yield('title-menu')</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fav and touch icons -->
@@ -160,7 +160,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                {{-- <div class="col-lg-4 col-md-6">
                     <div class="footer-box mb-sm-40">
                         <h4 class="text-custom-white fw-600">Newsletter</h4>
                         <div class="newsletter">
@@ -176,13 +176,13 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </footer>
     <!-- End Footer -->
     <!-- Start Copyright -->
-    <div class="copyright">
+    {{-- <div class="copyright">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -191,7 +191,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Copyright -->
     <div id="back-top" class="back-top"> <a href="#top"><i class="flaticon-arrows"></i></a> </div>
     <!-- Place all Scripts Here -->
