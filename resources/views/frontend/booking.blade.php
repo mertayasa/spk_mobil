@@ -31,7 +31,7 @@
                                 <div class="tab-inner">
                                     <div class="row">
                                         <div class="col-lg-8">
-                                            <h5 class="text-custom-black">Your Personal Information</h5>
+                                            <h5 class="text-custom-black">Data diri anda</h5>
                                             <form action="{{ route('bookingcar.store') }}" method="post" id="form-booking">
                                                 @csrf
                                                 <div class="row mb-md-80">
@@ -56,7 +56,7 @@
                                                         <hr>
                                                     </div>
                                                     <div class="col-12">
-                                                        <h5 class="text-custom-black">Your Booking Information</h5>
+                                                        <h5 class="text-custom-black">Informasi Booking</h5>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -114,13 +114,13 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <hr class="mt-0">
-                                                        <div class="form-group">
+                                                        {{-- <div class="form-group">
                                                             <label class="custom-checkbox">
                                                                 <input type="checkbox" name="#">
                                                                 <span class="checkmark"></span> By continuing, you agree to the <a href="#" class="text-custom-blue">Terms and Conditions.</a> 
                                                             </label>
-                                                        </div>
-                                                        <button type="submit" class="btn-first btn-submit">Confirm Booking</button>
+                                                        </div> --}}
+                                                        <button type="submit" class="btn-first btn-submit">Booking Sekarang</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -133,14 +133,14 @@
                                                         <div class="image-sec animate-img"> 
                                                             <a href="#"> <img src="{{ asset('images/' . $mobil->thumbnail) }}" class="full-width" alt="img"></a> 
                                                         </div>
-                                                        <div class="car-grid-caption padding-20 bg-custom-white p-relative">
+                                                        <div class="car-grid-caption padding-20 bg-custom-white p-relative mt-2">
                                                             <h4 class="title fs-16">
                                                                 <a href="#" class="text-custom-black">
-                                                                    {{ $mobil->nama }}<small class="text-light-dark">Per Day</small>
+                                                                    {{ $mobil->nama }}<small class="text-light-dark mt-3">Per Hari</small>
                                                                 </a>
                                                             </h4>
-                                                            <span class="price from"><small>From</small></span>
-                                                            <span class="js-harga harga-0 price">{{ $mobil->harga }}</span>
+                                                            <span class="price from"><small>Mulai</small></span>
+                                                            <span class="js-harga harga-0 price mt-3">{{ $mobil->harga }}</span>
                                                             {{-- <div class="action"> 
                                                                 <a class="btn-second btn-small" href="#">View</a> 
                                                                 <a class="btn-first btn-submit" href="#">Book</a> 
@@ -149,9 +149,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="need-help bx-wrapper padding-20">
-                                                    <h5 class="text-custom-black">Need Help?.</h5>
-                                                    <p class="text-light-dark">We would be more than happy to help you. Our team advisor are
-                                                    24/7 at your service to help you.</p>
+                                                    <h5 class="text-custom-black">Butuh Bantuan</h5>
+                                                    <p class="text-light-dark">Tim kami siap membantu anda 24/7</p>
                                                     <ul class="custom">
                                                     <li class="text-custom-blue fs-18"> <i class="fas fa-phone-alt"></i> <a href="#"
                                                         class="text-light-dark">(+347) 123 456 7890</a> </li>

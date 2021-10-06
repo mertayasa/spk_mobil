@@ -7,12 +7,12 @@
                 <div class="col-12 d-flex align-items-center justify-content-center">
                     <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                         <div class="text-center text-md-center mb-4 mt-md-0">
-                            <h1 class="mb-0 h3">Sign in to our platform</h1>
+                            <h1 class="mb-0 h3">Login Untuk Melanjutkan</h1>
                         </div>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group mb-4">
-                                <label for="email">{{ __('E-Mail Address') }}</label>
+                                <label for="email">Email</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">
                                         <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20"
@@ -62,12 +62,12 @@
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
                                         <label class="form-check-label mb-0" for="remember">
-                                            {{ __('Remember Me') }}
+                                            Ingat Saya
                                         </label>
                                     </div>
                                     @if (Route::has('password.request'))
                                         <div><a href="{{ route('password.request') }}"
-                                                class="small text-right">{{ __('Forgot Your Password?') }}</a></div>
+                                                class="small text-right">Lupa Sandi ?</a></div>
                                     @endif
                                 </div>
                             </div>
@@ -77,8 +77,8 @@
                         </form>
                         <div class="d-flex justify-content-center align-items-center mt-4">
                             <span class="fw-normal">
-                                Not registered?
-                                <a href="{{ route('register') }}" class="fw-bold">Create account</a>
+                                Belum Punya Akun ? 
+                                <a href="{{ route('register') }}" class="fw-bold">Register Sekarang</a>
                             </span>
                         </div>
                     </div>

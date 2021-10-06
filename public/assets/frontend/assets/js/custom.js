@@ -117,15 +117,15 @@
     })
     a(document).ready(function () {
         if (a("#search-engine").length) {
-            let $this        = a("#search-engine"),
-                $menunav     = a(".header").find(".navigation-wrapper").outerHeight(),
-                $this_search = a("#search-engine").find(".banner-tabs");
+            // let $this        = a("#search-engine"),
+            //     $menunav     = a(".header").find(".navigation-wrapper").outerHeight(),
+            //     $this_search = a("#search-engine").find(".banner-tabs");
             
-            $this.css("height", $this_search.outerHeight());
+            // $this.css("height", $this_search.outerHeight());
 
-            a(window).on('resize', function () {
-                $menunav     = a(".header").find(".navigation-wrapper").outerHeight();
-            });
+            // a(window).on('resize', function () {
+            //     $menunav     = a(".header").find(".navigation-wrapper").outerHeight();
+            // });
 
             var currentScroll = a(window).scrollTop(),
                 $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2,

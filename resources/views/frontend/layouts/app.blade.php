@@ -53,14 +53,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-5">
-                        <div class="leftside">
+                        {{-- <div class="leftside">
                             <ul class="custom-flex">
                                 <li><a href="#" class="text-custom-white"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#" class="text-custom-white"><i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#" class="text-custom-white"><i class="fab fa-instagram"></i></a></li>
                                 <li><a href="#" class="text-custom-white"><i class="fab fa-linkedin"></i></a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="col-lg-6 col-md-7">
                         <div class="rightside full-height">
@@ -105,7 +105,7 @@
                                             <a href="#" data-id="#home-slider" class="go-to-id">Home</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#" data-id="#search-engine" class="go-to-id">Product</a>
+                                            <a href="#" data-id="#search-engine" class="go-to-id">Mobil</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="#" data-id="#kriteria-section" class="go-to-id">Kriteria</a>
@@ -153,10 +153,10 @@
                             <li>Mon-sat 8:00-18:00 Sunday Closed</li>
                         </ul>
                         <ul class="custom-flex socials">
-                            <li><a href="#" class="text-custom-white fs-14"><i class="fab fa-facebook-f"></i></a></li>
+                            {{-- <li><a href="#" class="text-custom-white fs-14"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#" class="text-custom-white fs-14"><i class="fab fa-twitter"></i></a></li>
                             <li><a href="#" class="text-custom-white fs-14"><i class="fab fa-linkedin"></i></a></li>
-                            <li><a href="#" class="text-custom-white fs-14"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="#" class="text-custom-white fs-14"><i class="fab fa-youtube"></i></a></li> --}}
                         </ul>
                     </div>
                 </div>

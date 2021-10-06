@@ -33,71 +33,79 @@
             </div>
         </div> --}}
         <ul class="nav flex-column pt-3 pt-md-0">
+
+            <li class="nav-item"><a href="{{route('homepage')}}"
+                    class="btn btn-secondary d-flex align-items-center justify-content-between">Lihat Website<i class="ml-2 fas fa-chevron-right"></i> </a></li>
+
+            <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+
             <li class="nav-item {{ isActive('dashboard') }}">
-                <a href="/dashboard" class="nav-link">
+                <a href="{{ route('dashboard.index') }}"
+                    class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-fire"></i> </span>
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('sopir') }}">
-                <a href="{{route('sopir.index')}}" class="nav-link">
+                <a href="{{ route('sopir.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-id-badge"></i> </span>
                     <span class="sidebar-text">Sopir</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('user') }}">
-                <a href="{{route('user.index')}}" class="nav-link">
+                <a href="{{ route('user.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-users"></i> </span>
                     <span class="sidebar-text">Pengguna</span>
                 </a>
             </li>
 
+            <li class="nav-item {{ isActive('booking') }}">
+                <a href="{{ route('booking.index') }}" class="nav-link">
+                    <span class="sidebar-icon"> <i class="fas fa-calendar-check"></i> </span>
+                    <span class="sidebar-text">Booking</span>
+                </a>
+            </li>
+
             <li class="nav-item {{ isActive('mobil') }}">
-                <a href="{{route('mobil.index')}}" class="nav-link">
+                <a href="{{ route('mobil.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-car"></i> </span>
                     <span class="sidebar-text">Mobil</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('jenis-mobil') }}">
-                <a href="{{route('jenis_mobil.index')}}" class="nav-link">
+                <a href="{{ route('jenis_mobil.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Jenis Mobil</span>
                 </a>
             </li>
 
-            <li class="nav-item {{ isActive('booking') }}">
-                <a href="{{route('booking.index')}}" class="nav-link">
-                    <span class="sidebar-icon"> <i class="fas fa-calendar-check"></i> </span>
-                    <span class="sidebar-text">Booking</span>
-                </a>
-            </li>
-
             <li class="nav-item {{ isActive('kriteria') }}">
-                <a href="{{route('kriteria.index')}}" class="nav-link">
+                <a href="{{ route('kriteria.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Kriteria</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('sub-kriteria') }}">
-                <a href="{{route('sub_kriteria.index')}}" class="nav-link">
+                <a href="{{ route('sub_kriteria.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Sub Kriteria</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('saw') }}">
-                <a href="{{route('saw.index')}}" class="nav-link">
+                <a href="{{ route('saw.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
                     <span class="sidebar-text">Perhitungan SAW</span>
                 </a>
             </li>
-            
+
+
             {{-- Dropdown --}}
-              {{-- <li class="nav-item">
+            {{-- <li class="nav-item">
                   <span
                       class="nav-link {{ Request::segment(1) !== 'bootstrap-tables' ? 'collapsed' : '' }} d-flex justify-content-between align-items-center"
                       data-bs-toggle="collapse" data-bs-target="#submenu-app">
@@ -129,8 +137,7 @@
                   </div>
               </li> --}}
             {{-- End Dropdown --}}
-            
-            <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+
         </ul>
     </div>
 </nav>

@@ -40,6 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::get('/user', [DashboardController::class, 'indexUser'])->name('user');
     });
     
     Route::group(['prefix' => 'mobil', 'as' => 'mobil.'], function () {
