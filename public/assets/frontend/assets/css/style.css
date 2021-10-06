@@ -34,9 +34,9 @@
     }
 }
 
-html {
+/* html {
     overflow-x: hidden
-}
+} */
 
 button:focus,
 *:focus {
@@ -55,7 +55,7 @@ body {
     background: #fff;
     border-color: #dfdfdf;
     transition: transform ease-in .4s;
-    overflow: hidden
+    overflow-x: hidden
 }
 
 button {

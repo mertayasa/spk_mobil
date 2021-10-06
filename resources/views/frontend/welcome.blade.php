@@ -171,11 +171,11 @@
                                                 @foreach ($kriteria as $krite)
                                                     @php
                                                         $sub_kriteria = $krite->subKriteria->pluck('sub_kriteria', 'id')->toArray();
-                                                        $with_default_opt =  array_merge([0 => 'Pilih '.$krite->kriteria], $sub_kriteria);
+                                                        $with_default_opt = array_merge([0 => 'Pilih '.$krite->kriteria], $sub_kriteria);
                                                     @endphp
                                                     <div class="form-group group-form">
                                                         {!! Form::label('idKriteria'.$krite->id, $krite->kriteria, ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                        {!! Form::select('kriteria'.$krite->id, $with_default_opt, null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idKriteria'.$krite->id]) !!}
+                                                        {!! Form::select('kriteria'.$krite->id, $with_default_opt, null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir', 'id' => 'idKriteria'.$krite->id]) !!}
                                                         <div class="valid-feedback">Good</div>
                                                         @error('id_driver')
                                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -209,9 +209,6 @@
                 <div class="section-header style-left">
                 <div class="section-heading">
                     <h3 class="text-custom-black">Tentang Kami</h3>
-                    {{-- <div class="section-description">
-                        <div class="car-price"><strong>$125</strong><span>/Day</span></div>
-                    </div> --}}
                 </div>
                 </div>
                 <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
@@ -259,6 +256,14 @@
                 }
             });
 
+            function formatRupiah(harga) {
+                const locale = 'id';
+                const options = {style: 'currency', currency: 'idr', minimumFractionDigits: 0, maximumFractionDigits: 2};
+                const formatter = new Intl.NumberFormat(locale, options);
+                let data = formatter.format(harga);
+                return data;
+            }
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -273,11 +278,14 @@
                 url = url.replace(':id', data);
                 $.get(url, function (data) {
                     $('#judul-modal').html("Mobil Details");
+                    $(modal).find('#thumbnail-mobil').attr("src", "{{ asset('images') }}/" + data.thumbnail);
                     $(modal).modal('show');
                     $(modal).find('#nama-mobil').html(data.nama);
-                    $(modal).find('#harga-mobil').html(data.harga);
+                    $(modal).find('#jenis-mobil').html(data.jenis_mobil.jenis_mobil);
+                    $(modal).find('#harga-mobil').html(formatRupiah(data.harga));
                     $(modal).find('#capacity-mobil').html(data.jumlah_kursi);
                     $(modal).find('#description-mobil').html(data.deskripsi);
+                    // console.log(data);
                 });
             })
         })

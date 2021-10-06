@@ -63,8 +63,7 @@ class HomepageController extends Controller
     public function getmobil(Request $request, $data)
     {
         if ($request->ajax()) {
-            // dd($data);
-            $mobilnya = Mobil::where('id', '=', $data)->first();
+            $mobilnya = Mobil::with('jenisMobil')->where('id', '=', $data)->first();
             return response()->json($mobilnya);
         }
 
