@@ -131,50 +131,9 @@
 	</section>
 	<!-- End Product -->
     <!-- Start Form -->
-    <section id="kriteria-section" class="section-padding section-padding-bottom bg-light-white kategori-form">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-12">
-                    <div class="tabs">
-                        <div class="tab-content bg-custom-white bx-wrapper padding-20">
-                            <div class="tab-pane fade active show">
-                                <div class="tab-inner">
-                                    <h4 class="text-custom-black text-uppercase">Sesuaikan Mobil yang Kamu Cari</h4>
-                                    <form action="#" method="post">
-                                        @csrf
-                                        <div class="row mb-md-80">
-                                            <div class="col-12">
-                                                @foreach ($kriteria as $krite)
-                                                    @php
-                                                        $sub_kriteria = $krite->subKriteria->pluck('sub_kriteria', 'id')->toArray();
-                                                        $with_default_opt = array_merge([0 => 'Pilih '.$krite->kriteria], $sub_kriteria);
-                                                    @endphp
-                                                    <div class="form-group group-form">
-                                                        {!! Form::label('idKriteria'.$krite->id, $krite->kriteria, ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                        {!! Form::select('kriteria'.$krite->id, $with_default_opt, null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir', 'id' => 'idKriteria'.$krite->id]) !!}
-                                                        <div class="valid-feedback">Good</div>
-                                                        @error('id_driver')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                        @else
-                                                            <div class="invalid-feedback">Mohon pilih salah satu kriteria</div>
-                                                        @enderror
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                            <div class="col-12">
-                                                <hr class="mt-0">
-                                                <button type="submit" class="btn-first btn-submit">Cari Mobil berdasar kategori</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
+    @include('frontend.saw')
+
     <!-- End Form -->
     <!-- Start About Us -->
     <section id="tentang-section" class="section-padding about-us">
@@ -246,7 +205,7 @@
                 }
             });
 
-            $('.mobil-view-ajax').on('click', function (e) {
+            $(document).on('click', '.mobil-view-ajax', function (e) {
                 e.preventDefault();
                 let data = $(this).data('id');
                 const modal = $(this).data('target');

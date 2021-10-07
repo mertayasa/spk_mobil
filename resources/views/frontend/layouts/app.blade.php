@@ -8,6 +8,7 @@
     <meta name="keywords" content="#">
     <meta name="description" content="#">
     <title>Rental Mobil | @yield('title-menu')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fav and touch icons -->

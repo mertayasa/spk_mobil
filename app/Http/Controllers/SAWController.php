@@ -6,8 +6,10 @@ use App\Models\DetailSaw;
 use App\Models\HasilSaw;
 use App\Models\Kriteria;
 use App\Models\Mobil;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SAWController extends Controller
 {
@@ -35,6 +37,8 @@ class SAWController extends Controller
             }
         }
 
+        // dd($array_init);
+
         $array_data = [];
 
         foreach($array_init as $key => $data){
@@ -49,7 +53,7 @@ class SAWController extends Controller
             $array_data += [$data['id_mobil'] => $array_kriteria];
         }
 
-        // dd($array_init);
+        // dd($array_data);
 
         $array_kriteria = [];
 
@@ -91,6 +95,8 @@ class SAWController extends Controller
                 $normalisasi += [$key => $array_normal];
             }
         }
+
+        // dd($normalisasi);
 
         $preferensi = [];
     
@@ -170,5 +176,161 @@ class SAWController extends Controller
         return redirect()->route('saw.index')->with('success', 'Berhasil meng-update data perhitungan SAW');
 
         // dd($detail_temp);
+    }
+
+    public function sawFrontend(Request $request)
+    {
+        // return response(['code' => 0, 'message' => 'Gagal mencari mobil yang sesuai']);
+
+        try{
+            $data = $request->all();
+            unset($data['_token']);
+            unset($data['/saw/saw-frontend']);
+            
+            $kriteria = Kriteria::with('subKriteria')->get();
+            if(count($data) < $kriteria->count() || count($data) > $kriteria->count()){
+                return response(['code' => 0, 'message' => 'Data pencarian tidak sesuai']);
+            }
+            
+            $sub_kriteria = Mobil::with('detailSaw')->get()->pluck('saw')->toArray();
+
+            $sanitize_data = [];
+            foreach($data as $key => $da){
+                $sanitize_data += [str_replace('kriteria', '', $key) => $da];
+            }
+
+            $sanitize_data = ['id_mobil' => 'new'] + $sanitize_data;
+
+            array_push($sub_kriteria, $sanitize_data);
+
+            $saw = $this->calculateSaw($sub_kriteria);
+            
+            usort($saw, function($a, $b) {
+                return $a['nilai_akhir'] <=> $b['nilai_akhir'];
+            });
+
+            // Log::info($saw);
+
+            $search_array = array_search('new', array_column($saw, 'id_mobil'));
+
+            if($search_array == 0){
+                $closest_mobil = $saw[1];
+            }else{
+                if($saw[$search_array]['nilai_akhir'] - $saw[$search_array + 1]['nilai_akhir'] < $saw[$search_array]['nilai_akhir'] - $saw[$search_array -1 ]['nilai_akhir']){
+                    $closest_mobil = $saw[$search_array + 1];
+                }else{
+                    $closest_mobil = $saw[$search_array - 1];
+                };
+            }
+
+            $mobil = Mobil::find($closest_mobil['id_mobil']);
+            $html =  view('frontend.layouts.card_car', ['item' => $mobil, 'index' => $mobil->id])->render();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal mencari mobil yang sesuai']);
+        }
+
+        return response(['code' => 1, 'mobil' => $mobil, 'card' => $html]);
+    }
+
+    public function calculateSaw($array_init)
+    {
+        $array_data = [];
+
+        foreach($array_init as $key => $data){
+            $array_kriteria = [];
+            
+            foreach($data as $key_krite => $asd){
+                if(!str_contains($key_krite, 'id_mobil')){
+                    $array_kriteria += [$key_krite => $asd];
+                }
+            }
+
+            $array_data += [$data['id_mobil'] => $array_kriteria];
+        }
+
+
+        $array_kriteria = [];
+
+        foreach ($array_data as $element) {
+            # Iterate over every key-value pair of the associative array.
+            foreach ($element as $key => $value) {
+               # Ensure the sub-array specified by the key is set.
+               if (!isset($array_kriteria[$key])) $array_kriteria[$key] = [];
+    
+               # Insert the value in the sub-array specified by the key.
+               $array_kriteria[$key][] = $value;
+            }
+        }
+
+        // dd($array_kriteria);
+
+
+        $normalisasi = [];
+        foreach($array_kriteria as $key => $kriteria){
+            $model_kriteria = Kriteria::find($key);
+            
+            $array_normal = [];
+            if($model_kriteria->sifat == 'cost'){
+                $min = min($kriteria);
+                foreach($kriteria as $krite){
+                    array_push($array_normal, round($min/$krite, 2));
+                }
+
+                $normalisasi += [$key => $array_normal];
+            }
+            
+            if($model_kriteria->sifat == 'benefit'){
+                $min = max($kriteria);
+                foreach($kriteria as $krite){
+                    array_push($array_normal, round($krite/$min, 2));
+                }
+
+                $normalisasi += [$key => $array_normal];
+            }
+        }
+
+        // dd($normalisasi);
+
+        $preferensi = [];
+    
+        foreach($normalisasi as $key => $normal){
+            $model_kriteria = Kriteria::find($key);
+            
+            $prefer = [];
+            foreach($normal as $key_nor => $nor){
+                $prefer += [$array_init[$key_nor]['id_mobil'] => $nor * $model_kriteria->bobot];    
+            }
+
+            $preferensi += [$key => $prefer];
+        }
+
+        // dd($preferensi);
+
+
+        $new_preferensi = [];
+
+        # Iterate over every associative array in the data array.
+        foreach ($preferensi as $element) {
+            # Iterate over every key-value pair of the associative array.
+            foreach ($element as $key => $value) {
+               # Ensure the sub-array specified by the key is set.
+               if (!isset($new_preferensi[$key])) $new_preferensi[$key] = [];
+    
+               # Insert the value in the sub-array specified by the key.
+               $new_preferensi[$key][] = $value;
+            }
+        }
+
+
+        $nilai_akhir = [];
+
+        foreach($new_preferensi as $key => $prefer){
+            array_push($nilai_akhir,['id_mobil' => $key, 'nilai_akhir' => round(array_sum($prefer), 2)]);
+        }
+
+        return $nilai_akhir;
+
+        // dd($nilai_akhir);
     }
 }

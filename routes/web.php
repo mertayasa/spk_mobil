@@ -36,6 +36,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
+Route::group(['prefix' => 'saw', 'as' => 'saw.'], function () {
+    Route::post('saw-frontend', [SAWController::class, 'sawFrontend'])->name('frontend');
+});
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
@@ -123,6 +127,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('update', [SAWController::class, 'update'])->name('update');
         Route::delete('destroy/{saw}', [SAWController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [SAWController::class, 'datatable'])->name('datatable');
+        // Route::post('saw-frontend', [SAWController::class, 'sawFrontend'])->name('frontend');
     });
 
 });
