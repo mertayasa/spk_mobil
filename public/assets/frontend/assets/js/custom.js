@@ -117,7 +117,6 @@
     })
     a(document).ready(function () {
         if (a("#search-engine").length) {
-            // let $this        = a("#search-engine")
             let $this        = a("#search-engine"),
                 $menunav     = a(".header").find(".navigation-wrapper").outerHeight(),
                 $this_search = a("#search-engine").find(".banner-tabs");
@@ -155,10 +154,7 @@
                 if (currentScroll > offset) {
                     $this_search.addClass('scrolled').css("top", $menunav);
                 } else {
-                    // $this.addClass('hilang');
                     $this_search.removeClass('scrolled').css("top", 0);
-                    // setTimeout(function () {
-                    // }, 1000);
                 }
 
                 if (currentScroll < offset_end) {

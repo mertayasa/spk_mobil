@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="navigation-wrapper">
+        <div id="nav-wrapper" class="navigation-wrapper">
             <div class="container">
                 <div class="row">
                     <div class="col-12">

@@ -93,7 +93,8 @@
                 if(response.code == 1){
                     recomendationSection.classList.remove('d-none')
                     cardCar.insertAdjacentHTML('beforeend', response.card)
-                    recomendationSection.scrollIntoView({behavior: 'smooth'})
+                    // recomendationSection.scrollIntoView({behavior: 'smooth'})
+                    window.scrollTo({top: (document.getElementById('recommendation-section').getBoundingClientRect().top + window.pageYOffset) - document.getElementById('nav-wrapper').offsetHeight, behavior: 'smooth'})
                 }
 
                 if(response.code == 0){
