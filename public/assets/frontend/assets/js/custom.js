@@ -132,10 +132,10 @@
                 $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2,
                 offset       = $thisoffset - $menunav,
                 offset_search_nav = $menunav + $this_search.outerHeight() + ($this_search.outerHeight() / 2),
-                offset_end   = a('#mobilSection').offset().top - offset_search_nav;
+                offset_end   = a('#kriteria-section').offset().top - offset_search_nav;
             
 
-            if ( currentScroll > offset && currentScroll < offset_end) {
+            if ( currentScroll > offset) {
                 $this_search.addClass('scrolled').css("top", $menunav);
             } else {
                 $this_search.removeClass('scrolled').css("top", 0);
