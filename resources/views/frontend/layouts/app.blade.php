@@ -107,13 +107,13 @@
                                             <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#home-slider" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Home</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#" data-id="#search-engine" class="go-to-id">Mobil</a>
+                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#search-engine" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Mobil</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#" data-id="#kriteria-section" class="go-to-id">Kriteria</a>
+                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#kriteria-section" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Kriteria</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#" data-id="#tentang-section" class="go-to-id">Tentang Kami</a>
+                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#tentang-section" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Tentang Kami</a>
                                         </li>
                                         <li class="menu-item item-no-hover">
                                             <a href="{{ route('bookingcar.cart') }}">

@@ -215,7 +215,9 @@
 
             $('.js-select-first-disabled option:first').attr('disabled', true);
             let date = new Date();
-            let date_off = new Date(Date.now() + (3600 * 1000 * 24));
+            let date_off = new Date($(".datepickr").val());
+                date_off.setDate(date_off.getDate() + 1);
+            console.log(date_off);
             $(".datepickr").datepicker({
                 dateFormat: "dd-MM-yyyy",
                 timepicker: false,

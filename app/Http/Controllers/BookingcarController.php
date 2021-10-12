@@ -95,7 +95,7 @@ class BookingcarController extends Controller
     public function editForm($data)
     {
         if (!Auth::check()) {
-            return redirect()->route('homepage', '#search')->with('info', 'Silahkan pilih dulu mobil yang ingin disewa');
+            return redirect()->route('login')->with('info', 'Silahkan login terlebih dahulu');
         }
         $booking = Booking::with('user', 'mobil', 'sopir')
                     ->where([
@@ -113,6 +113,9 @@ class BookingcarController extends Controller
 
     public function cart()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('info', 'Silahkan login terlebih dahulu');
+        }
         $booking = Booking::with('user', 'mobil', 'sopir')
                     ->where([
                         ['id_user', '=', Auth::user()->id],
@@ -120,7 +123,7 @@ class BookingcarController extends Controller
                     ])->get();
 
         if ($booking->isEmpty()) {
-            return redirect()->route('homepage', '#search')->with('info', 'Silahkan pilih dulu mobil yang ingin disewa');
+            return redirect()->route('homepage', '#search')->with('error', 'Cart Kosong, Mohon Booking salah satu mobil');
         }
         return view('frontend.cart-book', compact('booking'));
     }
