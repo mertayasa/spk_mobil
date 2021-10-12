@@ -46,9 +46,9 @@
 									<div class="tab-inner">
 										<form method="get" action="{{ route('homepage', '#search') }}">
 											<div class="row">
-												<div class="col-lg-3 col-md-6">
+												<div class="col-lg-4 col-md-6">
 													<div class="form-group">
-                                                        {!! Form::label('idCategory', 'Category Cars', ['class' => 'fs-14 text-custom-white fw-600']) !!}
+                                                        {!! Form::label('idCategory', 'Kategori Mobil', ['class' => 'fs-14 text-custom-white fw-600']) !!}
 														<div class="group-form">
                                                             {!! Form::select('id_category', ['all' => 'All', $navCategory], request()->input('id_category'), ['class' => 'custom-select form-control form-control-custom', 'id' => 'idCategory']) !!}
 														</div>
@@ -56,28 +56,46 @@
 												</div>
 												<div class="col-lg-5 col-md-6">
 													<div class="form-group">
-                                                        {!! Form::label('idName', 'Name Cars', ['class' => 'fs-14 text-custom-white fw-600']) !!}
+                                                        {!! Form::label('idName', 'Name Mobil', ['class' => 'fs-14 text-custom-white fw-600']) !!}
                                                         {!! Form::text('id_name', request()->input('id_name'), ['class' => 'form-control form-control-custom', 'id' => 'idName', 'placeholder' => 'Search Cars by Name']) !!}
 													</div>
 												</div>
-												<div class="col-lg-4 col-md-12">
+												<div class="col-lg-3 col-md-12">
 													<div class="row">
-														<div class="col-4">
+														<div class="col-12">
 															<div class="form-group">
-                                                                {!! Form::label('idPassenger', 'Passenger', ['class' => 'fs-14 text-custom-white fw-600']) !!}
+                                                                {!! Form::label('idPassenger', 'Jumlah Penumpang', ['class' => 'fs-14 text-custom-white fw-600']) !!}
 																<div class="group-form">
                                                                     {!! Form::selectRange('id_passenger', 1, 10, request()->input('id_passenger'), ['class' => 'custom-select form-control form-control-custom', 'id' => 'idPassenger']) !!}
 																</div>
 															</div>
 														</div>
-														<div class="col-8">
+														{{-- <div class="col-8">
 															<div class="form-group">
 																<label class="submit"></label>
 																<button type="submit" class="btn-first btn-submit full-width btn-height">Search</button>
 															</div>
-														</div>
+														</div> --}}
 													</div>
 												</div>
+												<div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        {!! Form::label('startDate', 'Dari Tanggal', ['class' => 'fs-14 text-custom-white fw-600']) !!}
+                                                        {!! Form::date('start_date', request()->input('start_date'), ['class' => 'form-control form-control-custom', 'id' => 'startDate']) !!}
+													</div>
+                                                </div>
+												<div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        {!! Form::label('endDate', 'Sampai Tanggal', ['class' => 'fs-14 text-custom-white fw-600']) !!}
+                                                        {!! Form::date('end_date', request()->input('end_date'), ['class' => 'form-control form-control-custom', 'id' => 'endDate']) !!}
+													</div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="submit"></label>
+                                                        <button type="submit" class="btn-first btn-submit full-width btn-height">Cari Mobil</button>
+                                                    </div>
+                                                </div>
 											</div>
 										</form>
 									</div>

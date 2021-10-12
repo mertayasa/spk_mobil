@@ -45,6 +45,38 @@ class Mobil extends Model
         return $this->hasMany(\App\Models\Booking::class, 'id_mobil');
     }
 
+    public function getBookedDateAttribute()
+    {
+        $date_range = $this->bookings->pluck('date_range');
+        $new_date_range = [];
+        foreach($date_range as $range){
+            foreach($range as $ran){
+                array_push($new_date_range, $ran);
+            }
+        }
+
+        return $new_date_range;
+    }
+
+    public function isAvailable($date)
+    {
+        $date_range = $this->bookings->pluck('date_range');
+        $new_date_range = [];
+        foreach($date_range as $range){
+            foreach($range as $ran){
+                array_push($new_date_range, $ran);
+            }
+        }
+
+        foreach($date as $range){
+            if(array_search($range, $new_date_range)){
+                return 'not_available';
+            }
+        }
+
+        return 'available';
+    }
+
     public function hasilSaw()
     {
         return $this->hasOne(\App\Models\HasilSaw::class, 'id_mobil');

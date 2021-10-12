@@ -2,25 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Mobil;
 use App\Models\JenisMobil;
 use App\Models\Kriteria;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Validator;
 
 class HomepageController extends Controller
 {
     public function index(Request $request)
     {
+        $start_date = Carbon::now()->addDay(9);
+        $end_date = Carbon::now()->addDay(12);
+
+        // dd($request->all());
+
+        // $booking = searchAvailablity($start_date, $end_date, Mobil::all());
+
+        // dd($this->paginate($booking, 2));
+
+        // dd($request->all());
+
+        $validator = Validator::make($request->all(), [
+            'end_date' => $request->start_date != null ? 'required' : 'nullable',
+            'start_date' => $request->end_date != null ? 'required' : 'nullable'
+        ]);
+
+        if ($validator->fails()) {
+            dd($validator->getMessageBag());
+        }
+
         $kriteria_new = [];
 
         $kriteria = Kriteria::with('subKriteria')->get();
-
-        // foreach($kriteria as $key => $krite){
-        //     $kriteria_new += [$krite->id => $krite->subKriteria->pluck('sub_kriteria', 'id')];
-        // }
-
-        // dd($kriteria_new);
 
         if ($request->session()->has('id_mobil')) {
             $request->session()->forget('id_mobil');
@@ -54,8 +75,18 @@ class HomepageController extends Controller
         }
 
         $countmobil = $mobil->count();
+
+        $init_filtered_mobil = $mobil->get();
+
+        if($request->start_date != null && $request->end_date != null){
+            $init_filtered_mobil = searchAvailablity($start_date, $end_date, $mobil->get());
+        }
+
+        // dd($mobil->get());
         
-        $mobil = $mobil->paginate(6);
+        $mobil = $this->paginate($init_filtered_mobil, $_GET['page'] ?? 1, 3, ['path' => route('homepage')]);
+        // $mobil = $mobil->paginate(3);
+        // dd($mobil);
 
         return view('frontend.welcome', compact('mobil', 'countmobil', 'navJumlahKursi', 'navCategory', 'kriteria'));
     }
@@ -68,5 +99,12 @@ class HomepageController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function paginate($items, $page = null, $perPage = 3, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }

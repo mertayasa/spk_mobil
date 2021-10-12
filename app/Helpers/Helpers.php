@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
@@ -99,4 +100,24 @@ function isActive($param)
 {
     // return Request::route()->getPrefix() == '/' . $param ? 'active' : '';
     return Request::segment(1) == $param ? 'active' : '';
+}
+
+function searchAvailablity($start_date, $end_date, $mobil)
+{
+    $search_date_range = CarbonPeriod::create($start_date, $end_date)->toArray();
+
+    $range = [];
+    foreach($search_date_range as $date_range){
+        array_push($range, $date_range->format('Y-m-d'));
+    }
+
+    $available_mobil = [];
+
+    foreach($mobil as $mob){
+        if($mob->isAvailable($range) == 'available'){
+            array_push($available_mobil, $mob);
+        }
+    }
+
+    return $available_mobil;
 }

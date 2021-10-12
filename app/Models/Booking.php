@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -51,6 +53,22 @@ class Booking extends Model
     public function sopir()
     {
         return $this->belongsTo(\App\Models\Sopir::class, 'id_sopir');
+    }
+
+    public function getDateRangeAttribute()
+    {
+        // if(!$this->attributes['tgl_akhir_sewa'] <= Carbon::now()->format('Y-m-d')){
+        //     return [];
+        // }
+
+        $period = CarbonPeriod::create($this->attributes['tgl_mulai_sewa'], $this->attributes['tgl_akhir_sewa'])->toArray();
+        $new_period = [];
+        
+        foreach($period as $per){
+            array_push($new_period, $per->format('Y-m-d'));
+        }
+
+        return $new_period;
     }
 
     public function user()
