@@ -6,7 +6,7 @@
     <!-- Start Slider -->
     <div id="home-slider" class="slider p-relative">
         <div class="main-banner arrow-layout-1 ">
-            @foreach ($mobil as $mob)
+            @foreach ($mobil_slider as $mob)
                 <div class="slide-item">
                     <img src="{{ asset('images/'.$mob->thumbnail) }}" class="image-fit" alt="Slider">
                     <div class="transform-center">
@@ -44,7 +44,7 @@
 							<div class="tab-content">
 								<div class="tab-pane active" id="cars">
 									<div class="tab-inner">
-										<form method="get" action="{{ route('homepage', '#search') }}">
+										<form method="get" id="formSearch" action="{{ route('homepage', '#search') }}">
 											<div class="row">
 												<div class="col-lg-4 col-md-6">
 													<div class="form-group">
@@ -90,10 +90,16 @@
                                                         {!! Form::date('end_date', request()->input('end_date'), ['class' => 'form-control form-control-custom', 'id' => 'endDate']) !!}
 													</div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-12">
+                                                <div class="col-lg-2 col-md-6">
                                                     <div class="form-group">
                                                         <label class="submit"></label>
-                                                        <button type="submit" class="btn-first btn-submit full-width btn-height">Cari Mobil</button>
+                                                        <button type="submit" id="btnSubmit" class="btn-first btn-submit full-width btn-height">Cari Mobil</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="submit"></label>
+                                                        <button type="button" onclick="resetForm()" class="btn-first btn-reset full-width btn-height">Reset Form</button>
                                                     </div>
                                                 </div>
 											</div>
@@ -135,7 +141,10 @@
                     </div>
                 </div>
 			@empty
-				Kosong ?
+                <div class="col-12">
+                    <img src="{{asset('images/404_car_not_found.png')}}"  alt="" class="img-fluid w-75 mx-auto d-block">
+                    <h3 class="text-center">Maaf tidak ada mobil yang sesuai</h3>
+                </div>
 			@endforelse
 		  </div>
 		  <div class="row">
@@ -192,6 +201,12 @@
 
 @push('scriptplus')
     <script>
+        function resetForm(){
+            $("#formSearch").trigger("reset");
+            $("input[type=date]").val("");
+            $("#btnSubmit").click();
+        }
+
         $(document).ready(function () {
             $('.js-select-first-disabled').find('option:first').attr('disabled', true);
 

@@ -934,6 +934,12 @@ label.custom-checkbox .checkmark:after {
     background: #f00
 }
 
+.btn-reset {
+    border-color: #fff !important;
+    color: #fff !important;
+    background: transparent !important
+}
+
 .btn-small:before,
 .btn-submit:before {
     content: '';

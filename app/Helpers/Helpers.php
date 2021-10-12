@@ -116,6 +116,8 @@ function searchAvailablity($start_date, $end_date, $mobil)
         array_push($range, $date_range->format('Y-m-d'));
     }
 
+    // return $range;
+
     $available_mobil = [];
 
     foreach($mobil as $mob){

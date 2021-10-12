@@ -35,7 +35,7 @@
                                             <form action="{{ route('bookingcar.store') }}" method="post" id="form-booking">
                                                 @csrf
                                                 <div class="row mb-md-80">
-                                                    {!! Form::hidden('id_mobil', $mobil->id) !!}
+                                                    {!! Form::hidden('id_mobil', $mobil->id, ['id' => 'idMobil']) !!}
                                                     {!! Form::hidden('id_user', Auth::user()->id) !!}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
@@ -58,6 +58,7 @@
                                                     <div class="col-12">
                                                         <h5 class="text-custom-black">Informasi Booking</h5>
                                                     </div>
+                                                    
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             {!! Form::label('idDateFrom', 'Tanggal Sewa', ['class' => 'fs-14 text-custom-black fw-500']) !!}
@@ -73,6 +74,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             {!! Form::label('idDateTo', 'Tanggal Kembali', ['class' => 'fs-14 text-custom-black fw-500']) !!}
@@ -88,39 +90,35 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group group-form">
-                                                            {!! Form::label('idDriver', 'Pilih Sopir', ['class' => 'fs-14 text-custom-black fw-500']) !!}
-                                                            {!! Form::select('id_driver', [null => 'Pilih Sopir', $navSopir], null, ['class' => 'custom-select form-control-custom js-select-first-disabled select-sopir' . ($errors->has('id_driver') ? ' is-invalid' : null), 'id' => 'idDriver']) !!}
-                                                            <div class="valid-feedback">Good</div>
-                                                            @error('id_driver')
-                                                                <div class="invalid-feedback">{{ $message }}</div>
-                                                            @else
-                                                                <div class="invalid-feedback">Mohon pilih sopir anda</div>
-                                                            @enderror
-                                                        </div>
+
+                                                    <div class="col-12 col-md-6">
+                                                        <span class="mb-2 d-none" id="availableStatus"></span>
+                                                        <button type="button" data-url="{{url('bookingcar/check-available')}}" class="btn-submit py-2 mb-3" id="btnAvailablity">Cek Ketersediaan</button>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            {!! Form::label('idCatatan', 'Catatan', ['class' => 'mb-1']) !!}
-                                                            {!! Form::textarea('id_catatan', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_catatan') ? ' is-invalid' : null), 'id' => 'idCatatan', 'rows' => '5' ]) !!}
-                                                            <div class="valid-feedback">Good</div>
-                                                            @error('id_catatan')
-                                                                <div class="invalid-feedback">{{ $message }}</div>
-                                                            @else
-                                                                <div class="invalid-feedback">Mohon isi catatan untuk kami</div>
-                                                            @enderror
+                                                
+                                                    <div class="d-none" id="noteAndSubmit">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                {!! Form::label('idCatatan', 'Catatan', ['class' => 'mb-1']) !!}
+                                                                {!! Form::textarea('id_catatan', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_catatan') ? ' is-invalid' : null), 'id' => 'idCatatan', 'rows' => '5' ]) !!}
+                                                                <div class="valid-feedback">Good</div>
+                                                                @error('id_catatan')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @else
+                                                                    <div class="invalid-feedback">Mohon isi catatan untuk kami</div>
+                                                                @enderror
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <hr class="mt-0">
-                                                        {{-- <div class="form-group">
-                                                            <label class="custom-checkbox">
-                                                                <input type="checkbox" name="#">
-                                                                <span class="checkmark"></span> By continuing, you agree to the <a href="#" class="text-custom-blue">Terms and Conditions.</a> 
-                                                            </label>
-                                                        </div> --}}
-                                                        <button type="submit" class="btn-first btn-submit">Booking Sekarang</button>
+                                                        <div class="col-12">
+                                                            <hr class="mt-0">
+                                                            {{-- <div class="form-group">
+                                                                <label class="custom-checkbox">
+                                                                    <input type="checkbox" name="#">
+                                                                    <span class="checkmark"></span> By continuing, you agree to the <a href="#" class="text-custom-blue">Terms and Conditions.</a> 
+                                                                </label>
+                                                            </div> --}}
+                                                            <button type="submit" class="btn-first btn-submit">Booking Sekarang</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </form>
@@ -158,6 +156,85 @@
 
 @push('scriptplus')
     <script>
+
+
+        const btnAvailablity = document.getElementById('btnAvailablity')
+
+        btnAvailablity.addEventListener('click', (event) => {
+            event.preventDefault()
+            const startDate = document.getElementById('idDateFrom')
+            const endDate = document.getElementById('idDateTo')
+            const idMobil = document.getElementById('idMobil')
+            const noteAndSubmit = document.getElementById('noteAndSubmit')
+
+            if(startDate.value.length == 0){
+                showAlert('Harap masukkan tanggal mulai sewa', 'error')
+                return
+            }
+
+            if(endDate.value.length == 0){
+                showAlert('Harap masukkan tanggal akhir sewa', 'error')
+                return
+            }
+
+            if(idMobil.value.length == 0){
+                showAlert('Terjadi kesalahan mohon muat ulang halaman', 'error')
+                return
+            }
+
+            toogleAvailableStatus('hide')
+            
+            const url = event.target.getAttribute('data-url') +'/'+ idMobil.value +'/'+ startDate.value +'/'+ endDate.value
+            noteAndSubmit.classList.add('d-none')
+
+            fetch(url, {
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(response => {
+                // console.log(response)
+                if(response.code == 1){
+                    toogleAvailableStatus('show')
+                    noteAndSubmit.classList.remove('d-none')
+                }
+
+                if(response.code == 0){
+                    toogleAvailableStatus('hide')
+                    showAlert('Gagal mendapatkan informasi ketersediaan', 'error')
+                }
+
+                if(response.code == undefined || response.code == null){
+                    toogleAvailableStatus('hide')
+                    showAlert('Gagal mendapatkan informasi ketersediaan', 'error')
+                }
+            })
+            .catch(errror => {
+                toogleAvailableStatus('hide')
+                showAlert('Gagal mendapatkan informasi ketersediaan', 'error')
+                console.log(errror)
+            })
+        })
+
+        function toogleAvailableStatus(state){
+            const availableStatus = document.getElementById('availableStatus')
+            
+            if(state == 'hide'){
+                availableStatus.classList.remove('d-inline-block', 'text-success')
+                availableStatus.classList.add('d-none')
+            }else if(state == 'show'){
+                availableStatus.classList.remove('d-none')
+                availableStatus.classList.add('d-inline-block', 'text-success')
+                availableStatus.innerHTML = 'Mobil Tersedia'
+            }else{
+                availableStatus.classList.remove('d-inline-block', 'text-success')
+                availableStatus.classList.add('d-none')
+            }
+        }
+
+
         $(document).ready(function () {
 
             $('form#form-booking').on('submit', function (e) {
@@ -169,33 +246,33 @@
             function checkValidate() {
                 let wrong = 0;
 
-                if (!$('.datepickr').val()) {
-                    $('.datepickr').removeClass('is-valid').addClass('is-invalid');
-                    wrong = wrong + 1;
-                } else {
-                    $('.datepickr').removeClass('is-invalid').addClass('is-valid');
-                }
+                // if (!$('.datepickr').val()) {
+                //     $('.datepickr').removeClass('is-valid').addClass('is-invalid');
+                //     wrong = wrong + 1;
+                // } else {
+                //     $('.datepickr').removeClass('is-invalid').addClass('is-valid');
+                // }
 
-                if (!$('.datepickr-off').val()) {
-                    $('.datepickr-off').removeClass('is-valid').addClass('is-invalid');
-                    wrong = wrong + 1;
-                } else {
-                    $('.datepickr-off').removeClass('is-invalid').addClass('is-valid');
-                }
+                // if (!$('.datepickr-off').val()) {
+                //     $('.datepickr-off').removeClass('is-valid').addClass('is-invalid');
+                //     wrong = wrong + 1;
+                // } else {
+                //     $('.datepickr-off').removeClass('is-invalid').addClass('is-valid');
+                // }
 
-                if (!$('.select-sopir').val()) {
-                    $('.select-sopir').removeClass('is-valid').addClass('is-invalid');
-                    wrong = wrong + 1;
-                } else {
-                    $('.select-sopir').removeClass('is-invalid').addClass('is-valid');
-                }
+                // if (!$('.select-sopir').val()) {
+                //     $('.select-sopir').removeClass('is-valid').addClass('is-invalid');
+                //     wrong = wrong + 1;
+                // } else {
+                //     $('.select-sopir').removeClass('is-invalid').addClass('is-valid');
+                // }
 
-                if (!$('.catatan-book').val()) {
-                    $('.catatan-book').removeClass('is-valid').addClass('is-invalid');
-                    wrong = wrong + 1;
-                } else {
-                    $('.catatan-book').removeClass('is-invalid').addClass('is-valid');
-                }
+                // if (!$('.catatan-book').val()) {
+                //     $('.catatan-book').removeClass('is-valid').addClass('is-invalid');
+                //     wrong = wrong + 1;
+                // } else {
+                //     $('.catatan-book').removeClass('is-invalid').addClass('is-valid');
+                // }
 
                 if (wrong > 0) {
                     wrong = 0;
@@ -210,11 +287,11 @@
             let date = new Date();
             let date_off = new Date(Date.now() + (3600 * 1000 * 24));
             $(".datepickr").datepicker({
-                dateFormat: "dd-MM-yyyy",
+                dateFormat: "dd-m-yyyy",
                 timepicker: false,
                 minDate: date,
                 onSelect: function (date) {
-                    date ? $(".datepickr").removeClass('is-invalid').addClass('is-valid') : $(".datepickr").removeClass('is-valid').addClass('is-invalid');
+                    // date ? $(".datepickr").removeClass('is-invalid').addClass('is-valid') : $(".datepickr").removeClass('is-valid').addClass('is-invalid');
                     var selectedDate = new Date(date);
                     var msecsInADay = 86400000;
                     var endDate = new Date(selectedDate.getTime() + (3600 * 1000 * 24));
@@ -222,11 +299,11 @@
                 }
             });
             $(".datepickr-off").datepicker({
-                dateFormat: "dd-MM-yyyy",
+                dateFormat: "dd-m-yyyy",
                 timepicker: false,
                 minDate: date_off,
                 onSelect: function (date) {
-                    date ? $(".datepickr-off").removeClass('is-invalid').addClass('is-valid') : $(".datepickr-off").removeClass('is-valid').addClass('is-invalid');
+                    // date ? $(".datepickr-off").removeClass('is-invalid').addClass('is-valid') : $(".datepickr-off").removeClass('is-valid').addClass('is-invalid');
                 },
                 onClose: function () {
                     var dt1 = $(".datepickr").datepicker('getDate');

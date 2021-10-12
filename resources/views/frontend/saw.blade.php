@@ -110,14 +110,5 @@
                 console.log(errror)
             })
         })
-
-        function showAlert(message, type){
-            Swal.fire({
-                icon: type == 'error' ? 'error' : 'success',
-                title: message,
-                showConfirmButton: false,
-                timer: 3000
-            })
-        }
     </script>
 @endpush

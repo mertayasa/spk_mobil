@@ -42,7 +42,7 @@
     <!-- CSS for IE -->
     <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="css/ie.css" /><![endif]-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]><script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script><![endif]-->
+    <!--[if lt IE 9]><script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>___scripts_1___<![endif]-->
     <!-- place -->
 </head>
 
@@ -78,8 +78,11 @@
                                     @endif
                                 @else
                                     <li class="book-appointment">
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-unlock"></i>Log Out</a>
-                                        <form action="{{ route('logout') }}" method="post" id="logout-form" class="d-none">
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                                class="fa fa-unlock"></i>Log Out</a>
+                                        <form action="{{ route('logout') }}" method="post" id="logout-form"
+                                            class="d-none">
                                             @csrf
                                         </form>
                                     </li>
@@ -98,27 +101,38 @@
                             <div class="main-navigation">
                                 <div class="logo d-flex align-items-center">
                                     <a href="#" data-id="#home-slider" class="go-to-id">
-                                        <img src="{{ asset('assets/frontend/assets/images/logo.png') }}" class="img-fluid" alt="logo">
+                                        <img src="{{ asset('assets/frontend/assets/images/logo.png') }}"
+                                            class="img-fluid" alt="logo">
                                     </a>
                                 </div>
                                 <div class="main-menu">
                                     <ul class="custom-flex">
                                         <li class="menu-item active">
-                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#home-slider" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Home</a>
+                                            <a href="{{ !Request::is('/') ? route('homepage') : '#' }}"
+                                                data-id="#home-slider"
+                                                class="{{ !Request::is('/') ? '' : 'go-to-id' }}">Home</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#search-engine" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Mobil</a>
+                                            <a href="{{ !Request::is('/') ? route('homepage') : '#' }}"
+                                                data-id="#search-engine"
+                                                class="{{ !Request::is('/') ? '' : 'go-to-id' }}">Mobil</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#kriteria-section" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Kriteria</a>
+                                            <a href="{{ !Request::is('/') ? route('homepage') : '#' }}"
+                                                data-id="#kriteria-section"
+                                                class="{{ !Request::is('/') ? '' : 'go-to-id' }}">Kriteria</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#tentang-section" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Tentang Kami</a>
+                                            <a href="{{ !Request::is('/') ? route('homepage') : '#' }}"
+                                                data-id="#tentang-section"
+                                                class="{{ !Request::is('/') ? '' : 'go-to-id' }}">Tentang Kami</a>
                                         </li>
                                         <li class="menu-item item-no-hover">
                                             <a href="{{ route('bookingcar.cart') }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                    <path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z" />
                                                 </svg>
                                             </a>
                                         </li>
@@ -229,7 +243,19 @@
     {{-- <script src="http://www.google.cn/maps/api/js?key=AIzaSyDnd9JwZvXty-1gHZihMoFhJtCXmHfeRQg"></script> --}}
     <!-- Custom Js -->
     <script src="{{ asset('assets/frontend/assets/js/custom.js') }}"></script>
-	<!-- /Place all Scripts Here -->
+    <!-- /Place all Scripts Here -->
+
+    <script>
+        function showAlert(message, type) {
+            Swal.fire({
+                icon: type == 'error' ? 'error' : 'success',
+                title: message,
+                showConfirmButton: false,
+                timer: 3000
+            })
+        }
+    </script>
+
     @stack('scriptplus')
 </body>
 

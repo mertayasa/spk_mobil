@@ -172,4 +172,15 @@ class BookingcarController extends Controller
         return view('frontend.cart-book', compact('booking'));
     }
 
+    public function checkAvailable(Mobil $mobil, $start_date, $end_date){
+        $init_filtered_mobil = searchAvailablity($start_date, $end_date, [$mobil]);
+        return response(['code' => 0]);
+        
+        if(count($init_filtered_mobil) > 0){
+            return response(['code' => 1]);
+        }else{
+            return response(['code' => 0]);
+        }
+    }
+
 }

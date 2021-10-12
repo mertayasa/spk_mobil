@@ -19,17 +19,6 @@ class HomepageController extends Controller
 {
     public function index(Request $request)
     {
-        $start_date = Carbon::now()->addDay(9);
-        $end_date = Carbon::now()->addDay(12);
-
-        // dd($request->all());
-
-        // $booking = searchAvailablity($start_date, $end_date, Mobil::all());
-
-        // dd($this->paginate($booking, 2));
-
-        // dd($request->all());
-
         $validator = Validator::make($request->all(), [
             'end_date' => $request->start_date != null ? 'required' : 'nullable',
             'start_date' => $request->end_date != null ? 'required' : 'nullable'
@@ -51,6 +40,8 @@ class HomepageController extends Controller
         $name = $request->input('id_name');
         $passenger = $request->input('id_passenger');
         $sort = $request->input('id_sort');
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
 
         if ($category == 'all') {
             $category = null;
@@ -82,13 +73,12 @@ class HomepageController extends Controller
             $init_filtered_mobil = searchAvailablity($start_date, $end_date, $mobil->get());
         }
 
-        // dd($mobil->get());
-        
-        $mobil = $this->paginate($init_filtered_mobil, $_GET['page'] ?? 1, 3, ['path' => route('homepage')]);
-        // $mobil = $mobil->paginate(3);
-        // dd($mobil);
+        $mobil = $this->paginate($init_filtered_mobil, $_GET['page'] ?? 1, 6, ['path' => route('homepage')]);
 
-        return view('frontend.welcome', compact('mobil', 'countmobil', 'navJumlahKursi', 'navCategory', 'kriteria'));
+        $mobil_slider = Mobil::with('jenisMobil')->get();
+        // dd($mobil_slider);
+
+        return view('frontend.welcome', compact('mobil', 'mobil_slider', 'countmobil', 'navJumlahKursi', 'navCategory', 'kriteria'));
     }
 
     public function getmobil(Request $request, $data)
