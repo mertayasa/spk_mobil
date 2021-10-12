@@ -448,7 +448,7 @@ p {
 }
 
 a {
-    color: #fff;
+    color: #111;
     text-decoration: none;
     transition: .5s
 }
@@ -1219,6 +1219,10 @@ label.custom-checkbox .checkmark:after {
     opacity: 1
 }
 
+.header .navigation-wrapper nav>.main-navigation .main-menu>ul>.menu-item.item-no-hover:hover>a:after {
+    opacity: 0;
+}
+
 .header .navigation-wrapper nav>.main-navigation .main-menu>ul>.search {
     display: flex;
     align-items: center;
@@ -1964,11 +1968,16 @@ label.custom-checkbox .checkmark:after {
     padding: 6px 0
 }
 
-.btn-submits {
+.btn-submit {
     border-color: #f00;
     color: #fff;
     background: #f00;
     width: 100%
+}
+
+.btn-submit.btn-update {
+    border-color: #1da1f2;
+    background: #1da1f2;
 }
 
 .footer .footer-box .logo {

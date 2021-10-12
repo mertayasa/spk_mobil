@@ -38,6 +38,7 @@
     <link href="{{ asset('assets/frontend/assets/css/style.css') }}" rel="stylesheet">
     <!-- Custom Responsive -->
     <link href="{{ asset('assets/frontend/assets/css/responsive.css') }}" rel="stylesheet">
+    @yield('styleplus')
     <!-- CSS for IE -->
     <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="css/ie.css" /><![endif]-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -106,15 +107,23 @@
                                             <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#home-slider" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Home</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#" data-id="#search-engine" class="go-to-id">Mobil</a>
+                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#search-engine" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Mobil</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#" data-id="#kriteria-section" class="go-to-id">Kriteria</a>
+                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#kriteria-section" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Kriteria</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="#" data-id="#tentang-section" class="go-to-id">Tentang Kami</a>
+                                            <a href="{{!Request::is('/') ? route('homepage') : '#'}}" data-id="#tentang-section" class="{{!Request::is('/') ? '' : 'go-to-id'}}">Tentang Kami</a>
+                                        </li>
+                                        <li class="menu-item item-no-hover">
+                                            <a href="{{ route('bookingcar.cart') }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                    <path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/>
+                                                </svg>
+                                            </a>
                                         </li>
                                     </ul>
+
                                 </div>
                                 <div class="hamburger-menu">
                                     <div class="menu-btn"><span></span><span></span><span></span></div>

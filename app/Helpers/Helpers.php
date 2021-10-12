@@ -56,6 +56,11 @@ function indonesianDate($date)
     return Carbon::parse($date)->isoFormat('LL');
 }
 
+function indonesianDateFrontend($date)
+{
+    return Carbon::parse($date)->isoFormat('D-MMMM-YYYY');
+}
+
 function indonesianDateTime($date)
 {
     return Carbon::parse($date)->isoFormat('LL H:mm');
