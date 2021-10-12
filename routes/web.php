@@ -33,7 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/', [BookingcarController::class, 'index'])->name('index');
         Route::get('/', [BookingcarController::class, 'cek'])->name('cekIndex');
         Route::get('/edit/{data}', [BookingcarController::class, 'editForm'])->name('editForm');
-        Route::patch('/', [BookingcarController::class, 'edit'])->name('edit');
+        Route::patch('/edited', [BookingcarController::class, 'edit'])->name('edit');
         Route::post('store', [BookingcarController::class, 'store'])->name('store');
         Route::get('cart', [BookingcarController::class, 'cart'])->name('cart');
     });

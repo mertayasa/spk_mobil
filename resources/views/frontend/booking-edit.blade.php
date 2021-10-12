@@ -35,15 +35,11 @@
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <h5 class="text-custom-black">Data diri anda</h5>
-                                            {{-- {{ indonesianDateFrontend($editTglAwal) }}
-                                            {{ $editTglAkhir }}
-                                            {{ $editSopir }}
-                                            {{ $editCatatan }} --}}
-                                            <form action="" method="POST" id="form-booking">
+                                            <form action="{{ route('bookingcar.edit') }}" method="POST" id="form-booking">
                                                 @method('PATCH')
                                                 @csrf
+                                                {!! Form::hidden('id-booking', $bookingWhere->id, []) !!}
                                                 <div class="row mb-md-80">
-                                                    {{-- {!! Form::hidden('id_mobil', $mobil->id) !!} --}}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <img src="{{ asset('images/'.Auth::user()->photo) }}" alt="">
