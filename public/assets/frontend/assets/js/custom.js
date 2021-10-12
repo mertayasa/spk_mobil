@@ -53,7 +53,8 @@
         arrows: true,
         dots: false,
         autoplay: true,
-        autoplaySpeed: 8000,
+        autoplaySpeed: 5000,
+        pauseOnHover: false,
         speed: 500,
         cssEase: "linear",
         responsive: [{

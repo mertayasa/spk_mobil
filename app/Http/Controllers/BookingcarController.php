@@ -89,7 +89,40 @@ class BookingcarController extends Controller
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
         }
 
-        return redirect()->route('homepage')->with('success', 'Data Booking anda sudah kami terima');
+        return redirect()->route('bookingcar.cart')->with('success', 'Data Booking anda sudah kami terima');
+    }
+
+    public function editForm($data)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('homepage', '#search')->with('info', 'Silahkan pilih dulu mobil yang ingin disewa');
+        }
+        $booking = Booking::with('user', 'mobil', 'sopir')
+                    ->where([
+                        ['id_user', '=', Auth::user()->id],
+                        ['status', '=', 'booking_baru']
+                    ]);
+        $bookingWhere = $booking->where('id', '=', $data)->first();
+        if (empty($bookingWhere)) {
+            return redirect()->route('bookingcar.cart')->with('info', 'Mohon pilih mobil yang ingin diedit');
+        }
+        // dd($bookingWhere->mobil->thumbnail);
+        $navSopir = Sopir::pluck('nama', 'id');
+        return view('frontend.booking-edit', compact('bookingWhere', 'navSopir'));
+    }
+
+    public function cart()
+    {
+        $booking = Booking::with('user', 'mobil', 'sopir')
+                    ->where([
+                        ['id_user', '=', Auth::user()->id],
+                        ['status', '=', 'booking_baru']
+                    ])->get();
+
+        if ($booking->isEmpty()) {
+            return redirect()->route('homepage', '#search')->with('info', 'Silahkan pilih dulu mobil yang ingin disewa');
+        }
+        return view('frontend.cart-book', compact('booking'));
     }
 
 }
