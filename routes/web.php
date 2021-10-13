@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('/edited', [BookingcarController::class, 'edit'])->name('edit');
         Route::post('store', [BookingcarController::class, 'store'])->name('store');
         Route::get('cart', [BookingcarController::class, 'cart'])->name('cart');
+        Route::get('upload-bukti/{booking}', [BookingcarController::class, 'uploadBukti'])->name('upload_bukti');
         Route::get('check-available/{mobil}/{start_date}/{end_date}', [BookingcarController::class, 'checkAvailable'])->name('checkAvailable');
     });
 });

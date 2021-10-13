@@ -28,7 +28,7 @@ class BookingcarStoreRequest extends FormRequest
         return [
             'id_mobil' => ['required', 'integer', 'gt:0'],
             'id_user' => ['required', 'integer', 'gt:0'],
-            'id_driver' => ['required', 'integer', 'gt:0'],
+            // 'id_driver' => ['required', 'integer', 'gt:0'],
             'id_catatan' => ['required', 'string'],
             'id_date_from' => ['required', 'after_or_equal:'.$todayDate],
             'id_date_to' => ['required', 'after_or_equal:id_date_to'],

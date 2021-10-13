@@ -59,6 +59,7 @@ class BookingcarController extends Controller
 
     public function store(BookingcarStoreRequest $request)
     {
+
         if ($request->session()->has('id_mobil')) {
             $request->session()->forget('id_mobil');
         }
@@ -72,13 +73,20 @@ class BookingcarController extends Controller
             $data['id_dt_from_format'] = $mulai_sewa->format('Y-m-d');
             $data['id_dt_to_format'] = $akhir_sewa->format('Y-m-d');
 
+            
             $mobil = Mobil::find($data['id_mobil']);
+
+            $check_availablity = searchAvailablity($data['id_dt_from_format'], $data['id_dt_to_format'], [$mobil]);
+            if(count($check_availablity) < 1){
+                return redirect()->back()->withInput()->with('date_unavailable', 'Mobil tidak tersedia untuk tanggal yang dipilih');
+            }
+
             $data['id_harga'] = $mobil->harga * $durasi_sewa;
 
             Booking::create([
                 'id_mobil' => $data['id_mobil'],
                 'id_user' => $data['id_user'],
-                'id_sopir' => $data['id_driver'],
+                // 'id_sopir' => $data['id_driver'],
                 'deskripsi' => $data['id_catatan'],
                 'harga' => $data['id_harga'],
                 'tgl_mulai_sewa' => $data['id_dt_from_format'],
@@ -164,7 +172,7 @@ class BookingcarController extends Controller
                     ->where([
                         ['id_user', '=', Auth::user()->id],
                         ['status', '=', 'booking_baru']
-                    ])->get();
+                    ])->latest()->get();
 
         if ($booking->isEmpty()) {
             return redirect()->route('homepage', '#search')->with('error', 'Cart Kosong, Mohon Booking salah satu mobil');
@@ -173,14 +181,26 @@ class BookingcarController extends Controller
     }
 
     public function checkAvailable(Mobil $mobil, $start_date, $end_date){
-        $init_filtered_mobil = searchAvailablity($start_date, $end_date, [$mobil]);
-        return response(['code' => 0]);
         
-        if(count($init_filtered_mobil) > 0){
-            return response(['code' => 1]);
-        }else{
-            return response(['code' => 0]);
+        try{
+            $parsed_start = Carbon::parse($start_date)->format('d-m-Y');
+            $parsed_end = Carbon::parse($end_date)->format('d-m-Y');
+            $check_available = searchAvailablity($parsed_start, $parsed_end, [$mobil]);
+    
+            if(count($check_available) > 0){
+                return response(['code' => 1, 'message' => "Mobil tersedia untuk tanggal ${start_date} sampai ${end_date}"]);
+            }else{
+                return response(['code' => 0, 'message' => "Mobil tidak tersedia untuk tanggal ${start_date} sampai ${end_date}"]);
+            }
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal mendapatkan informasi ketersediaan mobil']);
         }
+    }
+
+    public function uploadBukti(Booking $booking)
+    {
+        dd($booking);
     }
 
 }

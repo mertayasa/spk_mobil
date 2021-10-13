@@ -92,6 +92,9 @@
                                                     </div>
 
                                                     <div class="col-12 col-md-6">
+                                                        @if (session()->has('date_unavailable'))
+                                                            <span class="mb-2 d-inline-block text-danger" id="errorDateSession">{{session()->get('date_unavailable')}}</span>
+                                                        @endif
                                                         <span class="mb-2 d-none" id="availableStatus"></span>
                                                         <button type="button" data-url="{{url('bookingcar/check-available')}}" class="btn-submit py-2 mb-3" id="btnAvailablity">Cek Ketersediaan</button>
                                                     </div>
@@ -166,6 +169,11 @@
             const endDate = document.getElementById('idDateTo')
             const idMobil = document.getElementById('idMobil')
             const noteAndSubmit = document.getElementById('noteAndSubmit')
+            const errorDateSession = document.getElementById('errorDateSession')
+
+            if(errorDateSession){
+                errorDateSession.remove()
+            }
 
             if(startDate.value.length == 0){
                 showAlert('Harap masukkan tanggal mulai sewa', 'error')
@@ -186,6 +194,7 @@
             
             const url = event.target.getAttribute('data-url') +'/'+ idMobil.value +'/'+ startDate.value +'/'+ endDate.value
             noteAndSubmit.classList.add('d-none')
+            console.log(url)
 
             fetch(url, {
                 headers: {
@@ -195,21 +204,26 @@
             })
             .then(response => response.json())
             .then(response => {
-                // console.log(response)
+                console.log(response)
                 if(response.code == 1){
-                    toogleAvailableStatus('show')
+                    toogleAvailableStatus('show', response.message)
                     noteAndSubmit.classList.remove('d-none')
+                    return ''
                 }
 
                 if(response.code == 0){
                     toogleAvailableStatus('hide')
-                    showAlert('Gagal mendapatkan informasi ketersediaan', 'error')
+                    showAlert(response.message, 'error')
+                    return ''
                 }
 
                 if(response.code == undefined || response.code == null){
                     toogleAvailableStatus('hide')
-                    showAlert('Gagal mendapatkan informasi ketersediaan', 'error')
+                    showAlert(response.message, 'error')
+                    return ''
                 }
+
+                throw ''
             })
             .catch(errror => {
                 toogleAvailableStatus('hide')
@@ -218,7 +232,7 @@
             })
         })
 
-        function toogleAvailableStatus(state){
+        function toogleAvailableStatus(state, message = null){
             const availableStatus = document.getElementById('availableStatus')
             
             if(state == 'hide'){
@@ -227,7 +241,7 @@
             }else if(state == 'show'){
                 availableStatus.classList.remove('d-none')
                 availableStatus.classList.add('d-inline-block', 'text-success')
-                availableStatus.innerHTML = 'Mobil Tersedia'
+                availableStatus.innerHTML = message ?? '-'
             }else{
                 availableStatus.classList.remove('d-inline-block', 'text-success')
                 availableStatus.classList.add('d-none')
