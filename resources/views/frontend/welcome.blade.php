@@ -81,13 +81,13 @@
 												<div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         {!! Form::label('startDate', 'Dari Tanggal', ['class' => 'fs-14 text-custom-white fw-600']) !!}
-                                                        {!! Form::date('start_date', request()->input('start_date'), ['class' => 'form-control form-control-custom', 'id' => 'startDate']) !!}
+                                                        {!! Form::text('start_date', request()->input('start_date'), ['class' => 'form-control form-control-custom datepickr-on', 'id' => 'startDate', 'placeholder' => 'dd-MM-yyyy', 'readonly' => 'readonly', 'required' => 'required']) !!}
 													</div>
                                                 </div>
 												<div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
                                                         {!! Form::label('endDate', 'Sampai Tanggal', ['class' => 'fs-14 text-custom-white fw-600']) !!}
-                                                        {!! Form::date('end_date', request()->input('end_date'), ['class' => 'form-control form-control-custom', 'id' => 'endDate']) !!}
+                                                        {!! Form::text('end_date', request()->input('end_date'), ['class' => 'form-control form-control-custom datepickr-off', 'id' => 'endDate', 'placeholder' => 'dd-MM-yyyy', 'readonly' => 'readonly', 'required' => 'required']) !!}
 													</div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-6">
@@ -209,6 +209,40 @@
 
         $(document).ready(function () {
             $('.js-select-first-disabled').find('option:first').attr('disabled', true);
+
+            let date = new Date();
+            let date_off = new Date(Date.now() + (3600 * 1000 * 24));
+            $(".datepickr-on").datepicker({
+                dateFormat: "dd-MM-yyyy",
+                autoClose: true,
+                timepicker: false,
+                minDate: date,
+                onSelect: function (date) {
+                    // date ? $(".datepickr").removeClass('is-invalid').addClass('is-valid') : $(".datepickr").removeClass('is-valid').addClass('is-invalid');
+                    var selectedDate = new Date(date);
+                    var endDate = new Date(selectedDate.getTime() + (3600 * 1000 * 24));
+                    $(".datepickr-off").datepicker({'minDate': endDate});
+                }
+            });
+            $(".datepickr-off").datepicker({
+                dateFormat: "dd-MM-yyyy",
+                autoClose: true,
+                timepicker: false,
+                minDate: date_off,
+                onSelect: function (date) {
+                    // date ? $(".datepickr-off").removeClass('is-invalid').addClass('is-valid') : $(".datepickr-off").removeClass('is-valid').addClass('is-invalid');
+                },
+                onClose: function () {
+                    var dt1 = $(".datepickr-on").datepicker('getDate');
+                    var dt2 = $(".datepickr-off").datepicker('getDate');
+                    //check to prevent a user from entering a date below date of dt1
+                    if (dt2 <= dt1) {
+                        var minDate = $(".datepickr-off").datepicker('option', 'minDate');
+                        $(".datepickr-off").datepicker('setDate', minDate);
+                    }
+                    
+                }
+            });
 
             $(window).on('load', function () {
                 if (this.location.hash == "#search") {

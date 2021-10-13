@@ -284,22 +284,22 @@
 
 
             $('.js-select-first-disabled option:first').attr('disabled', true);
+            
             let date = new Date();
             let date_off = new Date(Date.now() + (3600 * 1000 * 24));
             $(".datepickr").datepicker({
-                dateFormat: "dd-m-yyyy",
+                dateFormat: "dd-MM-yyyy",
                 timepicker: false,
                 minDate: date,
                 onSelect: function (date) {
                     // date ? $(".datepickr").removeClass('is-invalid').addClass('is-valid') : $(".datepickr").removeClass('is-valid').addClass('is-invalid');
                     var selectedDate = new Date(date);
-                    var msecsInADay = 86400000;
                     var endDate = new Date(selectedDate.getTime() + (3600 * 1000 * 24));
                     $(".datepickr-off").datepicker({'minDate': endDate});
                 }
             });
             $(".datepickr-off").datepicker({
-                dateFormat: "dd-m-yyyy",
+                dateFormat: "dd-MM-yyyy",
                 timepicker: false,
                 minDate: date_off,
                 onSelect: function (date) {
