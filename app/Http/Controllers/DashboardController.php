@@ -30,6 +30,7 @@ class DashboardController extends Controller
             'pelanggan_count' => $pelanggan->count(),
             'sopir_count' => $sopir->count(),
             'booking_count' => $booking->count(),
+            'booking_ongoing' => $booking->where('status', '!=', 'selesai')->count(),
             'booking_baru' => $booking->where('status', 'booking_baru')->count(),
             'booking_selesai' => $booking->where('status', 'selesai')->count(),
             'pemasukan' => $pemasukan,
