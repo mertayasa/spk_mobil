@@ -11,7 +11,11 @@
 <div class="row mt-3">
     <div class="col-12 col-md-6">
         {!! Form::label('idSopir', 'Sopir', ['class' => 'mb-1']) !!}
-        {!! Form::select('id_sopir', $sopir, null, ['class' => 'form-control', 'id' => 'idSopir']) !!}
+        {!! Form::select('id_sopir', ['' => 'Pilih Sopir'] + $sopir->toArray(), null, ['class' => 'form-control', 'id' => 'idSopir']) !!}
+    </div>
+    <div class="col-12 col-md-6">
+        {!! Form::label('bookingStatus', 'Status', ['class' => 'mb-1 text-danger']) !!}
+        {!! Form::select('status', getStatusBooking(), Request::is('*edit*') ? $booking->status : null, ['class' => 'form-control is-invalid', 'id' => 'bookingStatus']) !!}
     </div>
 </div>
 <hr>

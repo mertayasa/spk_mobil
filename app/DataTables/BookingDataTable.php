@@ -16,6 +16,22 @@ class BookingDataTable
                 return formatPrice($booking->harga);
             })
 
+            ->editColumn('status', function($booking){
+                if($booking->status == 'booking_baru'){
+                    return '<span class="text-danger">* Booking Baru *</span>';
+                }
+
+                return getStatusBooking($booking->status);
+            })
+
+            ->addColumn('nama_sopir', function($booking){
+                if($booking->sopir){
+                    return $booking->sopir->nama;
+                }else{
+                    return '<span class="text-danger">Tanpa Sopir</span>';
+                }
+            })
+
             ->editColumn('tgl_mulai_sewa', function($booking){
                 return indonesianDate($booking->tgl_mulai_sewa);
             })
@@ -32,6 +48,6 @@ class BookingDataTable
                     '<a href="' . route('booking.edit', $booking->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
                     '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus"><i class="menu-icon fa fa-trash"></i></a>' .
                     '</div>';
-            })->addIndexColumn()->rawColumns(['action'])->make(true);
+            })->addIndexColumn()->rawColumns(['action', 'nama_sopir', 'status'])->make(true);
     }
 }

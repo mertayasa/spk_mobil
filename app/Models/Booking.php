@@ -24,6 +24,8 @@ class Booking extends Model
         'id_sopir',
         'deskripsi',
         'harga',
+        'status',
+        'bukti_trf',
         'tgl_mulai_sewa',
         'tgl_akhir_sewa',
     ];

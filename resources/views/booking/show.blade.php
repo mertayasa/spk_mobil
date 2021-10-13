@@ -25,10 +25,10 @@
                     {{-- <h6>Tanggal Sewa : </h6>
                     {{indonesianDate($booking->tgl_mulai_sewa)}} --}}
 
-                    <h6 class="mt-0"> <b> Sopir : </b> </h6>
-                    {{$booking->sopir->nama}}
+                    <h6 class="mt-0 mb-0"> <b> Sopir : </b> </h6>
+                    {!! $booking->sopir->nama ?? '<span class="text-danger">Tanpa Sopir</span>' !!}
 
-                    <h6 class="mt-3"> <b> Catatan : </b> </h6>
+                    <h6 class="mt-3 mb-0"> <b> Catatan : </b> </h6>
                     {{$booking->deskripsi ?? '-'}}
                 </div>
 

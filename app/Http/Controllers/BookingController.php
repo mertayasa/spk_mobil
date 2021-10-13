@@ -112,10 +112,10 @@ class BookingController extends Controller
             $booking->update($data);
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data booking');
         }
 
-        return redirect()->route('booking.index')->with('success', 'Berhasil menambahkan data booking');
+        return redirect()->route('booking.index')->with('success', 'Berhasil mengubah data booking');
     }
 
     /**

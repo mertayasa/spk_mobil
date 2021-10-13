@@ -7,6 +7,7 @@
             <th>Penyewa</th>
             <th>Sopir</th>
             <th>Harga</th>
+            <th>Status</th>
             <th>Tanggal Sewa</th>
             <th>Tanggal Kembali</th>
             <th>Deskripsi</th>
@@ -50,12 +51,16 @@
                         name: 'user.nama',
                     },
                     {
-                        data: 'sopir.nama',
-                        name: 'sopir.nama',
+                        data: 'nama_sopir',
+                        name: 'nama_sopir',
                     },
                     {
                         data: 'harga',
                         name: 'harga'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
                     },
                     {
                         data: 'tgl_mulai_sewa',
@@ -87,7 +92,7 @@
                     },
                     {
                         responsivePriority: 1,
-                        targets: 9
+                        targets: 10
                     },
                 ],
                 language: {

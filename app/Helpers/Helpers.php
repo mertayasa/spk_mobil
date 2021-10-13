@@ -128,3 +128,14 @@ function searchAvailablity($start_date, $end_date, $mobil)
 
     return $available_mobil;
 }
+
+function getStatusBooking($status = null)
+{
+    $booking_status = ['booking_baru' => 'Booking Baru', 'dikonfirmasi_admin' => 'Dikonfirmasi Admin', 'on_progress' => 'On Progress', 'selesai' => 'Selesai'];
+
+    if($status == null){
+        return $booking_status;
+    }else{
+        return $booking_status[$status];
+    }
+}
