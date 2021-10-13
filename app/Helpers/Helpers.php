@@ -38,10 +38,10 @@ function formatPrice($value)
 function userRole()
 {
     // 3 User
-    // $role_name = Auth::user()->level == 0 ? 'Admin' : (Auth::user()->level == 1 ? 'Sekretaris' : (Auth::user()->level == 2 ? 'Bendahara' : 'Anggota'));
+    $role_name = Auth::user()->level == 0 ? 'Admin' : (Auth::user()->level == 1 ? 'Owner' : 'Pelanggan');
 
     // 2 user
-    $role_name = Auth::user()->level == 0 ? 'admin' : 'user';
+    // $role_name = Auth::user()->level == 0 ? 'admin' : 'user';
 
     return $role_name;
 }

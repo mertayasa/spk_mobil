@@ -54,7 +54,7 @@
                 maxFileSize: '500KB'
                 }
             @else
-                imageUrl = "{{ asset('images/uploaded/' . $mobil->thumbnail) }}"
+                imageUrl = "{{ asset('images/' . $mobil->thumbnail) }}"
                 options = {
                     acceptedFileTypes: ['image/png', 'image/jng', 'image/jpeg'],
                     maxFileSize: '500KB',

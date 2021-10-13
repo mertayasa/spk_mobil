@@ -77,6 +77,15 @@ class BookingController extends Controller
     {
         try{
             $data = $request->all();
+
+            $base_64_foto = json_decode($request['bukti_trf'], true);
+            $upload_image = uploadFile($base_64_foto, 'bukti_trf');
+            if ($upload_image === 0) {
+                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            }
+    
+            $data['bukti_trf'] = $upload_image;
+
             $mulai_sewa = Carbon::parse($data['tgl_mulai_sewa']);
             $akhir_sewa = Carbon::parse($data['tgl_akhir_sewa']);
             $durasi_sewa = $akhir_sewa->diffInDays($mulai_sewa);
@@ -102,6 +111,15 @@ class BookingController extends Controller
     {
         try{
             $data = $request->all();
+
+            $base_64_foto = json_decode($request['bukti_trf'], true);
+            $upload_image = uploadFile($base_64_foto, 'bukti_trf');
+            if ($upload_image === 0) {
+                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            }
+    
+            $data['bukti_trf'] = $upload_image;
+            
             $mulai_sewa = Carbon::parse($data['tgl_mulai_sewa']);
             $akhir_sewa = Carbon::parse($data['tgl_akhir_sewa']);
             $durasi_sewa = $akhir_sewa->diffInDays($mulai_sewa);

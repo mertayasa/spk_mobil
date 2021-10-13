@@ -33,6 +33,51 @@
 <div class="row mt-3">
     <div class="col-12 col-md-6">
         {!! Form::label('deskripsi', 'Catatan', ['class' => 'mb-1']) !!}
-        {!! Form::textarea('deskripsi', null, ['class' => 'form-control', 'id' => 'deskripsi', 'style' => 'height:148px']) !!}
+        {!! Form::textarea('deskripsi', null, ['class' => 'form-control', 'id' => 'deskripsi', 'style' => 'height:288px']) !!}
+    </div>
+    <div class="col-12 col-md-6 pb-3 pb-md-0">
+        {!! Form::label('buktiTrf', 'Bukti Transfer / Pembayaran', ['class' => 'mb-1']) !!}
+        {!! Form::file('bukti_trf', ['class' => 'd-block filepond', 'id' => 'buktiTrf']) !!}
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            FilePond.registerPlugin(
+                FilePondPluginFileEncode,
+                FilePondPluginFileValidateSize,
+                FilePondPluginFileValidateType,
+                FilePondPluginImageExifOrientation,
+                FilePondPluginImagePreview
+            );
+
+            let options
+            let imageUrl
+            const url = window.location
+
+            @if (Request::is('*/create') || (isset($booking) && $booking->bukti_trf == null))
+                options = {
+                acceptedFileTypes: ['image/png', 'image/jng', 'image/jpeg'],
+                maxFileSize: '500KB'
+                }
+            @else
+                imageUrl = "{{ asset('images/' . $booking->bukti_trf) }}"
+                options = {
+                    acceptedFileTypes: ['image/png', 'image/jng', 'image/jpeg'],
+                    maxFileSize: '500KB',
+                    files: [{
+                        source: imageUrl,
+                        options:{
+                        type: 'remote'
+                        }
+                    }],
+                }
+            @endif
+
+            FilePond.create(
+                document.getElementById('buktiTrf'), options
+            );
+        })
+    </script>
+@endpush
