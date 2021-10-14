@@ -673,13 +673,13 @@ table {
     visibility: hidden;
 }
 
-#search-engine .banner-tabs {
+/* #search-engine .banner-tabs {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1;
-}
+} */
 
 #search-engine .banner-tabs.scrolled {
     animation-name: fadeHeaderInDown;

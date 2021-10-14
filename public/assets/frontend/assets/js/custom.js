@@ -117,54 +117,54 @@
         }
     })
     a(document).ready(function () {
-        if (a("#search-engine").length) {
-            let $this        = a("#search-engine"),
-                $menunav     = a(".header").find(".navigation-wrapper").outerHeight(),
-                $this_search = a("#search-engine").find(".banner-tabs");
+        // if (a("#search-engine").length) {
+        //     let $this        = a("#search-engine"),
+        //         $menunav     = a(".header").find(".navigation-wrapper").outerHeight(),
+        //         $this_search = a("#search-engine").find(".banner-tabs");
             
-            $this.css("height", $this_search.outerHeight());
+        //     $this.css("height", $this_search.outerHeight());
 
-            a(window).on('resize', function () {
-                $menunav     = a(".header").find(".navigation-wrapper").outerHeight();
-            });
+        //     a(window).on('resize', function () {
+        //         $menunav     = a(".header").find(".navigation-wrapper").outerHeight();
+        //     });
 
-            var currentScroll = a(window).scrollTop(),
-                $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2,
-                offset       = $thisoffset - $menunav,
-                offset_search_nav = $menunav + $this_search.outerHeight() + ($this_search.outerHeight() / 2),
-                offset_end   = a('#kriteria-section').offset().top - offset_search_nav;
+        //     var currentScroll = a(window).scrollTop(),
+        //         $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2,
+        //         offset       = $thisoffset - $menunav,
+        //         offset_search_nav = $menunav + $this_search.outerHeight() + ($this_search.outerHeight() / 2),
+        //         offset_end   = a('#kriteria-section').offset().top - offset_search_nav;
             
 
-            if ( currentScroll > offset) {
-                $this_search.addClass('scrolled').css("top", $menunav);
-            } else {
-                $this_search.removeClass('scrolled').css("top", 0);
-            }
+        //     if ( currentScroll > offset) {
+        //         $this_search.addClass('scrolled').css("top", $menunav);
+        //     } else {
+        //         $this_search.removeClass('scrolled').css("top", 0);
+        //     }
             
-            if (currentScroll < offset_end) {
-                $this.removeClass('hilang');
-            } else {
-                $this.addClass('hilang');
-            }
+        //     if (currentScroll < offset_end) {
+        //         $this.removeClass('hilang');
+        //     } else {
+        //         $this.addClass('hilang');
+        //     }
                 
-            a(window).on('scroll', function () {
-                currentScroll = a(window).scrollTop();
-                $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2;
-                offset       = $thisoffset - $menunav;
+        //     a(window).on('scroll', function () {
+        //         currentScroll = a(window).scrollTop();
+        //         $thisoffset  = $this.offset().top + $this_search.outerHeight() / 2;
+        //         offset       = $thisoffset - $menunav;
 
-                if (currentScroll > offset) {
-                    $this_search.addClass('scrolled').css("top", $menunav);
-                } else {
-                    $this_search.removeClass('scrolled').css("top", 0);
-                }
+        //         if (currentScroll > offset) {
+        //             $this_search.addClass('scrolled').css("top", $menunav);
+        //         } else {
+        //             $this_search.removeClass('scrolled').css("top", 0);
+        //         }
 
-                if (currentScroll < offset_end) {
-                    $this.removeClass('hilang');
-                } else {
-                    $this.addClass('hilang');
-                }
-            });
-        };
+        //         if (currentScroll < offset_end) {
+        //             $this.removeClass('hilang');
+        //         } else {
+        //             $this.addClass('hilang');
+        //         }
+        //     });
+        // };
         a(".dob").datepicker({
             timepicker: false,
         });
