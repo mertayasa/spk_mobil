@@ -152,4 +152,14 @@ class BookingController extends Controller
 
         return response(['code' => 1, 'message' => 'Berhasil menghapus data booking']);
     }
+
+    public function calendar()
+    {
+        
+    }
+
+    public function calendarData()
+    {
+        # code...
+    }
 }

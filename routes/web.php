@@ -49,7 +49,8 @@ Route::group(['prefix' => 'saw', 'as' => 'saw.'], function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
-        Route::get('/user', [DashboardController::class, 'indexUser'])->name('user');
+        Route::get('user', [DashboardController::class, 'indexUser'])->name('user');
+        Route::post('booking-chart', [DashboardController::class, 'getBookingChart'])->name('booking_chart');
     });
     
     Route::group(['prefix' => 'mobil', 'as' => 'mobil.'], function () {
@@ -121,6 +122,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('update/{booking}', [BookingController::class, 'update'])->name('update');
         Route::delete('destroy/{booking}', [BookingController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [BookingController::class, 'datatable'])->name('datatable');
+        Route::get('calendar', [BookingController::class, 'calendar'])->name('calendar');
     });
 
     Route::group(['prefix' => 'saw', 'as' => 'saw.'], function () {

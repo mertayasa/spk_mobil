@@ -73,6 +73,14 @@ class Booking extends Model
         return $new_period;
     }
 
+    public function getBookingDuration()
+    {
+        $tgl_mulai = Carbon::parse($this->attributes['tgl_mulai_sewa']);
+        $tgl_akhir = Carbon::parse($this->attributes['tgl_akhir_sewa']);
+        
+        return $tgl_mulai->diffInDays($tgl_akhir);
+    }
+
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class, 'id_user');
