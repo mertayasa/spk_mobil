@@ -16,7 +16,10 @@
                                 <h2 class="fs-5 fw-bold mb-0">Data Kriteria</h2>
                             </div>
                             <div class="col text-end">
-                                <a href="{{route('kriteria.create')}}" class="btn btn-sm btn-primary">Tambah Kriteria</a>
+                                @if (userRole() == 'admin')
+                                    <a href="{{route('kriteria.create')}}" class="btn btn-sm btn-primary">Tambah Kriteria</a>
+                                @endif
+
                             </div>
                         </div>
                     </div>

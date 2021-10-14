@@ -127,7 +127,7 @@ class UserController extends Controller
                 unset($data['password']);
             }
         
-            $data['level'] = 2;
+            // $data['level'] = 2;
     
             $user->update($data);
         }catch(Exception $e){

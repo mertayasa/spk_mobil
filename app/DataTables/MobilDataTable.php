@@ -22,12 +22,16 @@ class MobilDataTable
             })
 
             ->addColumn('action', function ($mobil) {
-                $deleteUrl = "'" . route('mobil.destroy', $mobil->id) . "', 'mobilDatatable'";
-                return
-                    '<div class="btn-group">' .
-                    '<a href="' . route('mobil.edit', $mobil->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
-                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus"><i class="menu-icon fa fa-trash"></i></a>' .
-                    '</div>';
+                if(userRole() == 'admin'){
+                    $deleteUrl = "'" . route('mobil.destroy', $mobil->id) . "', 'mobilDatatable'";
+                    return
+                        '<div class="btn-group">' .
+                        '<a href="' . route('mobil.edit', $mobil->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
+                        '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus"><i class="menu-icon fa fa-trash"></i></a>' .
+                        '</div>';
+                }
+
+                return '-';
             })->addIndexColumn()->rawColumns(['action', 'thumbnail'])->make(true);
     }
 }
