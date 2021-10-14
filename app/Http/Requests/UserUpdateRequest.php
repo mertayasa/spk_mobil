@@ -30,7 +30,7 @@ class UserUpdateRequest extends FormRequest
             'photo' => ['nullable', 'string'],
             'alamat' => ['required', 'string', 'max:255'],
             'jenis_kelamin' => ['required', 'min:0', 'max:1'],
-            'status_aktif' => ['required', 'min:0', 'max:1']
+            'status_aktif' => ['sometimes', 'required', 'min:0', 'max:1']
         ];
 
         if($this->password != null){

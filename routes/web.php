@@ -108,6 +108,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('create', [UserController::class, 'create'])->name('create');
         Route::post('store', [UserController::class, 'store'])->name('store');
         Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
+        Route::get('profile/{user}', [UserController::class, 'edit'])->name('profile');
         Route::patch('update/{user}', [UserController::class, 'update'])->name('update');
         Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
         Route::get('datatable', [UserController::class, 'datatable'])->name('datatable');
