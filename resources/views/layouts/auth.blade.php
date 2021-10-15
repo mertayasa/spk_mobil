@@ -75,6 +75,9 @@
     <!-- Volt JS -->
     <script src="{{asset('assets/js/volt.js')}}"></script>
 
+    @yield('styleplus')
+    @yield('scriptplus')
+
 </head>
 
 <body>

@@ -24,7 +24,7 @@
                                         </svg>
                                     </span>
                                     <input type="email" name="email" class="form-control"
-                                        placeholder="example@company.com" value="{{ old('email') }}" id="email" autofocus
+                                        placeholder="contoh@email.com" value="{{ old('email') }}" id="email" autofocus
                                         required>
                                 </div>
                                 @error('email')
