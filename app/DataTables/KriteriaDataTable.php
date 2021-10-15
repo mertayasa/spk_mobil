@@ -17,12 +17,16 @@ class KriteriaDataTable
                 return $kriteria->sifat == 0 ? 'Benefit' : 'Cost';
             })
             ->addColumn('action', function ($kriteria) {
-                $deleteUrl = "'" . route('kriteria.destroy', $kriteria->id) . "', 'kriteriaDatatable'";
-                return
-                    '<div class="btn-group">' .
-                    '<a href="' . route('kriteria.edit', $kriteria->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
-                    '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus"><i class="menu-icon fa fa-trash"></i></a>' .
-                    '</div>';
+                if(userRole() == 'admin'){
+                    $deleteUrl = "'" . route('kriteria.destroy', $kriteria->id) . "', 'kriteriaDatatable'";
+                    return
+                        '<div class="btn-group">' .
+                        '<a href="' . route('kriteria.edit', $kriteria->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
+                        '<a href="#" onclick="deleteModel(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus"><i class="menu-icon fa fa-trash"></i></a>' .
+                        '</div>';
+                }
+
+                return '-';
             })->addIndexColumn()->rawColumns(['action', 'thumbnail'])->make(true);
     }
 }

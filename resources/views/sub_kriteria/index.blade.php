@@ -19,7 +19,10 @@
                                 <h2 class="fs-5 fw-bold mb-0">Data Sub Kriteria</h2>
                             </div>
                             <div class="col text-end">
-                                <a href="{{route('sub_kriteria.create')}}" class="btn btn-sm btn-primary">Tambah Sub Kriteria</a>
+                                @if (userRole() == 'admin')
+                                    <a href="{{route('sub_kriteria.create')}}" class="btn btn-sm btn-primary">Tambah Sub Kriteria</a>
+                                @endif
+
                             </div>
                         </div>
                     </div>

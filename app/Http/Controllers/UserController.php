@@ -127,15 +127,19 @@ class UserController extends Controller
                 unset($data['password']);
             }
         
-            $data['level'] = 2;
+            // $data['level'] = 2;
     
             $user->update($data);
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data pengguna');
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah profil pengguna');
         }
 
-        return redirect()->route('user.index')->with('success', 'Berhasil menambahkan data pengguna');
+        if(isset($request->is_profile)){
+            return redirect()->back()->with('success', 'Berhasil mengubah profil pengguna');
+        }
+
+        return redirect()->route('user.index')->with('success', 'Berhasil mengubah profil pengguna');
     }
 
     /**

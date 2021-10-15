@@ -1,3 +1,7 @@
+@if (Request::is('*profile*'))
+    {!! Form::hidden('is_profile', true, []) !!}
+@endif
+
 <div class="row">
     <div class="col-12 col-md-6 pb-3 pb-md-0">
         {!! Form::label('photoUser', 'Photo', ['class' => 'mb-1']) !!}
@@ -18,7 +22,7 @@
 <div class="row mt-3">
     <div class="col-12 col-md-6">
         {!! Form::label('telponUser', 'Telpon', ['class' => 'mb-1']) !!}
-        {!! Form::number('telpon', null, ['class' => 'form-control', 'id' => 'telponUser']) !!}
+        {!! Form::text('telpon', null, ['class' => 'form-control', 'id' => 'telponUser']) !!}
     </div>
     <div class="col-12 col-md-6">
         {!! Form::label('noKtpUser', 'No KTP', ['class' => 'mb-1']) !!}
@@ -34,7 +38,7 @@
     @endif
     
     <div class="col-12 col-md-6">
-        {!! Form::label('kelaminUser', 'Jenis Kelamain', ['class' => 'mb-1']) !!}
+        {!! Form::label('kelaminUser', 'Jenis Kelamain', ['class' => 'mb-3']) !!}
         {!! Form::select('jenis_kelamin', [0 => 'Laki-Laki', 1 => 'Perempuan'], null, ['class' => 'form-control', 'id' => 'kelaminUser']) !!}
     </div>
 
@@ -79,7 +83,7 @@
                 maxFileSize: '500KB'
                 }
             @else
-                imageUrl = "{{ asset('images/uploaded/' . $user->photo) }}"
+                imageUrl = "{{ asset('images/' . $user->photo) }}"
                 options = {
                     acceptedFileTypes: ['image/png', 'image/jng', 'image/jpeg'],
                     maxFileSize: '500KB',

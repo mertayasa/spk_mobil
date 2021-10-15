@@ -16,7 +16,10 @@
                                 <h2 class="fs-5 fw-bold mb-0">Data Mobil</h2>
                             </div>
                             <div class="col text-end">
-                                <a href="{{route('mobil.create')}}" class="btn btn-sm btn-primary">Tambah Mobil</a>
+                                @if (userRole() == 'admin')
+                                    <a href="{{route('mobil.create')}}" class="btn btn-sm btn-primary">Tambah Mobil</a>
+                                @endif
+
                             </div>
                         </div>
                     </div>

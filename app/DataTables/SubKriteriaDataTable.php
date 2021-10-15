@@ -39,12 +39,16 @@ class SubKriteriaDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function ($query) {
-                $deleteUrl = "'" . route('sub_kriteria.destroy', $query) . "', 'subKriteriaDatatable', 'sub kriteria'";
-                return
-                    '<div class="btn-group">' .
-                    '<a href="' . route('sub_kriteria.edit', $query) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
-                    '<a href="#" onclick="deleteModelSub(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus"><i class="menu-icon fa fa-trash"></i></a>' .
-                    '</div>';
+                if(userRole() == 'admin'){
+                    $deleteUrl = "'" . route('sub_kriteria.destroy', $query) . "', 'subKriteriaDatatable', 'sub kriteria'";
+                    return
+                        '<div class="btn-group">' .
+                        '<a href="' . route('sub_kriteria.edit', $query) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
+                        '<a href="#" onclick="deleteModelSub(' . $deleteUrl . ',)" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus"><i class="menu-icon fa fa-trash"></i></a>' .
+                        '</div>';
+                }
+
+                return '-';
             });
             // ->addIndexColumn();
             // ->addColumn('action', 'sub_kriteria.datatables_action');
