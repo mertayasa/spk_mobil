@@ -213,7 +213,6 @@
             let date = new Date();
             let date_off = new Date($(".datepickr").val());
                 date_off.setDate(date_off.getDate() + 1);
-            console.log(date_off);
             $(".datepickr").datepicker({
                 dateFormat: "dd-MM-yyyy",
                 timepicker: false,

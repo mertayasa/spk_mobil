@@ -200,7 +200,36 @@ class BookingcarController extends Controller
 
     public function uploadBukti(Booking $booking)
     {
-        dd($booking);
+        if (Auth::user()->id != $booking->user->id) {
+            return redirect()->route('bookingcar.cart')->with('error', 'Jangan macem-macem bro');
+        }
+
+        if (!empty($booking->bukti_trf)) {
+            return redirect()->route('bookingcar.cart')->with('info', 'Bukti Pembayaran Anda sudah kami terima');
+        }
+
+        return view('frontend.bukti-bayar', compact('booking'));
     }
 
+    public function kirimBukti(Request $request, Booking $booking)
+    {
+        try{
+            $data = $request->all();
+
+            $base_64_foto = json_decode($request['bukti_trf'], true);
+            $upload_image = uploadFile($base_64_foto, 'bukti_trf');
+            if ($upload_image === 0) {
+                return redirect()->back()->withInput()->with('error', 'Mohon mengisi bukti pembayaran !');
+            }
+    
+            $data['bukti_trf'] = $upload_image;
+
+            $booking->update($data);
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal mengirim bukti pembayaran');
+        }
+
+        return redirect()->route('bookingcar.cart')->with('success', 'Berhasil mengirim bukti pembayaran');
+    }
 }
