@@ -17,6 +17,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" href="assets/images/favicon.ico"> --}}
     <link rel="shortcut icon" href="{{ asset('assets/frontend/assets/images/favicon.jpg') }}">
+    @yield('style-app')
     <!-- Bootstrap -->
     <link href="{{ asset('assets/frontend/assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Fontawesome -->
@@ -39,6 +40,7 @@
     <!-- Custom Responsive -->
     <link href="{{ asset('assets/frontend/assets/css/responsive.css') }}" rel="stylesheet">
     @yield('styleplus')
+    @yield('js-app')
     <!-- CSS for IE -->
     <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="css/ie.css" /><![endif]-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
