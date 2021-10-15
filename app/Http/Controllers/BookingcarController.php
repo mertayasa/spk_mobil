@@ -204,6 +204,10 @@ class BookingcarController extends Controller
             return redirect()->route('bookingcar.cart')->with('error', 'Jangan macem-macem bro');
         }
 
+        if (!empty($booking->bukti_trf)) {
+            return redirect()->route('bookingcar.cart')->with('info', 'Bukti Pembayaran Anda sudah kami terima');
+        }
+
         return view('frontend.bukti-bayar', compact('booking'));
     }
 
