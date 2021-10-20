@@ -5,11 +5,14 @@
             <th></th>
             <th>Mobil</th>
             <th>Penyewa</th>
+            <th>Dengan Sopir</th>
             <th>Sopir</th>
+            <th>Pengambilan</th>
             <th>Harga</th>
             <th>Status</th>
             <th>Tanggal Sewa</th>
             <th>Tanggal Kembali</th>
+            <th>Alamat Pengambilan</th>
             <th>Deskripsi</th>
             <th>Aksi</th>
         </tr>
@@ -51,8 +54,16 @@
                         name: 'user.nama',
                     },
                     {
+                        data: 'dengan_sopir',
+                        name: 'dengan_sopir',
+                    },
+                    {
                         data: 'nama_sopir',
                         name: 'nama_sopir',
+                    },
+                    {
+                        data: 'pengambilan',
+                        name: 'pengambilan',
                     },
                     {
                         data: 'harga',
@@ -69,6 +80,10 @@
                     {
                         data: 'tgl_akhir_sewa',
                         name: 'tgl_akhir_sewa'
+                    },
+                    {
+                        data: 'alamat_antar',
+                        name: 'alamat_antar'
                     },
                     {
                         data: 'deskripsi',
@@ -92,7 +107,7 @@
                     },
                     {
                         responsivePriority: 1,
-                        targets: 10
+                        targets: 13
                     },
                 ],
                 language: {

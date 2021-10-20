@@ -30,11 +30,19 @@ class BookingFactory extends Factory
 
         $booking_start_date = Carbon::now()->addDay($rand_number);
         $booking_end_date = Carbon::now()->addDay($rand_number+rand(1,5));
+        $dengan_sopir = ['ya', 'tidak'];
+        $pengambilan = ['diantar', 'ambil_sendiri'];
+        $dengan_sopir_val = $dengan_sopir[rand(0, 1)];
+        $pengambilan_val = $pengambilan[rand(0, 1)];
+
         return [
             'id_mobil' => Mobil::inRandomOrder()->first()->id,
             'id_user' => User::where('level', 2)->inRandomOrder()->first()->id,
-            'id_sopir' => Sopir::inRandomOrder()->first()->id,
+            'id_sopir' => $dengan_sopir_val == 'ya' ? Sopir::inRandomOrder()->first()->id : null,
             'deskripsi' => $this->faker->text,
+            'dengan_sopir' => $dengan_sopir_val,
+            'pengambilan' => $pengambilan_val,
+            'alamat_antar' => $pengambilan_val == 'diantar' ? $this->faker->address() : null,
             'harga' => $this->faker->numberBetween(150000, 500000),
             'tgl_mulai_sewa' => $booking_start_date,
             'tgl_akhir_sewa' => $booking_end_date,

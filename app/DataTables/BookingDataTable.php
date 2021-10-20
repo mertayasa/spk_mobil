@@ -24,11 +24,27 @@ class BookingDataTable
                 return getStatusBooking($booking->status);
             })
 
+            ->editColumn('dengan_sopir', function($booking){
+                if($booking->dengan_sopir == 'ya'){
+                    return '<span class="text-success">Dengan Sopir</span>';
+                }
+
+                return '<span class="text-danger">Tanpa Sopir</span>';
+            })
+
+            ->editColumn('pengambilan', function($booking){
+                if($booking->pengambilan == 'diantar'){
+                    return '<span class="text-success">Diantar</span>';
+                }
+
+                return '<span class="text-danger">Ambil Sendiri</span>';
+            })
+
             ->addColumn('nama_sopir', function($booking){
                 if($booking->sopir){
                     return $booking->sopir->nama;
                 }else{
-                    return '<span class="text-danger">Tanpa Sopir</span>';
+                    return '<span class="text-danger">Sopir Belum Ditentukan</span>';
                 }
             })
 
@@ -52,6 +68,6 @@ class BookingDataTable
                 }
 
                 return '-';
-            })->addIndexColumn()->rawColumns(['action', 'nama_sopir', 'status'])->make(true);
+            })->addIndexColumn()->rawColumns(['action', 'nama_sopir', 'status', 'dengan_sopir', 'pengambilan'])->make(true);
     }
 }
