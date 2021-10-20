@@ -111,7 +111,8 @@ class SubKriteriaController extends Controller
     public function update(Request $request, SubKriteria $subKriteria)
     {
         $data = $request->all();
-
+        unset($data['id_kriteria']);
+        // dd($data);
         try{
             $subKriteria->update($data);
         }catch(Exception $e){

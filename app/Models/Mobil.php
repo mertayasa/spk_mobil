@@ -108,6 +108,6 @@ class Mobil extends Model
 
         $detail = $hasil_saw[0]->detailSaw()->where('id_kriteria', $id_kriteria)->get();
 
-        return $detail[0]->id_sub_kriteria;
+        return $detail[0]->id_sub_kriteria ?? 0;
     }
 }
