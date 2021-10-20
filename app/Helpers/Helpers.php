@@ -139,3 +139,35 @@ function getStatusBooking($status = null)
         return $booking_status[$status];
     }
 }
+
+function getStatusSopir($status_sopir)
+{
+    if($status_sopir == 'ya'){
+        return '<span class="text-success">Dengan Sopir</span>';
+    }
+
+    return '<span class="text-danger">Tanpa Sopir</span>';
+}
+
+function getStatusPengambilan($status_pengambilan)
+{
+    if($status_pengambilan == 'diantar'){
+        return '<span class="text-success">Diantar</span>';
+    }
+
+    return '<span class="text-danger">Ambil Sendiri</span>';
+
+}
+
+function getNamaSopir($status_sopir, $booking)
+{
+    if($status_sopir == 'ya'){
+        if($booking->sopir){
+            return $booking->sopir->nama;
+        }
+
+        return '<span class="text-danger">Sopir Belum Ditentukan</span>';
+    }else{
+        return '-';
+    }
+}

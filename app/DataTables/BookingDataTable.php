@@ -25,27 +25,15 @@ class BookingDataTable
             })
 
             ->editColumn('dengan_sopir', function($booking){
-                if($booking->dengan_sopir == 'ya'){
-                    return '<span class="text-success">Dengan Sopir</span>';
-                }
-
-                return '<span class="text-danger">Tanpa Sopir</span>';
+                return getStatusSopir($booking->dengan_sopir);
             })
 
             ->editColumn('pengambilan', function($booking){
-                if($booking->pengambilan == 'diantar'){
-                    return '<span class="text-success">Diantar</span>';
-                }
-
-                return '<span class="text-danger">Ambil Sendiri</span>';
+                return getStatusPengambilan($booking->pengambilan);
             })
 
             ->addColumn('nama_sopir', function($booking){
-                if($booking->sopir){
-                    return $booking->sopir->nama;
-                }else{
-                    return '<span class="text-danger">Sopir Belum Ditentukan</span>';
-                }
+                return getNamaSopir($booking->dengan_sopir, $booking);
             })
 
             ->editColumn('tgl_mulai_sewa', function($booking){
