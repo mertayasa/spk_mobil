@@ -75,7 +75,9 @@ class BookingcarController extends Controller
 
             empty($data['id_cek_sopir']) ? $data['id_cekSopir'] = 'tidak' : $data['id_cekSopir'] = 'ya';
 
-            // dd($data['id_cekSopir']);
+            empty($data['id_cek_diantar']) ? $data['id_cekDiantar'] = 'ambil_sendiri' : $data['id_cekDiantar'] = 'diantar';
+            empty($data['id_cek_diantar']) ? $data['id_alamat_diantar'] = null : '';
+            // dd($data['id_alamat_diantar']);
             
             $mobil = Mobil::find($data['id_mobil']);
 
@@ -94,7 +96,9 @@ class BookingcarController extends Controller
                 'harga' => $data['id_harga'],
                 'tgl_mulai_sewa' => $data['id_dt_from_format'],
                 'tgl_akhir_sewa' => $data['id_dt_to_format'],
-                'dengan_sopir' => $data['id_cekSopir']
+                'dengan_sopir' => $data['id_cekSopir'],
+                'pengambilan' => $data['id_cekDiantar'],
+                'alamat_antar' => $data['id_alamat_diantar']
             ]);
 
         } catch(Exception $e) {

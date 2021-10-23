@@ -56,7 +56,7 @@
                                                         <hr>
                                                     </div>
                                                     <div class="col-12">
-                                                        <h5 class="text-custom-black">Informasi Booking</h5>
+                                                        <h5 class="text-custom-black">Cek Ketersediaan</h5>
                                                     </div>
                                                     
                                                     <div class="col-md-6">
@@ -102,13 +102,40 @@
                                                 
                                                     <div class="col-12">
                                                         <div class="row d-none" id="noteAndSubmit">
-                                                            <div class="col-auto">
-                                                                <div class="can-toggle">
+                                                            <div class="col-12">
+                                                                <hr>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <h5 class="text-custom-black">Mengisi Data Booking</h5>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group can-toggle">
                                                                     {!! Form::label('sopirkah', 'Sewa Sopir ?', ['class' => 'mb-1']) !!}
                                                                     {!! Form::checkbox('id_cek_sopir', null, null, ['id' => 'sopirkah']) !!}
                                                                     <label for="sopirkah">
                                                                         <div class="can-toggle__switch" data-checked="Ya" data-unchecked="Tidak"></div>
                                                                     </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-12">
+                                                                <div class="form-group can-toggle">
+                                                                    {!! Form::label('diantarkah', 'Mobil diantar ke tempat tujuan ?', ['class' => 'mb-1']) !!}
+                                                                    {!! Form::checkbox('id_cek_diantar', null, null, ['id' => 'diantarkah']) !!}
+                                                                    <label for="diantarkah">
+                                                                        <div class="can-toggle__switch" data-checked="Ya" data-unchecked="Tidak"></div>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-8 col-12">
+                                                                <div class="form-group d-none">
+                                                                    {!! Form::label('idAlamatDiantar', 'Alamat Mobil diantar :', ['class' => 'mb-1']) !!}
+                                                                    {!! Form::textarea('id_alamat_diantar', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_alamat_diantar') ? ' is-invalid' : null), 'id' => 'idAlamatDiantar', 'rows' => '3' ]) !!}
+                                                                    <div class="valid-feedback">Good</div>
+                                                                    @error('id_alamat_diantar')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @else
+                                                                        <div class="invalid-feedback">Mohon isi alamat jika ingin mobil diantar</div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                             <div class="col-12">
@@ -166,12 +193,12 @@
 @push('scriptplus')
     <script>
 
-        const btnCheckSopir = document.getElementById('sopirkah');
+        const btnCheckDiantar = document.getElementById('diantarkah')
+        const formAlamatDiantar = document.getElementById('idAlamatDiantar')
 
-        // btnCheckSopir.addEventListener('click', (e) => {
-        //     e.preventDefault()
-        //     btnCheckSopir.checked == true ? 
-        // })
+        btnCheckDiantar.addEventListener('click', (e) => {
+            btnCheckDiantar.checked == true ? formAlamatDiantar.parentNode.classList.remove('d-none') : formAlamatDiantar.parentNode.classList.add('d-none');
+        })
 
 
         const btnAvailablity = document.getElementById('btnAvailablity')
@@ -202,6 +229,9 @@
                 showAlert('Terjadi kesalahan mohon muat ulang halaman', 'error')
                 return
             }
+
+            
+            btnCheckDiantar.checked == true ? formAlamatDiantar.parentNode.classList.remove('d-none') : formAlamatDiantar.parentNode.classList.add('d-none');
 
             toogleAvailableStatus('hide')
             

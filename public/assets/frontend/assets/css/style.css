@@ -2767,6 +2767,7 @@ label.custom-checkbox .checkmark:after {
 
 .can-toggle {
     position: relative;
+    display: inline-block;
 }
 
 .can-toggle *,
