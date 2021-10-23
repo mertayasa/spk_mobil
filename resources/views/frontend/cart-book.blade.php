@@ -93,7 +93,11 @@
                                                                 </div>
                                                                 <div class="col-12 col-md-2 col-lg-2">
                                                                     <div class="cart_meta_prices price">
-                                                                        <div class="cart_price {{$item->sopir == null ? 'text-danger' : ''}}">{{ $item->sopir->nama ?? 'Belum Diverifikasi' }}</div>
+                                                                        @if ($item->dengan_sopir == 'tidak')
+                                                                            <div class="cart_price text-info">(Tanpa Sopir)</div>
+                                                                        @else
+                                                                            <div class="cart_price {{$item->sopir == null ? 'text-danger' : 'font-weight-bold'}}">{{ $item->sopir->nama ?? 'Belum Diverifikasi' }}</div>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-md-2 col-lg-2 text-center">

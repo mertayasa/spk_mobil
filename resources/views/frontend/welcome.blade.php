@@ -221,7 +221,11 @@
                     // date ? $(".datepickr").removeClass('is-invalid').addClass('is-valid') : $(".datepickr").removeClass('is-valid').addClass('is-invalid');
                     var selectedDate = new Date(date);
                     var endDate = new Date(selectedDate.getTime() + (3600 * 1000 * 24));
-                    $(".datepickr-off").datepicker({'minDate': endDate});
+                    if (new Date($(".datepickr-off").val()) < new Date($(".datepickr-on").val())) {
+                        $(".datepickr-off").datepicker({'minDate': endDate}).val('');
+                    } else {
+                        $(".datepickr-off").datepicker({'minDate': endDate});
+                    }
                 }
             });
             $(".datepickr-off").datepicker({

@@ -28,6 +28,7 @@ class Booking extends Model
         'bukti_trf',
         'tgl_mulai_sewa',
         'tgl_akhir_sewa',
+        'dengan_sopir'
     ];
 
     /**

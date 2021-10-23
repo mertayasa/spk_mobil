@@ -63,7 +63,7 @@
                                                         <div class="form-group">
                                                             {!! Form::label('idDateFrom', 'Tanggal Sewa', ['class' => 'fs-14 text-custom-black fw-500']) !!}
                                                             <div class="input-group group-form">
-                                                                {!! Form::text('id_date_from', null, ['class' => 'form-control form-control-custom datepickr' . ($errors->has('id_date_from') ? ' is-invalid' : null), 'id' => 'idDateFrom', 'placeholder' => 'mm/dd/yyyy', 'readonly' => 'readonly', 'required' => 'required']) !!}
+                                                                {!! Form::text('id_date_from', null, ['class' => 'form-control form-control-custom datepickr-on' . ($errors->has('id_date_from') ? ' is-invalid' : null), 'id' => 'idDateFrom', 'placeholder' => 'mm/dd/yyyy', 'readonly' => 'readonly', 'required' => 'required']) !!}
                                                                 <div class="valid-feedback">Good</div>
                                                                 @error('id_date_from')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -71,6 +71,7 @@
                                                                     <div class="invalid-feedback">Mohon pilih tgl mulai sewa</div>
                                                                 @enderror
                                                                 <span class="input-group-append"> <i class="far fa-calendar"></i> </span>
+                                                                <div id="reset-date-off" class="d-none">abaikan</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -99,28 +100,33 @@
                                                         <button type="button" data-url="{{url('bookingcar/check-available')}}" class="btn-submit py-2 mb-3" id="btnAvailablity">Cek Ketersediaan</button>
                                                     </div>
                                                 
-                                                    <div class="d-none" id="noteAndSubmit">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                {!! Form::label('idCatatan', 'Catatan', ['class' => 'mb-1']) !!}
-                                                                {!! Form::textarea('id_catatan', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_catatan') ? ' is-invalid' : null), 'id' => 'idCatatan', 'rows' => '5' ]) !!}
-                                                                <div class="valid-feedback">Good</div>
-                                                                @error('id_catatan')
-                                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                                @else
-                                                                    <div class="invalid-feedback">Mohon isi catatan untuk kami</div>
-                                                                @enderror
+                                                    <div class="col-12">
+                                                        <div class="row d-none" id="noteAndSubmit">
+                                                            <div class="col-auto">
+                                                                <div class="can-toggle">
+                                                                    {!! Form::label('sopirkah', 'Sewa Sopir ?', ['class' => 'mb-1']) !!}
+                                                                    {!! Form::checkbox('id_cek_sopir', null, null, ['id' => 'sopirkah']) !!}
+                                                                    <label for="sopirkah">
+                                                                        <div class="can-toggle__switch" data-checked="Ya" data-unchecked="Tidak"></div>
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <hr class="mt-0">
-                                                            {{-- <div class="form-group">
-                                                                <label class="custom-checkbox">
-                                                                    <input type="checkbox" name="#">
-                                                                    <span class="checkmark"></span> By continuing, you agree to the <a href="#" class="text-custom-blue">Terms and Conditions.</a> 
-                                                                </label>
-                                                            </div> --}}
-                                                            <button type="submit" class="btn-first btn-submit">Booking Sekarang</button>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    {!! Form::label('idCatatan', 'Catatan', ['class' => 'mb-1']) !!}
+                                                                    {!! Form::textarea('id_catatan', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_catatan') ? ' is-invalid' : null), 'id' => 'idCatatan', 'rows' => '5' ]) !!}
+                                                                    <div class="valid-feedback">Good</div>
+                                                                    @error('id_catatan')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                    @else
+                                                                        <div class="invalid-feedback">Mohon isi catatan untuk kami</div>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <hr class="mt-0">
+                                                                <button type="submit" class="btn-first btn-submit">Booking Sekarang</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -159,6 +165,13 @@
 
 @push('scriptplus')
     <script>
+
+        const btnCheckSopir = document.getElementById('sopirkah');
+
+        // btnCheckSopir.addEventListener('click', (e) => {
+        //     e.preventDefault()
+        //     btnCheckSopir.checked == true ? 
+        // })
 
 
         const btnAvailablity = document.getElementById('btnAvailablity')
@@ -301,7 +314,7 @@
             
             let date = new Date();
             let date_off = new Date(Date.now() + (3600 * 1000 * 24));
-            $(".datepickr").datepicker({
+            $(".datepickr-on").datepicker({
                 dateFormat: "dd-MM-yyyy",
                 timepicker: false,
                 minDate: date,
@@ -309,7 +322,11 @@
                     // date ? $(".datepickr").removeClass('is-invalid').addClass('is-valid') : $(".datepickr").removeClass('is-valid').addClass('is-invalid');
                     var selectedDate = new Date(date);
                     var endDate = new Date(selectedDate.getTime() + (3600 * 1000 * 24));
-                    $(".datepickr-off").datepicker({'minDate': endDate});
+                    if (new Date($(".datepickr-off").val()) < new Date($(".datepickr-on").val())) {
+                        $(".datepickr-off").datepicker({'minDate': endDate}).val('');
+                    } else {
+                        $(".datepickr-off").datepicker({'minDate': endDate});
+                    }
                 }
             });
             $(".datepickr-off").datepicker({
@@ -320,7 +337,7 @@
                     // date ? $(".datepickr-off").removeClass('is-invalid').addClass('is-valid') : $(".datepickr-off").removeClass('is-valid').addClass('is-invalid');
                 },
                 onClose: function () {
-                    var dt1 = $(".datepickr").datepicker('getDate');
+                    var dt1 = $(".datepickr-on").datepicker('getDate');
                     var dt2 = $(".datepickr-off").datepicker('getDate');
                     //check to prevent a user from entering a date below date of dt1
                     if (dt2 <= dt1) {

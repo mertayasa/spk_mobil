@@ -73,6 +73,9 @@ class BookingcarController extends Controller
             $data['id_dt_from_format'] = $mulai_sewa->format('Y-m-d');
             $data['id_dt_to_format'] = $akhir_sewa->format('Y-m-d');
 
+            empty($data['id_cek_sopir']) ? $data['id_cekSopir'] = 'tidak' : $data['id_cekSopir'] = 'ya';
+
+            // dd($data['id_cekSopir']);
             
             $mobil = Mobil::find($data['id_mobil']);
 
@@ -90,7 +93,8 @@ class BookingcarController extends Controller
                 'deskripsi' => $data['id_catatan'],
                 'harga' => $data['id_harga'],
                 'tgl_mulai_sewa' => $data['id_dt_from_format'],
-                'tgl_akhir_sewa' => $data['id_dt_to_format']
+                'tgl_akhir_sewa' => $data['id_dt_to_format'],
+                'dengan_sopir' => $data['id_cekSopir']
             ]);
 
         } catch(Exception $e) {
