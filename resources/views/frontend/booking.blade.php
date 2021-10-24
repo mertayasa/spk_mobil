@@ -152,7 +152,7 @@
                                                             </div>
                                                             <div class="col-12">
                                                                 <hr class="mt-0">
-                                                                <button type="submit" class="btn-first btn-submit">Booking Sekarang</button>
+                                                                <button type="submit" id="btnBooking" class="btn-first btn-submit">Booking Sekarang</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -169,10 +169,14 @@
                                                     <h5 class="text-custom-black">Butuh Bantuan</h5>
                                                     <p class="text-light-dark">Tim kami siap membantu anda 24/7</p>
                                                     <ul class="custom">
-                                                    <li class="text-custom-blue fs-18"> <i class="fas fa-phone-alt"></i> <a href="#"
-                                                        class="text-light-dark">(+347) 123 456 7890</a> </li>
-                                                    <li class="text-custom-blue fs-18"> <i class="fas fa-envelope"></i> <a href="#"
-                                                        class="text-light-dark fs-14">help@domain.com</a> </li>
+                                                        <li class="text-custom-blue fs-18"> 
+                                                            <i class="fas fa-phone-alt"></i> 
+                                                            <a href="#" class="text-light-dark">(+347) 123 456 7890</a> 
+                                                        </li>
+                                                        <li class="text-custom-blue fs-18"> 
+                                                            <i class="fas fa-envelope"></i> 
+                                                            <a href="#" class="text-light-dark fs-14">help@domain.com</a> 
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 </div>
@@ -302,34 +306,23 @@
 
             function checkValidate() {
                 let wrong = 0;
+                if ($('#diantarkah').is(':checked')) {
+                    if (!$('#idAlamatDiantar').val()) {
+                        $('#idAlamatDiantar').removeClass('is-valid').addClass('is-invalid');
+                        wrong = wrong + 1;
+                    } else {
+                        $('#idAlamatDiantar').removeClass('is-invalid').addClass('is-valid');
+                    }
+                } else {
+                    $('#idAlamatDiantar').removeClass('is-invalid is-valid')
+                }
 
-                // if (!$('.datepickr').val()) {
-                //     $('.datepickr').removeClass('is-valid').addClass('is-invalid');
-                //     wrong = wrong + 1;
-                // } else {
-                //     $('.datepickr').removeClass('is-invalid').addClass('is-valid');
-                // }
-
-                // if (!$('.datepickr-off').val()) {
-                //     $('.datepickr-off').removeClass('is-valid').addClass('is-invalid');
-                //     wrong = wrong + 1;
-                // } else {
-                //     $('.datepickr-off').removeClass('is-invalid').addClass('is-valid');
-                // }
-
-                // if (!$('.select-sopir').val()) {
-                //     $('.select-sopir').removeClass('is-valid').addClass('is-invalid');
-                //     wrong = wrong + 1;
-                // } else {
-                //     $('.select-sopir').removeClass('is-invalid').addClass('is-valid');
-                // }
-
-                // if (!$('.catatan-book').val()) {
-                //     $('.catatan-book').removeClass('is-valid').addClass('is-invalid');
-                //     wrong = wrong + 1;
-                // } else {
-                //     $('.catatan-book').removeClass('is-invalid').addClass('is-valid');
-                // }
+                if (!$('#idCatatan').val()) {
+                    $('#idCatatan').removeClass('is-valid').addClass('is-invalid');
+                    wrong = wrong + 1;
+                } else {
+                    $('#idCatatan').removeClass('is-invalid').addClass('is-valid');
+                }
 
                 if (wrong > 0) {
                     wrong = 0;

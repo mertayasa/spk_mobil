@@ -40,7 +40,7 @@
                                                 @csrf
                                                 <div class="cart_header">
                                                     <div class="row align-items-center">
-                                                        <div class="col-4">Produk</div>
+                                                        <div class="col-4 text-center">Produk</div>
                                                         <div class="col-2">Sopir</div>
                                                         <div class="col-2 text-center">Tgl Sewa</div>
                                                         <div class="col-2 text-center">Total</div>
@@ -62,7 +62,12 @@
                                                                                 <a href="#">{{ $item->mobil->nama }}</a>
                                                                             </h5>
                                                                             <div class="mini_cart_meta">
-                                                                                <p class="cart_meta_variant"><strong>{{ $item->mobil->jenisMobil->jenis_mobil }}</strong></p></div>
+                                                                                <p class="cart_meta_variant"><strong>{{ $item->mobil->jenisMobil->jenis_mobil }}</strong></p>
+                                                                                <p class="cart_meta_variant"><strong>{{ $item->pengambilan }}</strong></p>
+                                                                                @if ($item->pengambilan == 'diantar')
+                                                                                    <p class="cart_meta_variant"><strong>{{ $item->alamat_antar }}</strong></p>
+                                                                                @endif
+                                                                            </div>
                                                                             <div class="mini_cart_tool mt__10">
                                                                                 {{-- <form action="{{ route('bookingcar.edit') }}">
                                                                                     @csrf
