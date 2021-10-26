@@ -59,6 +59,8 @@ class BookingcarController extends Controller
 
     public function store(BookingcarStoreRequest $request)
     {
+        return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
+
 
         if ($request->session()->has('id_mobil')) {
             $request->session()->forget('id_mobil');
@@ -82,12 +84,19 @@ class BookingcarController extends Controller
             }
 
             $data['id_harga'] = $mobil->harga * $durasi_sewa;
+            $data['dengan_sopir'] = $data['dengan_sopir'] == 'on' ? 'ya' : 'tidak';
+            $data['pengambilan'] = $data['pengambilan'] == 'on' ? 'diantar' : 'ambil_sendiri';
+            $data['id_alamat'] = $data['pengambilan'] == 'diantar' ? $data['id_alamat'] : '';
+
+            // dd($data);
 
             Booking::create([
                 'id_mobil' => $data['id_mobil'],
                 'id_user' => $data['id_user'],
-                // 'id_sopir' => $data['id_driver'],
                 'deskripsi' => $data['id_catatan'],
+                'dengan_sopir' => $data['dengan_sopir'],
+                'pengambilan' => $data['pengambilan'],
+                'alamat_antar' => $data['id_alamat'],
                 'harga' => $data['id_harga'],
                 'tgl_mulai_sewa' => $data['id_dt_from_format'],
                 'tgl_akhir_sewa' => $data['id_dt_to_format']
