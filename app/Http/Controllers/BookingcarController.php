@@ -36,8 +36,6 @@ class BookingcarController extends Controller
 
             $navSopir = Sopir::pluck('nama', 'id');
 
-            return view('frontend.booking', compact('navSopir', 'mobil'));
-
         } else if ($request->old()) {
 
             $mobilreq = $request->old('id_mobil');
@@ -48,13 +46,11 @@ class BookingcarController extends Controller
 
             $navSopir = Sopir::pluck('nama', 'id');
 
-            return view('frontend.booking', compact('navSopir', 'mobil'));
-
         } else {
-
             return redirect()->route('homepage', '#search')->with('info', 'Silahkan pilih dulu mobil yang ingin disewa');
-
         }
+
+        return view('frontend.booking', compact('navSopir', 'mobil'));
     }
 
     public function store(BookingcarStoreRequest $request)
@@ -202,10 +198,14 @@ class BookingcarController extends Controller
         try{
             $parsed_start = Carbon::parse($start_date)->format('d-m-Y');
             $parsed_end = Carbon::parse($end_date)->format('d-m-Y');
+
+            $durasi_sewa = Carbon::parse($start_date)->diffInDays(Carbon::parse($end_date));
+            $harga_sewa = $mobil->harga * $durasi_sewa;
+
             $check_available = searchAvailablity($parsed_start, $parsed_end, [$mobil]);
     
             if(count($check_available) > 0){
-                return response(['code' => 1, 'message' => "Mobil tersedia untuk tanggal ${start_date} sampai ${end_date}"]);
+                return response(['code' => 1, 'message' => "Mobil tersedia untuk tanggal ${start_date} sampai ${end_date}", 'harga_sewa' => formatPrice($harga_sewa)]);
             }else{
                 return response(['code' => 0, 'message' => "Mobil tidak tersedia untuk tanggal ${start_date} sampai ${end_date}"]);
             }

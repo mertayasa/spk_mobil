@@ -231,7 +231,7 @@
             }
 
             
-            btnCheckDiantar.checked == true ? formAlamatDiantar.parentNode.classList.remove('d-none') : formAlamatDiantar.parentNode.classList.add('d-none');
+            // btnCheckDiantar.checked == true ? formAlamatDiantar.parentNode.classList.remove('d-none') : formAlamatDiantar.parentNode.classList.add('d-none');
 
             toogleAvailableStatus('hide')
             
@@ -250,6 +250,7 @@
                 console.log(response)
                 if(response.code == 1){
                     toogleAvailableStatus('show', response.message)
+                    document.querySelectorAll('.price-tag')[0].innerHTML = response.harga_sewa
                     noteAndSubmit.classList.remove('d-none')
                     return ''
                 }
