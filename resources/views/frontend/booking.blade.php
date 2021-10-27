@@ -92,68 +92,56 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-12 col-md-6">
+                                                    <div class="col-12">
                                                         @if (session()->has('date_unavailable'))
                                                             <span class="mb-2 d-inline-block text-danger" id="errorDateSession">{{session()->get('date_unavailable')}}</span>
                                                         @endif
                                                         <span class="mb-2 d-none" id="availableStatus"></span>
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
                                                         <button type="button" data-url="{{url('bookingcar/check-available')}}" class="btn-submit py-2 mb-3" id="btnAvailablity">Cek Ketersediaan</button>
                                                     </div>
                                                 
-                                                    <div class="col-12">
-                                                        <div class="row d-none" id="noteAndSubmit">
-                                                            <div class="col-12">
-                                                                <hr>
+                                                    <div class="d-none col-12 px-0" id="noteAndSubmit">
+                                                        <div class="col-12">
+                                                            <hr class="mt-0">
+                                                            <div class="form-group">
+                                                                <label class="custom-checkbox">
+                                                                    <input type="checkbox" name="dengan_sopir">
+                                                                    <span class="checkmark"></span> Apakah anda memerlukan sopir ?
+                                                                </label>
                                                             </div>
-                                                            <div class="col-12">
-                                                                <h5 class="text-custom-black">Mengisi Data Booking</h5>
+                                                            <div class="form-group">
+                                                                <label class="custom-checkbox">
+                                                                    <input type="checkbox" name="pengambilan" id="checkDelivery">
+                                                                    <span class="checkmark"></span> Apakah mobil perlu diantar ke lokasi anda ?
+                                                                </label>
                                                             </div>
-                                                            <div class="col-12">
-                                                                <div class="form-group can-toggle">
-                                                                    {!! Form::label('sopirkah', 'Sewa Sopir ?', ['class' => 'mb-1']) !!}
-                                                                    {!! Form::checkbox('id_cek_sopir', null, null, ['id' => 'sopirkah']) !!}
-                                                                    <label for="sopirkah">
-                                                                        <div class="can-toggle__switch" data-checked="Ya" data-unchecked="Tidak"></div>
-                                                                    </label>
-                                                                </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="form-group d-none" id="alamatBox">
+                                                                {!! Form::label('idAlamat', 'Alamat Pengantaran', ['class' => 'mb-1']) !!}
+                                                                {!! Form::textarea('id_alamat', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_alamat') ? ' is-invalid' : null), 'id' => 'idAlamat', 'rows' => '5' ]) !!}
+                                                                <div class="valid-feedback">Good</div>
+                                                                @error('id_alamat')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @else
+                                                                    <div class="invalid-feedback">Mohon isi alamat pengantaran</div>
+                                                                @enderror
                                                             </div>
-                                                            <div class="col-lg-4 col-12">
-                                                                <div class="form-group can-toggle">
-                                                                    {!! Form::label('diantarkah', 'Mobil diantar ke tempat tujuan ?', ['class' => 'mb-1']) !!}
-                                                                    {!! Form::checkbox('id_cek_diantar', null, null, ['id' => 'diantarkah']) !!}
-                                                                    <label for="diantarkah">
-                                                                        <div class="can-toggle__switch" data-checked="Ya" data-unchecked="Tidak"></div>
-                                                                    </label>
-                                                                </div>
+
+                                                            <div class="form-group">
+                                                                {!! Form::label('idCatatan', 'Catatan', ['class' => 'mb-1']) !!}
+                                                                {!! Form::textarea('id_catatan', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_catatan') ? ' is-invalid' : null), 'id' => 'idCatatan', 'rows' => '5' ]) !!}
+                                                                <div class="valid-feedback">Good</div>
+                                                                @error('id_catatan')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @else
+                                                                    <div class="invalid-feedback">Mohon isi catatan untuk kami</div>
+                                                                @enderror
                                                             </div>
-                                                            <div class="col-lg-8 col-12">
-                                                                <div class="form-group d-none">
-                                                                    {!! Form::label('idAlamatDiantar', 'Alamat Mobil diantar :', ['class' => 'mb-1']) !!}
-                                                                    {!! Form::textarea('id_alamat_diantar', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_alamat_diantar') ? ' is-invalid' : null), 'id' => 'idAlamatDiantar', 'rows' => '3' ]) !!}
-                                                                    <div class="valid-feedback">Good</div>
-                                                                    @error('id_alamat_diantar')
-                                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                                    @else
-                                                                        <div class="invalid-feedback">Mohon isi alamat jika ingin mobil diantar</div>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    {!! Form::label('idCatatan', 'Catatan', ['class' => 'mb-1']) !!}
-                                                                    {!! Form::textarea('id_catatan', null, ['class' => 'form-control form-control-custom catatan-book' . ($errors->has('id_catatan') ? ' is-invalid' : null), 'id' => 'idCatatan', 'rows' => '5' ]) !!}
-                                                                    <div class="valid-feedback">Good</div>
-                                                                    @error('id_catatan')
-                                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                                    @else
-                                                                        <div class="invalid-feedback">Mohon isi catatan untuk kami</div>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <hr class="mt-0">
-                                                                <button type="submit" id="btnBooking" class="btn-first btn-submit">Booking Sekarang</button>
-                                                            </div>
+                                                            <button type="submit" class="btn-first btn-submit">Booking Sekarang</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -197,15 +185,23 @@
 @push('scriptplus')
     <script>
 
-        const btnCheckDiantar = document.getElementById('diantarkah')
-        const formAlamatDiantar = document.getElementById('idAlamatDiantar')
+        // function showAlamatBox(element){
+        //     console.log(element)
+        // }
 
-        btnCheckDiantar.addEventListener('click', (e) => {
-            btnCheckDiantar.checked == true ? formAlamatDiantar.parentNode.classList.remove('d-none') : formAlamatDiantar.parentNode.classList.add('d-none');
-        })
-
-
+        const checkDelivery = document.getElementById('checkDelivery')
         const btnAvailablity = document.getElementById('btnAvailablity')
+
+        checkDelivery.addEventListener('click', function(event){
+            // console.log(event.target)
+            const alamatBox = document.getElementById('alamatBox')
+
+            if (event.target.checked == true){
+                alamatBox.classList.remove('d-none')
+            }else{
+                alamatBox.classList.add('d-none')
+            }
+        })
 
         btnAvailablity.addEventListener('click', (event) => {
             event.preventDefault()
@@ -235,7 +231,7 @@
             }
 
             
-            btnCheckDiantar.checked == true ? formAlamatDiantar.parentNode.classList.remove('d-none') : formAlamatDiantar.parentNode.classList.add('d-none');
+            // btnCheckDiantar.checked == true ? formAlamatDiantar.parentNode.classList.remove('d-none') : formAlamatDiantar.parentNode.classList.add('d-none');
 
             toogleAvailableStatus('hide')
             
@@ -254,6 +250,7 @@
                 console.log(response)
                 if(response.code == 1){
                     toogleAvailableStatus('show', response.message)
+                    document.querySelectorAll('.price-tag')[0].innerHTML = response.harga_sewa
                     noteAndSubmit.classList.remove('d-none')
                     return ''
                 }

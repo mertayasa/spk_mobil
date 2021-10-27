@@ -13,7 +13,7 @@
             </h4>
             <span class="price from"><small>Mulai</small></span>
             @if (!isset($hide_description))
-                <span class="mt-3 js-harga harga-{{ $index }} price">{{ formatPrice($item->harga) }}</span>
+                <span class="mt-3 js-harga harga-{{ $index }} price price-tag">{{ formatPrice($item->harga) }}</span>
                 <p>{{ $item->jenisMobil->jenis_mobil }}</p>
                 <p>{{ $item->deskripsi }}</p>
                 <div class="action">
@@ -24,7 +24,7 @@
                     </form>
                 </div>
             @else
-                <span class="mt-3 js-harga harga-{{ $index ?? '0' }} price">{{ formatPrice($item->harga) }}</span>
+                <span class="mt-3 js-harga harga-{{ $index ?? '0' }} price price-tag">{{ formatPrice($item->harga) }}</span>
             @endif
         </div>
     @else

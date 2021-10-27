@@ -36,8 +36,6 @@ class BookingcarController extends Controller
 
             $navSopir = Sopir::pluck('nama', 'id');
 
-            return view('frontend.booking', compact('navSopir', 'mobil'));
-
         } else if ($request->old()) {
 
             $mobilreq = $request->old('id_mobil');
@@ -48,17 +46,17 @@ class BookingcarController extends Controller
 
             $navSopir = Sopir::pluck('nama', 'id');
 
-            return view('frontend.booking', compact('navSopir', 'mobil'));
-
         } else {
-
             return redirect()->route('homepage', '#search')->with('info', 'Silahkan pilih dulu mobil yang ingin disewa');
-
         }
+
+        return view('frontend.booking', compact('navSopir', 'mobil'));
     }
 
     public function store(BookingcarStoreRequest $request)
     {
+        return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
+
 
         if ($request->session()->has('id_mobil')) {
             $request->session()->forget('id_mobil');
@@ -87,12 +85,19 @@ class BookingcarController extends Controller
             }
 
             $data['id_harga'] = $mobil->harga * $durasi_sewa;
+            $data['dengan_sopir'] = $data['dengan_sopir'] == 'on' ? 'ya' : 'tidak';
+            $data['pengambilan'] = $data['pengambilan'] == 'on' ? 'diantar' : 'ambil_sendiri';
+            $data['id_alamat'] = $data['pengambilan'] == 'diantar' ? $data['id_alamat'] : '';
+
+            // dd($data);
 
             Booking::create([
                 'id_mobil' => $data['id_mobil'],
                 'id_user' => $data['id_user'],
-                // 'id_sopir' => $data['id_driver'],
                 'deskripsi' => $data['id_catatan'],
+                'dengan_sopir' => $data['dengan_sopir'],
+                'pengambilan' => $data['pengambilan'],
+                'alamat_antar' => $data['id_alamat'],
                 'harga' => $data['id_harga'],
                 'tgl_mulai_sewa' => $data['id_dt_from_format'],
                 'tgl_akhir_sewa' => $data['id_dt_to_format'],
@@ -192,10 +197,14 @@ class BookingcarController extends Controller
         try{
             $parsed_start = Carbon::parse($start_date)->format('d-m-Y');
             $parsed_end = Carbon::parse($end_date)->format('d-m-Y');
+
+            $durasi_sewa = Carbon::parse($start_date)->diffInDays(Carbon::parse($end_date));
+            $harga_sewa = $mobil->harga * $durasi_sewa;
+
             $check_available = searchAvailablity($parsed_start, $parsed_end, [$mobil]);
     
             if(count($check_available) > 0){
-                return response(['code' => 1, 'message' => "Mobil tersedia untuk tanggal ${start_date} sampai ${end_date}"]);
+                return response(['code' => 1, 'message' => "Mobil tersedia untuk tanggal ${start_date} sampai ${end_date}", 'harga_sewa' => formatPrice($harga_sewa)]);
             }else{
                 return response(['code' => 0, 'message' => "Mobil tidak tersedia untuk tanggal ${start_date} sampai ${end_date}"]);
             }
