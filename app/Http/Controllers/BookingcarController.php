@@ -176,8 +176,7 @@ class BookingcarController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login')->with('info', 'Silahkan login terlebih dahulu');
         }
-        $booking = Booking::with('user', 'mobil', 'sopir')
-                    ->where([
+        $booking = Booking::where([
                         ['id_user', '=', Auth::user()->id],
                         ['status', '=', 'booking_baru']
                     ])->latest()->get();
@@ -239,5 +238,15 @@ class BookingcarController extends Controller
         }
 
         return redirect()->route('bookingcar.cart')->with('success', 'Berhasil mengirim bukti pembayaran');
+    }
+
+    public function getBooking(Request $request, $data)
+    {
+        if ($request->ajax()) {
+            $bookingnya = Booking::where('id', $data)->first();
+            return response()->json($bookingnya);
+        }
+
+        return redirect()->back();
     }
 }
