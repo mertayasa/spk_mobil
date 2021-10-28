@@ -193,6 +193,18 @@
                 return data;
             }
 
+            function tanggal(tgl) {
+                if (tgl == null) {
+                    return 'undefined';
+                }
+                const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                let tglnya = new Date(tgl);
+                let thn = tglnya.getFullYear();
+                let bln = monthNames[tglnya.getMonth()];
+                let hr = tglnya.getDate();
+                return hr+' '+bln+' '+thn;
+            }
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -206,16 +218,41 @@
                 let url = "{{ route('databooking', ':id') }}";
                 url = url.replace(':id', data);
                 $.get(url, function (data) {
-                    console.log(data);
-                    $('#judul-modal').html("Detail Mobil");
+                    $('#judul-modal').html("Detail Booking");
+                    if (data.bukti_trf != null) {
+                        $(modal).find('.bukti-bayar').removeClass('d-none');
+                        $(modal).find('.upload-bayar').addClass('d-none');
+                        $(modal).find('.upload-bayar').removeClass('d-none').attr('href', '#');
+                    } else {
+                        $(modal).find('.bukti-bayar').addClass('d-none');
+                        $(modal).find('.upload-bayar').removeClass('d-none').attr("href", "{{ route('bookingcar.cekIndex') }}/upload-bukti/"+data.id);
+
+                    }
                     $(modal).find('#thumbnail-mobil').attr("src", "{{ asset('images') }}/" + data.mobil.thumbnail);
-                    $(modal).modal('show');
-                    $(modal).find('#nama-mobil').html(data.mobil.nama);
-                    $(modal).find('#jenis-mobil').html(data.mobil.jenis_mobil.jenis_mobil);
-                    $(modal).find('#harga-mobil').html(formatRupiah(data.mobil.harga));
+                    $(modal).find('#nama-mobil').html(data.mobil.nama+'<small class="text-secondary ml-4">('+data.mobil.jenis_mobil.jenis_mobil+')</small>');
                     $(modal).find('#capacity-mobil').html(data.mobil.jumlah_kursi);
+                    $(modal).find('#harga-mobil').html(formatRupiah(data.mobil.harga));
                     $(modal).find('#description-mobil').html(data.mobil.deskripsi);
+                    $(modal).find('#tanggal-mulai-sewa').html(tanggal(data.tgl_mulai_sewa));
+                    $(modal).find('#tanggal-akhir-sewa').html(tanggal(data.tgl_akhir_sewa));
+                    console.log(data);
+                    if (data.dengan_sopir == 'ya') {
+                        if (data.sopir == null) {
+                            $(modal).find('#sopir').html('Menunggu Verifikasi');
+                        } else {
+                            $(modal).find('#sopir').html('Menggunakan Sopir dengan Nama : <b>' + data.sopir.nama + '</b>');
+                        }
+                    } else if (data.dengan_sopir == 'tidak') {
+                        $(modal).find('#sopir').html('Tidak Menyewa Jasa Sopir');
+                    }
+                    if (data.pengambilan === 'diantar') {
+                        $(modal).find('#diantar').html('Mobil Diantar ke Alamat : <b>' + data.alamat_antar + '</b>');
+                    } else if (data.pengambilan === 'ambil_sendiri') {
+                        $(modal).find('#diantar').html('Modil diambil ke Kantor');
+                    }
+                    $(modal).find('#total-bayar').html(formatRupiah(data.harga));
                     // console.log(data);
+                    $(modal).modal('show');
                 });
             })
 
