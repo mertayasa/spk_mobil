@@ -33,7 +33,11 @@ class BookingDataTable
             })
 
             ->addColumn('nama_sopir', function($booking){
-                return getNamaSopir($booking->dengan_sopir, $booking);
+                if($booking->dengan_sopir == 'ya'){
+                    return getNamaSopir($booking->dengan_sopir, $booking);
+                }else{
+                    return '<span class="text-danger">* Tanpa Sopir *</span>';
+                }
             })
 
             ->editColumn('tgl_mulai_sewa', function($booking){
@@ -42,6 +46,14 @@ class BookingDataTable
 
             ->editColumn('tgl_akhir_sewa', function($booking){
                 return indonesianDate($booking->tgl_akhir_sewa);
+            })
+
+            ->editColumn('alamat_antar', function($booking){
+                if($booking->pengambilan == 'diantar'){
+                    return $booking->alamat_antar;
+                }else{
+                    return '<span class="text-danger">* Penyewa ambil sendiri ke kantor *</span>';
+                }
             })
 
             ->addColumn('action', function ($booking) {
@@ -56,6 +68,6 @@ class BookingDataTable
                 }
 
                 return '-';
-            })->addIndexColumn()->rawColumns(['action', 'nama_sopir', 'status', 'dengan_sopir', 'pengambilan'])->make(true);
+            })->addIndexColumn()->rawColumns(['action', 'nama_sopir', 'status', 'dengan_sopir', 'pengambilan', 'nama_sopir', 'alamat_antar'])->make(true);
     }
 }
