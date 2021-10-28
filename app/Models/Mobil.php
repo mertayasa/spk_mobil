@@ -34,6 +34,9 @@ class Mobil extends Model
         'id_jenis_mobil' => 'integer',
     ];
 
+    protected $with = [
+        'jenisMobil'
+    ];
 
     public function jenisMobil()
     {
