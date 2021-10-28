@@ -116,10 +116,10 @@ function searchAvailablity($start_date, $end_date, $mobil)
         array_push($range, $date_range->format('Y-m-d'));
     }
 
-    // return $range;
-
+    
     $available_mobil = [];
-
+    // dd($mobil[0]->isAvailable($range));
+    
     foreach($mobil as $mob){
         if($mob->isAvailable($range) == 'available'){
             array_push($available_mobil, $mob);
@@ -146,7 +146,7 @@ function getStatusSopir($status_sopir)
         return '<span class="text-success">Dengan Sopir</span>';
     }
 
-    return '<span class="text-danger">Tanpa Sopir</span>';
+    return '<span class="text-danger">* Tanpa Sopir *</span>';
 }
 
 function getStatusPengambilan($status_pengambilan)
@@ -155,7 +155,7 @@ function getStatusPengambilan($status_pengambilan)
         return '<span class="text-success">Diantar</span>';
     }
 
-    return '<span class="text-danger">Ambil Sendiri</span>';
+    return '<span class="text-danger">* Ambil Sendiri *</span>';
 
 }
 

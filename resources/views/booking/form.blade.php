@@ -10,15 +10,15 @@
 </div>
 <div class="row mt-3">
     <div class="col-12 col-md-6">
-        {!! Form::label('idSopir', 'Sopir', ['class' => 'mb-1']) !!}
-        {!! Form::select('id_sopir', ['' => 'Pilih Sopir'] + $sopir->toArray(), null, ['class' => 'form-control', 'id' => 'idSopir']) !!}
+        {!! Form::label('denganSopir', 'Dengan Sopir', ['class' => 'mb-1']) !!}
+        {!! Form::select('status', ['ya', 'tidak'], null, ['class' => 'form-control', 'id' => 'denganSopir']) !!}
     </div>
     <div class="col-12 col-md-6">
-        {!! Form::label('bookingStatus', 'Status', ['class' => 'mb-1 text-danger']) !!}
-        {!! Form::select('status', getStatusBooking(), Request::is('*edit*') ? $booking->status : null, ['class' => 'form-control is-invalid', 'id' => 'bookingStatus']) !!}
+        {!! Form::label('idSopir', 'Sopir (Kosongkan Bila Tanpa Sopir)', ['class' => 'mb-1']) !!}
+        {!! Form::select('id_sopir', ['' => 'Pilih Sopir'] + $sopir->toArray(), null, ['class' => 'form-control', 'id' => 'idSopir']) !!}
     </div>
 </div>
-<hr>
+
 <div class="row mt-3">
     <div class="col-12 col-md-6">
         {!! Form::label('tglMulaiSewa', 'Tanggal Sewa', ['class' => 'mb-1']) !!}
@@ -29,6 +29,26 @@
         {!! Form::date('tgl_akhir_sewa', null, ['class' => 'form-control', 'id' => 'tglAkhirSewa']) !!}
     </div>
 </div>
+
+<div class="row mt-3">
+    <div class="col-12 col-md-6">
+        {!! Form::label('pengambilan', 'Pengambilan', ['class' => 'mb-1']) !!}
+        {!! Form::select('pengambilan', ['ambil_sendiri' => 'Ambil Sendiri', 'diantar' => 'Diantar'], null, ['class' => 'form-control', 'id' => 'pengambilan']) !!}
+    </div>
+    <div class="col-12 col-md-6">
+        {!! Form::label('alamatAntar', 'Alamat Antar (Kosongkan apabila ambil sendiri)', ['class' => 'mb-1']) !!}
+        {!! Form::text('alamat_antar', null, ['class' => 'form-control', 'id' => 'alamatAntar']) !!}
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-12 col-md-6">
+        {!! Form::label('bookingStatus', 'Status', ['class' => 'mb-1 text-danger']) !!}
+        {!! Form::select('status', getStatusBooking(), Request::is('*edit*') ? $booking->status : null, ['class' => 'form-control is-invalid', 'id' => 'bookingStatus']) !!}
+    </div>
+</div>
+
+{{-- <hr> --}}
 
 <div class="row mt-3">
     <div class="col-12 col-md-6">

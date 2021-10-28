@@ -78,13 +78,24 @@ class BookingController extends Controller
         try{
             $data = $request->all();
 
-            $base_64_foto = json_decode($request['bukti_trf'], true);
-            $upload_image = uploadFile($base_64_foto, 'bukti_trf');
-            if ($upload_image === 0) {
-                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            $parsed_start = Carbon::parse($data['tgl_mulai_sewa'])->format('d-m-Y');
+            $parsed_end = Carbon::parse($data['tgl_akhir_sewa'])->format('d-m-Y');
+            $check_available = searchAvailablity($parsed_start, $parsed_end, Mobil::where('id', $data['id_mobil'])->get());
+            
+            
+            if(count($check_available) < 1){
+                return redirect()->back()->withInput()->with('error', "Mobil tidak tersedia untuk tanggal ". $data['tgl_mulai_sewa'] ." sampai ". $data['tgl_akhir_sewa']);
             }
-    
-            $data['bukti_trf'] = $upload_image;
+
+            if($request['bukti_trf']){
+                $base_64_foto = json_decode($request['bukti_trf'], true);
+                $upload_image = uploadFile($base_64_foto, 'bukti_trf');
+                if ($upload_image === 0) {
+                    return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+                }
+        
+                $data['bukti_trf'] = $upload_image;
+            }
 
             $mulai_sewa = Carbon::parse($data['tgl_mulai_sewa']);
             $akhir_sewa = Carbon::parse($data['tgl_akhir_sewa']);
@@ -95,6 +106,7 @@ class BookingController extends Controller
 
             Booking::create($data);
         }catch(Exception $e){
+            // dd($e->getMessage());
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
         }
@@ -112,13 +124,26 @@ class BookingController extends Controller
         try{
             $data = $request->all();
 
-            $base_64_foto = json_decode($request['bukti_trf'], true);
-            $upload_image = uploadFile($base_64_foto, 'bukti_trf');
-            if ($upload_image === 0) {
-                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            if($data['tgl_mulai_sewa'] != $booking->tgl_mulai_sewa || $data['tgl_akhir_sewa'] != $booking->tgl_akhir_sewa){
+                $parsed_start = Carbon::parse($data['tgl_mulai_sewa'])->format('d-m-Y');
+                $parsed_end = Carbon::parse($data['tgl_akhir_sewa'])->format('d-m-Y');
+                $check_available = searchAvailablity($parsed_start, $parsed_end, Mobil::where('id', $data['id_mobil'])->get());
+                
+                
+                if(count($check_available) < 1){
+                    return redirect()->back()->withInput()->with('error', "Mobil tidak tersedia untuk tanggal ". $data['tgl_mulai_sewa'] ." sampai ". $data['tgl_akhir_sewa']);
+                }
+            }
+
+            if($request['bukti_trf']){
+                $base_64_foto = json_decode($request['bukti_trf'], true);
+                $upload_image = uploadFile($base_64_foto, 'bukti_trf');
+                if ($upload_image === 0) {
+                    return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+                }
+                $data['bukti_trf'] = $upload_image;
             }
     
-            $data['bukti_trf'] = $upload_image;
             
             $mulai_sewa = Carbon::parse($data['tgl_mulai_sewa']);
             $akhir_sewa = Carbon::parse($data['tgl_akhir_sewa']);
@@ -129,6 +154,8 @@ class BookingController extends Controller
 
             $booking->update($data);
         }catch(Exception $e){
+            // dd($e->getMessage());
+
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Gagal mengubah data booking');
         }
