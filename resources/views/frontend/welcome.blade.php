@@ -165,29 +165,30 @@
     <!-- Start About Us -->
     <section id="tentang-section" class="section-padding about-us">
         <div class="container">
-        <div class="row">
-            <div class="col-xl-7 col-lg-6 pl-2 pr-2 align-self-center text-left">
-            <div class="about-left-side mb-md-80">
-                <div class="section-header style-left">
-                <div class="section-heading">
-                    <h3 class="text-custom-black">Tentang Kami</h3>
+        <div class="row align-items-stretch">
+            <div class="col-xl-7 col-lg-6 pl-2 pr-2 text-left">
+                <div class="about-left-side mb-md-80">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-header style-left">
+                                <div class="section-heading">
+                                    <h3 class="text-custom-black">Tentang Kami</h3>
+                                </div>
+                            </div>
+                            <p class="pt-2">Perusahaan Rama Jaya Rental merupakan salah satu perusahaan yang bergerak di bidang jasa penyewaan mobil dengan pasar adalah wisatawan domestik maupun mancanegara. Perusahaan ini berdiri pada tahun 2003 yang didirikan oleh Bapak I Wayan Gede Wijaya, S. H. yang berlokasi di Jl. By Pass Prof Dr Ida Bagus Mantra, Ketewel, Gianyar Bali.</p>
+                        </div>
+                        <div class="col-12 align-self-end">
+                            <a href="#" data-id="#search-engine" class="btn-first btn-submit go-id">Sewa Mobil Sekarang</a>
+                        </div>
+                    </div>
                 </div>
-                </div>
-                <p class="pt-2">Perusahaan Rama Jaya Rental merupakan salah satu perusahaan yang bergerak di bidang jasa penyewaan mobil dengan pasar adalah wisatawan domestik maupun mancanegara. Perusahaan ini berdiri pada tahun 2003 yang didirikan oleh Bapak I Wayan Gede Wijaya, S. H. yang berlokasi di Jl. By Pass Prof Dr Ida Bagus Mantra, Ketewel, Gianyar Bali.</p>
-                <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                been the industry's standard dummy text.</p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text. Lorem Ipsum has been the industry's standard dummy text. Lorem Ipsum is
-                simply dummy.</p>
-                <a href="#" data-id="#search-engine" class="btn-first btn-submit go-id">Reserve Now</a>
-            </div>
             </div>
             <div class="col-xl-5 col-lg-6">
-            <div class="about-right-side full-height">
-                <div class="about-img full-height"> 
-                    <img src="{{ asset('assets/frontend/assets/images/about.jpg') }}" class="img-fluid image-fit" alt="img"> 
+                <div class="about-right-side full-height">
+                    <div class="about-img full-height"> 
+                        <img src="{{ asset('assets/frontend/assets/images/about.jpg') }}" class="img-fluid image-fit" alt="img"> 
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
         </div>

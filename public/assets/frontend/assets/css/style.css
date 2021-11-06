@@ -1176,12 +1176,21 @@ label.custom-checkbox .checkmark:after {
 }
 
 .header .navigation-wrapper nav>.main-navigation .logo>a {
+    display: flex;
+    align-items: center;
     height: 100%;
 }
 
 .header .navigation-wrapper nav>.main-navigation .logo img {
     height: 100%;
     background: #fffbff
+}
+
+.header .navigation-wrapper nav>.main-navigation .logo span {
+    font-family: 'Merriweather', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 10px;
 }
 
 .header .navigation-wrapper nav>.main-navigation .main-menu>ul {
@@ -2762,7 +2771,12 @@ label.custom-checkbox .checkmark:after {
 }
 
 .about-left-side {
-    max-width: 560px
+    max-width: 560px;
+    height: 100%;
+}
+
+.about-left-side .row {
+    height: 100%;
 }
 
 .banner-tabs .tab-content {

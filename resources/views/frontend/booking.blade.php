@@ -159,11 +159,11 @@
                                                     <ul class="custom">
                                                         <li class="text-custom-blue fs-18"> 
                                                             <i class="fas fa-phone-alt"></i> 
-                                                            <a href="#" class="text-light-dark">(+347) 123 456 7890</a> 
+                                                            <a href="tel:08123964771" class="text-light-dark">08123964771</a> 
                                                         </li>
                                                         <li class="text-custom-blue fs-18"> 
                                                             <i class="fas fa-envelope"></i> 
-                                                            <a href="#" class="text-light-dark fs-14">help@domain.com</a> 
+                                                            <a href="mailto:ramajayarent98@gmail.com" target="_blank" class="text-light-dark fs-14">ramajayarent98@gmail.com </a> 
                                                         </li>
                                                     </ul>
                                                 </div>
