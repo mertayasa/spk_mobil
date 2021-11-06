@@ -57,10 +57,14 @@
     fill: #0095ff;
 }
 
-.template-cart .mini_cart_meta p {
+.template-cart .mini_cart_meta p:first-child {
     font-size: 13px;
     color: #999;
     margin: 0 0 7px;
+}
+
+.template-cart .mini_cart_meta p:last-child {
+    margin-bottom: 0;
 }
 
 .template-cart .cart_header {

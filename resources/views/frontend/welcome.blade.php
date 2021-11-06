@@ -173,10 +173,7 @@
                     <h3 class="text-custom-black">Tentang Kami</h3>
                 </div>
                 </div>
-                <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                been the industry's standard dummy text.
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text.</p>
+                <p class="pt-2">Perusahaan Rama Jaya Rental merupakan salah satu perusahaan yang bergerak di bidang jasa penyewaan mobil dengan pasar adalah wisatawan domestik maupun mancanegara. Perusahaan ini berdiri pada tahun 2003 yang didirikan oleh Bapak I Wayan Gede Wijaya, S. H. yang berlokasi di Jl. By Pass Prof Dr Ida Bagus Mantra, Ketewel, Gianyar Bali.</p>
                 <p class="pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                 been the industry's standard dummy text.</p>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the

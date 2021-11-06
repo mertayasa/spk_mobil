@@ -1146,7 +1146,7 @@ label.custom-checkbox .checkmark:after {
 }
 
 .header .navigation-wrapper {
-    background-color: #fff;
+    background-color: #f7f7f7;
     position: absolute;
     z-index: 5;
     left: 0;
@@ -1161,20 +1161,26 @@ label.custom-checkbox .checkmark:after {
     left: 0;
     right: 0;
     z-index: 999;
-    background: #fff;
+    background: #f7f7f7;
     animation-duration: 1s;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     animation-fill-mode: both
 }
 
 .header .navigation-wrapper nav>.main-navigation .logo {
-    width: 185px;
+    /* width: 185px; */
+    width: auto;
     height: 100%;
     position: absolute;
     top: 0
 }
 
+.header .navigation-wrapper nav>.main-navigation .logo>a {
+    height: 100%;
+}
+
 .header .navigation-wrapper nav>.main-navigation .logo img {
+    height: 100%;
     background: #fffbff
 }
 
@@ -1972,6 +1978,14 @@ label.custom-checkbox .checkmark:after {
     list-style: none;
     color: #fff;
     padding: 6px 0
+}
+
+.footer .footer-box .main li a {
+    color: #fff;
+}
+
+.footer .footer-box .main li a:hover {
+    color: #f00;
 }
 
 .btn-submit {
@@ -2982,4 +2996,8 @@ label.custom-checkbox .checkmark:after {
 
 .can-toggle.can-toggle--size-small label .can-toggle__switch:hover:after {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.mini_cart_body h5 {
+    margin-bottom: 0;
 }

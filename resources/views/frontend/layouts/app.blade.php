@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="keywords" content="#">
     <meta name="description" content="#">
-    <title>Rental Mobil | @yield('title-menu')</title>
+    <title>Rama Jaya Rental | @yield('title-menu')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -103,8 +103,9 @@
                             <div class="main-navigation">
                                 <div class="logo d-flex align-items-center">
                                     <a href="#" data-id="#home-slider" class="go-to-id">
-                                        <img src="{{ asset('assets/frontend/assets/images/logo.png') }}"
+                                        <img src="{{ asset('assets/frontend/assets/images/logo.jpeg') }}"
                                             class="img-fluid" alt="logo">
+                                        <span>Rama Jaya Rental</span>
                                     </a>
                                 </div>
                                 <div class="main-menu">
@@ -158,25 +159,18 @@
     <footer class="section-padding footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-8 col-md-6 col-12">
                     <div class="footer-box mb-md-40">
-                        <h4 class="text-custom-white fw-600">About Us</h4>
-                        <p class="text-custom-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor
-                            incididunt.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt.Lorem
-                            ipsum dolor sit amet...
-                        </p>
-
+                        <h4 class="text-custom-white fw-600">Tentang Kami</h4>
+                        <p class="text-custom-white">Perusahaan Rama Jaya Rental merupakan salah satu perusahaan yang bergerak di bidang jasa penyewaan mobil dengan pasar adalah wisatawan domestik maupun mancanegara. Perusahaan ini berdiri pada tahun 2003 yang didirikan oleh Bapak I Wayan Gede Wijaya, S. H. yang berlokasi di Jl. By Pass Prof Dr Ida Bagus Mantra, Ketewel, Gianyar Bali.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-12">
                     <div class="footer-box mb-md-40">
-                        <h4 class="text-custom-white fw-600">About Us</h4>
+                        <h4 class="text-custom-white fw-600">Kontak Kami</h4>
                         <ul class="m-0 p-0 main">
-                            <li>1-567-124-44227</li>
-                            <li>182 main street pert habour 8007</li>
-                            <li>Mon-sat 8:00-18:00 Sunday Closed</li>
+                            <li><a href="mailto:ramajayarent98@gmail.com" target="_blank">ramajayarent98@gmail.com</a></li>
+                            <li><a href="tel:08123964771">08123964771</li>
                         </ul>
                         <ul class="custom-flex socials">
                             {{-- <li><a href="#" class="text-custom-white fs-14"><i class="fab fa-facebook-f"></i></a></li>
