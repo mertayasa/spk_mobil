@@ -6,6 +6,7 @@ use App\Models\DetailSaw;
 use App\Models\HasilSaw;
 use App\Models\Kriteria;
 use App\Models\Mobil;
+use App\Models\SubKriteria;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -69,7 +70,7 @@ class SAWController extends Controller
             }
         }
 
-        // dd($array_data);
+        // dd($array_kriteria);
 
 
         $normalisasi = [];
@@ -132,6 +133,7 @@ class SAWController extends Controller
             array_push($nilai_akhir,['id_mobil' => $key, 'nilai_akhir' => round(array_sum($prefer), 2)]);
         }
 
+
         // Eloquent::unguard();
 
 		//disable foreign key check for this connection before running seeders
@@ -148,10 +150,9 @@ class SAWController extends Controller
         $id_hasil_saw = [];
 
         foreach($nilai_akhir as $akhir){
-            $nilai_akhir = HasilSaw::create($akhir);
-
-            array_push($id_hasil_saw, $nilai_akhir->id);
-        }
+            $akhir = HasilSaw::create($akhir);
+            array_push($id_hasil_saw, $akhir->id);
+        }        
 
         $detail_temp = [];
 
@@ -160,7 +161,7 @@ class SAWController extends Controller
             
             foreach($data as $key_krite => $asd){
                 if(str_contains($key_krite, 'kriteria')){
-                    array_push($array_kriteria, ['id_kriteria' => str_replace('kriteria', '', $key_krite), 'id_sub_kriteria' => $asd, 'id_hasil_saw' => $id_hasil_saw[$key]]);
+                    array_push($array_kriteria, ['id_kriteria' => str_replace('kriteria', '', $key_krite), 'id_sub_kriteria' => SubKriteria::where('id_kriteria', str_replace('kriteria', '', $key_krite))->where('skor', $asd)->first()->id , 'id_hasil_saw' => $id_hasil_saw[$key]]);
                 }
             }
 
@@ -174,8 +175,6 @@ class SAWController extends Controller
         }
 
         return redirect()->route('saw.index')->with('success', 'Berhasil meng-update data perhitungan SAW');
-
-        // dd($detail_temp);
     }
 
     public function sawFrontend(Request $request)
