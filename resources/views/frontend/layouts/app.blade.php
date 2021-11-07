@@ -104,7 +104,7 @@
                                 <div class="logo d-flex align-items-center">
                                     <a href="#" data-id="#home-slider" class="go-to-id">
                                         <img src="{{ asset('assets/frontend/assets/images/logo.jpeg') }}"
-                                            class="img-fluid" alt="logo">
+                                            class="img-fluid py-2" alt="logo">
                                         <span>Rama Jaya Rental</span>
                                     </a>
                                 </div>
