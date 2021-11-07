@@ -21,9 +21,6 @@ class SubKriteriaController extends Controller
     public function index(SubKriteriaDataTable $subKriteriaDataTable)
     {
         $is_same = $this->checkSubKriteriaLength();
-        // dd($is_same);
-
-        // SubKriteria::all()->dd();
         
         return $subKriteriaDataTable->render('sub_kriteria.index', compact('is_same'));
     }
@@ -90,13 +87,15 @@ class SubKriteriaController extends Controller
             $asd = [];
             foreach($new_sub as $sub){
                 if(!in_array(null, $sub, true)){
-                    SubKriteria::create($sub);
+                    DB::transaction(function () use($sub) {
+                        SubKriteria::create($sub);
+                    }, 5);
                 }
             }
             
         }catch(Exception $e){
             Log::info($e->getMessage());
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data sub kriteria');
         }
 
