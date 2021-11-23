@@ -57,7 +57,7 @@
                 imageUrl = "{{ asset('images/' . $mobil->thumbnail) }}"
                 options = {
                     acceptedFileTypes: ['image/png', 'image/jng', 'image/jpeg'],
-                    maxFileSize: '500KB',
+                    maxFileSize: '2048KB',
                     files: [{
                         source: imageUrl,
                         options:{

@@ -30,9 +30,7 @@
 
 <div class="btn-perhitungan p-3">
     {{-- <a href="{{route('saw.index')}}" class="btn btn-danger">Kembali</a> --}}
-    @if (userRole() == 'admin')
         <button type="submit" class="btn btn-primary">Update Perhitungan</button>
-    @endif
 </div>
 
 {!! Form::close() !!}

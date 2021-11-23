@@ -186,7 +186,7 @@
             <div class="col-xl-5 col-lg-6">
                 <div class="about-right-side full-height">
                     <div class="about-img full-height"> 
-                        <img src="{{ asset('assets/frontend/assets/images/about.jpg') }}" class="img-fluid image-fit" alt="img"> 
+                        <img src="{{ asset('images/default/default.jpeg') }}" class="img-fluid image-fit" alt="img"> 
                     </div>
                 </div>
             </div>

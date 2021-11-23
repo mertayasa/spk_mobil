@@ -5,11 +5,11 @@
             <th></th>
             <th>Mobil</th>
             <th>Penyewa</th>
+            <th>Status</th>
             <th>Dengan Sopir</th>
             <th>Sopir</th>
             <th>Pengambilan</th>
             <th>Harga</th>
-            <th>Status</th>
             <th>Tanggal Sewa</th>
             <th>Tanggal Kembali</th>
             <th>Alamat Pengambilan</th>
@@ -54,6 +54,10 @@
                         name: 'user.nama',
                     },
                     {
+                        data: 'status',
+                        name: 'status',
+                    },
+                    {
                         data: 'dengan_sopir',
                         name: 'dengan_sopir',
                     },
@@ -68,10 +72,6 @@
                     {
                         data: 'harga',
                         name: 'harga'
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
                     },
                     {
                         data: 'tgl_mulai_sewa',
