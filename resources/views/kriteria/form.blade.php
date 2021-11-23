@@ -11,6 +11,6 @@
 <div class="row mt-3">
     <div class="col-12 col-md-6 pb-3 pb-md-0">
         {!! Form::label('sifat', 'Sifat ', ['class' => 'mb-1']) !!}
-        {!! Form::select('sifat', [0 => 'Benefit', 1 => 'Cost'], null, ['class' => 'form-control', 'id' => 'sifat']) !!}
+        {!! Form::select('sifat', ['benefit' => 'Benefit', 'cost' => 'Cost'], null, ['class' => 'form-control', 'id' => 'sifat']) !!}
     </div>
 </div>

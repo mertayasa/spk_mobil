@@ -26,7 +26,7 @@ class KriteriaStoreRequest extends FormRequest
         return [
             'kriteria' => ['required', 'string', 'max:50'],
             'bobot' => ['required'],
-            'sifat' => ['required', 'numeric'],
+            'sifat' => ['required'],
         ];
     }
 }

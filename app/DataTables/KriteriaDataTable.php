@@ -14,7 +14,11 @@ class KriteriaDataTable
         // 
         return Datatables::of($kriteria)
             ->editColumn('sifat', function($kriteria){
-                return $kriteria->sifat == 0 ? 'Benefit' : 'Cost';
+                if($kriteria->sifat){
+                    return ucfirst($kriteria->sifat);
+                }
+
+                return '-';
             })
             ->addColumn('action', function ($kriteria) {
                 if(userRole() == 'admin'){
