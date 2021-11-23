@@ -161,7 +161,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-6 col-12">
                     <div class="footer-box mb-md-40">
-                        <h4 class="text-custom-white fw-600">Tentang Kami</h4>
+                        <h4 class="text-custom-white fw-600">Tentang Kami </h4>
                         <p class="text-custom-white">Perusahaan Rama Jaya Rental merupakan salah satu perusahaan yang bergerak di bidang jasa penyewaan mobil dengan pasar adalah wisatawan domestik maupun mancanegara. Perusahaan ini berdiri pada tahun 2003 yang didirikan oleh Bapak I Wayan Gede Wijaya, S. H. yang berlokasi di Jl. By Pass Prof Dr Ida Bagus Mantra, Ketewel, Gianyar Bali.</p>
                     </div>
                 </div>
