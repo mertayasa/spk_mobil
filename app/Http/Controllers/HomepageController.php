@@ -19,14 +19,15 @@ class HomepageController extends Controller
 {
     public function index(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'end_date' => $request->start_date != null ? 'required' : 'nullable',
-            'start_date' => $request->end_date != null ? 'required' : 'nullable'
-        ]);
+        // dd('asdas');
+        // $validator = Validator::make($request->all(), [
+        //     'end_date' => $request->start_date != null ? 'required' : 'nullable',
+        //     'start_date' => $request->end_date != null ? 'required' : 'nullable'
+        // ]);
 
-        if ($validator->fails()) {
-            dd($validator->getMessageBag());
-        }
+        // if ($validator->fails()) {
+        //     dd($validator->getMessageBag());
+        // }
 
         $kriteria_new = [];
 
@@ -76,8 +77,7 @@ class HomepageController extends Controller
         $mobil = $this->paginate($init_filtered_mobil, $_GET['page'] ?? 1, 6, ['path' => route('homepage')]);
 
         $mobil_slider = Mobil::with('jenisMobil')->get();
-        // dd($mobil_slider);
-
+        
         return view('frontend.welcome', compact('mobil', 'mobil_slider', 'countmobil', 'navJumlahKursi', 'navCategory', 'kriteria'));
     }
 

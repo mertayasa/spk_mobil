@@ -22,7 +22,7 @@
                             <a href="{{route('homepage')}}" class="text-custom-white">Home</a>
                         </li>
                         <li class="fw-500">
-                            <a href="{{route('bookingcar.cart')}}" class="text-custom-white">Cart Booking</a>
+                            <a href="{{route('cart.index')}}" class="text-custom-white">Cart Booking</a>
                         </li>
                         <li class="active fw-500">Upload Bukti Pembayaran</li>
                     </ul>

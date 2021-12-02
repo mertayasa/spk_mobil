@@ -49,7 +49,7 @@
 </head>
 
 <body>
-    <div class="loader go"></div>
+    {{-- <div class="loader go"></div> --}}
     <!-- Header -->
     <!-- Start Topbar -->
     <header class="header">
@@ -131,7 +131,7 @@
                                                 class="{{ !Request::is('/') ? '' : 'go-to-id' }}">Tentang Kami</a>
                                         </li>
                                         <li class="menu-item item-no-hover">
-                                            <a href="{{ route('bookingcar.cart') }}">
+                                            <a href="{{ route('cart.index') }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24">
                                                     <path

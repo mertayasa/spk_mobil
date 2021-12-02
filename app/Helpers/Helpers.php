@@ -131,12 +131,12 @@ function searchAvailablity($start_date, $end_date, $mobil)
 
 function getStatusBooking($status = null)
 {
-    $booking_status = ['booking_baru' => 'Booking Baru', 'dikonfirmasi_admin' => 'Dikonfirmasi Admin', 'on_progress' => 'On Progress', 'selesai' => 'Selesai'];
+    $booking_status = ['booking_baru' => 'Booking Baru', 'dikonfirmasi_admin' => 'Dikonfirmasi Admin', 'diantar' => 'Diantar', 'on_progress' => 'On Progress', 'selesai' => 'Selesai', 'dibatalkan' => 'Dibatalkan', 'expired' => 'Expired'];
 
     if($status == null){
         return $booking_status;
     }else{
-        return $booking_status[$status];
+        return ucfirst(str_replace('_', ' ', $booking_status[$status]));
     }
 }
 
@@ -147,6 +147,11 @@ function getStatusSopir($status_sopir)
     }
 
     return '<span class="text-danger">* Tanpa Sopir *</span>';
+}
+
+function getStatusPengambilanRaw($status)
+{
+    return ucfirst(str_replace('_', ' ', $status));
 }
 
 function getStatusPengambilan($status_pengambilan)

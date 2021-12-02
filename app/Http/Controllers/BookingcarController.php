@@ -15,12 +15,8 @@ use App\Http\Requests\BookingcarUpdateRequest;
 
 class BookingcarController extends Controller
 {
-    public function index(Request $request)
+    public function index(Mobil $mobil)
     {
-        $mobilreq = $request->input('id_mobil');
-
-        $mobil = Mobil::where('id', $mobilreq)->first();
-
         $navSopir = Sopir::pluck('nama', 'id');
 
         return view('frontend.booking', compact('navSopir', 'mobil'));
@@ -55,9 +51,6 @@ class BookingcarController extends Controller
 
     public function store(BookingcarStoreRequest $request)
     {
-        return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
-
-
         if ($request->session()->has('id_mobil')) {
             $request->session()->forget('id_mobil');
         }
@@ -111,7 +104,7 @@ class BookingcarController extends Controller
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data booking');
         }
 
-        return redirect()->route('bookingcar.cart')->with('success', 'Data Booking anda sudah kami terima');
+        return redirect()->route('cart.index')->with('success', 'Data Booking anda sudah kami terima');
     }
 
     public function editForm(Request $request, $data)
@@ -130,7 +123,7 @@ class BookingcarController extends Controller
                     ]);
         $bookingWhere = $booking->where('id', '=', $data)->first();
         if (empty($bookingWhere)) {
-            return redirect()->route('bookingcar.cart')->with('info', 'Mohon pilih mobil yang ingin diedit');
+            return redirect()->route('cart.index')->with('info', 'Mohon pilih mobil yang ingin diedit');
         }
         // dd($bookingWhere->mobil->thumbnail);
         $navSopir = Sopir::pluck('nama', 'id');
@@ -166,10 +159,10 @@ class BookingcarController extends Controller
         }catch(Exception $e){
             dd($data);
             Log::info($e->getMessage());
-            return redirect()->route('bookingcar.cart')->with('error', 'Gagal mengubah data booking');
+            return redirect()->route('cart.index')->with('error', 'Gagal mengubah data booking');
         }
 
-        return redirect()->route('bookingcar.cart')->with('success', 'Berhasil mengubah data booking');
+        return redirect()->route('cart.index')->with('success', 'Berhasil mengubah data booking');
     }
 
     public function cart(Request $request)
@@ -181,14 +174,16 @@ class BookingcarController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login')->with('info', 'Silahkan login terlebih dahulu');
         }
+
         $booking = Booking::where([
                         ['id_user', '=', Auth::user()->id],
-                        ['status', '=', 'booking_baru']
+                        // ['status', '=', 'booking_baru']
                     ])->latest()->get();
 
-        if ($booking->isEmpty()) {
-            return redirect()->route('homepage', '#search')->with('error', 'Cart Kosong, Mohon Booking salah satu mobil');
-        }
+        // if ($booking->isEmpty()) {
+        //     return redirect()->route('homepage', '#search')->with('error', 'Cart Kosong, Mohon Booking salah satu mobil');
+        // }
+
         return view('frontend.cart-book', compact('booking'));
     }
 
@@ -217,11 +212,11 @@ class BookingcarController extends Controller
     public function uploadBukti(Booking $booking)
     {
         if (Auth::user()->id != $booking->user->id) {
-            return redirect()->route('bookingcar.cart')->with('error', 'Jangan macem-macem bro');
+            return redirect()->route('cart.index')->with('error', 'Jangan macem-macem bro');
         }
 
         if (!empty($booking->bukti_trf)) {
-            return redirect()->route('bookingcar.cart')->with('info', 'Bukti Pembayaran Anda sudah kami terima');
+            return redirect()->route('cart.index')->with('info', 'Bukti Pembayaran Anda sudah kami terima');
         }
 
         return view('frontend.bukti-bayar', compact('booking'));
@@ -246,7 +241,7 @@ class BookingcarController extends Controller
             return redirect()->back()->withInput()->with('error', 'Gagal mengirim bukti pembayaran');
         }
 
-        return redirect()->route('bookingcar.cart')->with('success', 'Berhasil mengirim bukti pembayaran');
+        return redirect()->route('cart.index')->with('success', 'Berhasil mengirim bukti pembayaran');
     }
 
     public function getBooking(Request $request, $data)

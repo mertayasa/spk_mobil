@@ -28,27 +28,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('mobilnya/{data}', [HomepageController::class, 'getmobil'])->name('datamobil');
 Route::get('bookingnya/{data}', [BookingcarController::class, 'getBooking'])->name('databooking');
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
-        Route::post('/', [BookingcarController::class, 'index'])->name('index');
-        Route::get('/', [BookingcarController::class, 'cek'])->name('cekIndex');
-        Route::get('/edit/{data}', [BookingcarController::class, 'editForm'])->name('editForm');
-        Route::patch('/edited', [BookingcarController::class, 'edit'])->name('edit');
-        Route::post('store', [BookingcarController::class, 'store'])->name('store');
-        Route::get('cart', [BookingcarController::class, 'cart'])->name('cart');
-        Route::get('upload-bukti/{booking}', [BookingcarController::class, 'uploadBukti'])->name('upload_bukti');
-        Route::get('check-available/{mobil}/{start_date}/{end_date}', [BookingcarController::class, 'checkAvailable'])->name('checkAvailable');
-        Route::patch('upload-bukti/{booking}', [BookingcarController::class, 'kirimBukti'])->name('kirim_bukti');
-    });
-});
-
 Route::group(['prefix' => 'saw', 'as' => 'saw.'], function () {
     Route::post('saw-frontend', [SAWController::class, 'sawFrontend'])->name('frontend');
 });
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
+        Route::get('/{mobil}', [BookingcarController::class, 'index'])->name('index');
+        Route::get('/', [BookingcarController::class, 'cek'])->name('cekIndex');
+        Route::get('/edit/{data}', [BookingcarController::class, 'editForm'])->name('editForm');
+        Route::patch('/edited', [BookingcarController::class, 'edit'])->name('edit');
+        Route::post('store', [BookingcarController::class, 'store'])->name('store');
+        Route::get('upload-bukti/{booking}', [BookingcarController::class, 'uploadBukti'])->name('upload_bukti');
+        Route::get('check-available/{mobil}/{start_date}/{end_date}', [BookingcarController::class, 'checkAvailable'])->name('checkAvailable');
+        Route::patch('upload-bukti/{booking}', [BookingcarController::class, 'kirimBukti'])->name('kirim_bukti');
+    });
+
+    Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
+        Route::get('/', [BookingcarController::class, 'cart'])->name('index');
+    });
+    
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::get('user', [DashboardController::class, 'indexUser'])->name('user');

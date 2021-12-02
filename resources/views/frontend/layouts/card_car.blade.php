@@ -18,10 +18,11 @@
                 <p>{{ $item->deskripsi }}</p>
                 <div class="action">
                     <a class="btn-second btn-small mobil-view-ajax" href="#" data-id="{{ $item->id }}" data-toggle="modal" data-target="#exampleModal">Detail</a>
-                    <form action="{{ route('bookingcar.index') }}" method="post">
+                    {{-- <form action="{{ route('bookingcar.index') }}" method="post">
                         @csrf
                         <button name="id_mobil" type="submit" value="{{ $item->id }}" class="btn-first btn-submit">Booking</button>
-                    </form>
+                    </form> --}}
+                    <a href="{{ route('bookingcar.index', $item->id) }}" class="btn-first btn-submit w-50">Booking</a>
                 </div>
             @else
                 <span class="mt-3 js-harga harga-{{ $index ?? '0' }} price price-tag">{{ formatPrice($item->harga) }}</span>

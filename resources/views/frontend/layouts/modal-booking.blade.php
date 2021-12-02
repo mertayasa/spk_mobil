@@ -56,9 +56,12 @@
                         <h3 id="total-bayar"></h3>
                     </div>
                     <div class="col-12 d-none bukti-bayar">
-                        <a href="{{ asset('images/'.$item->bukti_trf) }}" target="_blank">
-                            <img class="w-100" src="{{ asset('images/'.$item->bukti_trf) }}" alt="">
+                        <a href="" target="_blank">
+                            <img class="w-100" src="" alt="">
                         </a>
+                        {{-- <a href="{{ asset('images/'.$item->bukti_trf) }}" target="_blank">
+                            <img class="w-100" src="{{ asset('images/'.$item->bukti_trf) }}" alt="">
+                        </a> --}}
                     </div>
                 </div>
             </div>

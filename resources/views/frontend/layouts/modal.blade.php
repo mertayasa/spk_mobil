@@ -36,10 +36,11 @@
             <div class="modal-footer">
                 {{-- <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Tutup</button> --}}
                 <button class="btn-second" data-dismiss="modal">Tutup</button>
-                <form action="{{ route('bookingcar.index') }}" method="post">
+                {{-- <form action="{{ route('bookingcar.index') }}" method="post">
                     @csrf
                     <button name="id_mobil" id="id-mobil" type="submit" value="" class="btn-first btn-sm btn-submit">Booking Sekarang</button>
-                </form>
+                </form> --}}
+                {{-- <a href="{{ route('bookingcar.index', $item->id) }} class="btn-first btn-submit">Booking</a> --}}
             </div>
         </div>
     </div>
