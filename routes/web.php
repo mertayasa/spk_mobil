@@ -34,15 +34,16 @@ Route::group(['prefix' => 'saw', 'as' => 'saw.'], function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
-        Route::get('/{mobil}', [BookingcarController::class, 'index'])->name('index');
+        Route::get('/{mobil}/{start_date?}/{end_date?}', [BookingcarController::class, 'index'])->name('index');
         Route::get('/', [BookingcarController::class, 'cek'])->name('cekIndex');
         Route::get('/edit/{data}', [BookingcarController::class, 'editForm'])->name('editForm');
         Route::patch('/edited', [BookingcarController::class, 'edit'])->name('edit');
         Route::post('store', [BookingcarController::class, 'store'])->name('store');
-        Route::get('upload-bukti/{booking}', [BookingcarController::class, 'uploadBukti'])->name('upload_bukti');
         Route::get('check-available/{mobil}/{start_date}/{end_date}', [BookingcarController::class, 'checkAvailable'])->name('checkAvailable');
         Route::patch('upload-bukti/{booking}', [BookingcarController::class, 'kirimBukti'])->name('kirim_bukti');
     });
+    
+    Route::get('upload-bukti/{booking}', [BookingcarController::class, 'uploadBukti'])->name('upload_bukti');
 
     Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
         Route::get('/', [BookingcarController::class, 'cart'])->name('index');

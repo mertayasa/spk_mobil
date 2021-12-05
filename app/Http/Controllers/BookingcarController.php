@@ -15,11 +15,18 @@ use App\Http\Requests\BookingcarUpdateRequest;
 
 class BookingcarController extends Controller
 {
-    public function index(Mobil $mobil)
+    public function index(Mobil $mobil, $start_date = null, $end_date = null)
     {
         $navSopir = Sopir::pluck('nama', 'id');
 
-        return view('frontend.booking', compact('navSopir', 'mobil'));
+        $data = [
+            'navSopir' => $navSopir, 
+            'mobil' => $mobil, 
+            'start_date' => $start_date != null ? Carbon::parse($start_date)->format('Y-m-d') : null,
+            'end_date' => $start_date != null ? Carbon::parse($end_date)->format('Y-m-d') : null,
+        ];  
+
+        return view('frontend.booking', $data);
     }
 
     public function cek(Request $request)
@@ -55,8 +62,22 @@ class BookingcarController extends Controller
             $request->session()->forget('id_mobil');
         }
 
+        $data = $request->all();
+
+        $today = Carbon::today();
+        $start = Carbon::parse($data['id_date_from']);
+        $request->validate([
+            'id_date_from' => 'required|date|after_or_equal:'.$today,
+            'id_date_to' => 'required|date|after:'.$start->format('d-m-Y')
+        ],[
+            'id_date_from.after_or_equal' => 'Tanggal Kembali Harus Lebih Dari Atau Sama Dengan Hari Ini',
+            'id_date_to.after' => 'Tanggal Kembali Harus 1 Hari Melewati Tanggal Sewa'
+        ]);
+
+        // dd('asd');
+
         try{
-            $data = $request->all();
+
             $mulai_sewa = Carbon::parse($data['id_date_from']);
             $akhir_sewa = Carbon::parse($data['id_date_to']);
             $durasi_sewa = $akhir_sewa->diffInDays($mulai_sewa);
@@ -68,21 +89,21 @@ class BookingcarController extends Controller
 
             empty($data['id_cek_diantar']) ? $data['id_cekDiantar'] = 'ambil_sendiri' : $data['id_cekDiantar'] = 'diantar';
             empty($data['id_cek_diantar']) ? $data['id_alamat_diantar'] = null : '';
-            // dd($data['id_alamat_diantar']);
             
             $mobil = Mobil::find($data['id_mobil']);
 
             $check_availablity = searchAvailablity($data['id_dt_from_format'], $data['id_dt_to_format'], [$mobil]);
+            // dd($check_availablity);
             if(count($check_availablity) < 1){
                 return redirect()->back()->withInput()->with('date_unavailable', 'Mobil tidak tersedia untuk tanggal yang dipilih');
             }
 
             $data['id_harga'] = $mobil->harga * $durasi_sewa;
-            $data['dengan_sopir'] = $data['dengan_sopir'] == 'on' ? 'ya' : 'tidak';
-            $data['pengambilan'] = $data['pengambilan'] == 'on' ? 'diantar' : 'ambil_sendiri';
+            $data['dengan_sopir'] = $data['dengan_sopir'] ?? 'off' == 'on' ? 'ya' : 'tidak';
+            $data['pengambilan'] = $data['pengambilan'] ?? 'off' == 'on' ? 'diantar' : 'ambil_sendiri';
             $data['id_alamat'] = $data['pengambilan'] == 'diantar' ? $data['id_alamat'] : '';
-
-            // dd($data);
+            // dd($data['dengan_sopir']);
+            $durasi_sewa = $mulai_sewa->diffInDays($akhir_sewa);
 
             Booking::create([
                 'id_mobil' => $data['id_mobil'],
@@ -90,13 +111,11 @@ class BookingcarController extends Controller
                 'deskripsi' => $data['id_catatan'],
                 'dengan_sopir' => $data['dengan_sopir'],
                 'pengambilan' => $data['pengambilan'],
-                'alamat_antar' => $data['id_alamat'],
+                'alamat_antar' => $data['id_alamat_diantar'],
                 'harga' => $data['id_harga'],
                 'tgl_mulai_sewa' => $data['id_dt_from_format'],
                 'tgl_akhir_sewa' => $data['id_dt_to_format'],
-                'dengan_sopir' => $data['id_cekSopir'],
-                'pengambilan' => $data['id_cekDiantar'],
-                'alamat_antar' => $data['id_alamat_diantar']
+                'biaya_sopir' => $data['dengan_sopir'] == 'ya' ? $durasi_sewa * 150000 : 0
             ]);
 
         } catch(Exception $e) {
@@ -211,6 +230,7 @@ class BookingcarController extends Controller
 
     public function uploadBukti(Booking $booking)
     {
+        // dd('asdsa');
         if (Auth::user()->id != $booking->user->id) {
             return redirect()->route('cart.index')->with('error', 'Jangan macem-macem bro');
         }
@@ -226,6 +246,14 @@ class BookingcarController extends Controller
     {
         try{
             $data = $request->all();
+
+            $now = Carbon::now();
+            // dd($now->diffInHours($booking->created_at));
+            if($now->diffInHours($booking->created_at)){
+                $booking->status = 'expired';
+                $booking->save();
+                return redirect()->back()->with('error', 'Batas waktu pembayaran sudah lebih dari 24jam');
+            }
 
             $base_64_foto = json_decode($request['bukti_trf'], true);
             $upload_image = uploadFile($base_64_foto, 'bukti_trf');

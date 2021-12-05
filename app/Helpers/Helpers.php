@@ -110,6 +110,7 @@ function isActive($param)
 function searchAvailablity($start_date, $end_date, $mobil)
 {
     $search_date_range = CarbonPeriod::create($start_date, $end_date)->toArray();
+    // dd($start_date);
 
     $range = [];
     foreach($search_date_range as $date_range){

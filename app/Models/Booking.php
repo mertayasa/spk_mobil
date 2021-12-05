@@ -33,7 +33,8 @@ class Booking extends Model
         'tgl_akhir_sewa',
         'dengan_sopir',
         'pengambilan',
-        'alamat_antar'
+        'alamat_antar',
+        'biaya_sopir'
     ];
 
     /**

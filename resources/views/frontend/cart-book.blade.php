@@ -85,7 +85,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-md-2 col-lg-2 text-center">
-                                                                <span class="cart-item-price fwm cd js_tt_price_it">{{ formatPrice($item->harga) }}</span>
+                                                                <span class="cart-item-price fwm cd js_tt_price_it">{{ formatPrice($item->harga + $item->biaya_sopir) }}</span> <br>
+                                                                <span> <small> {{ 'Sewa : '.formatPrice($item->harga) }} </small> </span> <br>
+                                                                <span> <small> {{ 'Sopir : '.formatPrice($item->biaya_sopir) }} </small> </span>
                                                             </div>
                                                             <div class="col-12 col-md-2 col-lg-2 text-center">
                                                                 @if ($item->status == 'dibatalkan')
@@ -98,7 +100,7 @@
                                                                             <img class="w-100 mb-2" src="{{ asset('images/'.$item->bukti_trf) }}" alt="">
                                                                         </a>
                                                                     @else
-                                                                        <a href="{{route('bookingcar.upload_bukti', $item->id)}}" class="btn btn-danger btn-sm mb-2">Upload Bukti Pembayaran</a>
+                                                                        <a href="{{route('upload_bukti', $item->id)}}" class="btn btn-danger btn-sm mb-2">Upload Bukti Pembayaran</a>
                                                                     @endif
                                                                 @endif
                                                                 <a class="btn-second btn-small booking-view-ajax w-100" href="#" data-id="{{ $item->id }}" data-toggle="modal" data-target="#exampleModal">Detail</a>

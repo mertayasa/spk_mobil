@@ -41,7 +41,8 @@
                                                     {!! Form::hidden('id_user', Auth::user()->id) !!}
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <img src="{{ asset('images/' . Auth::user()->photo) }}" alt="">
+                                                            <img src="{{ asset('images/' . Auth::user()->photo) }}"
+                                                                alt="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-8">
@@ -66,7 +67,7 @@
                                                         <div class="form-group">
                                                             {!! Form::label('idDateFrom', 'Tanggal Sewa', ['class' => 'fs-14 text-custom-black fw-500']) !!}
                                                             <div class="input-group group-form">
-                                                                {!! Form::text('id_date_from', null, ['class' => 'form-control form-control-custom datepickr-on' . ($errors->has('id_date_from') ? ' is-invalid' : null), 'id' => 'idDateFrom', 'placeholder' => 'mm/dd/yyyy', 'readonly' => 'readonly', 'required' => 'required']) !!}
+                                                                {!! Form::date('id_date_from', $start_date, ['class' => 'form-control px-2 form-control-custom datepickr-on' . ($errors->has('id_date_from') ? ' is-invalid' : null), 'id' => 'idDateFrom', 'required' => 'required']) !!}
                                                                 <div class="valid-feedback">Good</div>
                                                                 @error('id_date_from')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -74,8 +75,6 @@
                                                                     <div class="invalid-feedback">Mohon pilih tgl mulai sewa
                                                                     </div>
                                                                 @enderror
-                                                                <span class="input-group-append"> <i
-                                                                        class="far fa-calendar"></i> </span>
                                                                 <div id="reset-date-off" class="d-none">abaikan
                                                                 </div>
                                                             </div>
@@ -86,7 +85,7 @@
                                                         <div class="form-group">
                                                             {!! Form::label('idDateTo', 'Tanggal Kembali', ['class' => 'fs-14 text-custom-black fw-500']) !!}
                                                             <div class="input-group group-form">
-                                                                {!! Form::text('id_date_to', null, ['class' => 'form-control form-control-custom datepickr-off' . ($errors->has('id_date_to') ? ' is-invalid' : null), 'id' => 'idDateTo', 'placeholder' => 'mm/dd/yyyy', 'readonly' => 'readonly', 'required' => 'required']) !!}
+                                                                {!! Form::date('id_date_to', $end_date, ['class' => 'form-control px-2 form-control-custom datepickr-on' . ($errors->has('id_date_to') ? ' is-invalid' : null), 'id' => 'idDateTo', 'required' => 'required']) !!}
                                                                 <div class="valid-feedback">Good</div>
                                                                 @error('id_date_to')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -94,8 +93,6 @@
                                                                     <div class="invalid-feedback">Mohon pilih tgl berakhir sewa
                                                                     </div>
                                                                 @enderror
-                                                                <span class="input-group-append spantgloff"> <i
-                                                                        class="far fa-calendar"></i> </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -105,23 +102,23 @@
                                                             <span class="mb-2 d-inline-block text-danger"
                                                                 id="errorDateSession">{{ session()->get('date_unavailable') }}</span>
                                                         @endif
-                                                        <span class="mb-2 d-none" id="availableStatus"></span>
+                                                        <span class="mb-2 {{$start_date != null && $end_date != null ? 'text-success' : 'd-none'}}" id="availableStatus"> {{$start_date != null && $end_date != null ? "Mobil tersedia untuk tanggal ${start_date} sampai ${end_date}" : ''}}</span>
                                                     </div>
-                                                    <div class="col-12 col-md-6">
+                                                    <div class="col-12 col-md-6 {{$start_date != null && $end_date != null ? 'mt-2' : ''}}">
                                                         <button type="button"
                                                             data-url="{{ url('bookingcar/check-available') }}"
                                                             class="btn-submit py-2 mb-3" id="btnAvailablity">Cek
                                                             Ketersediaan</button>
                                                     </div>
 
-                                                    <div class="d-none col-12 px-0" id="noteAndSubmit">
+                                                    <div class="{{$start_date != null && $end_date != null ? '' : 'd-none'}} col-12 px-0" id="noteAndSubmit">
                                                         <div class="col-12">
                                                             <hr class="mt-0">
                                                             <div class="form-group">
                                                                 <label class="custom-checkbox">
                                                                     <input type="checkbox" name="dengan_sopir">
                                                                     <span class="checkmark"></span> Apakah anda
-                                                                    memerlukan sopir ?
+                                                                    memerlukan sopir (biaya sopirRp 150.000 per 12 jam) ?
                                                                 </label>
                                                             </div>
                                                             <div class="form-group">
@@ -206,15 +203,10 @@
 
 @push('scriptplus')
     <script>
-        // function showAlamatBox(element){
-        //     console.log(element)
-        // }
-
         const checkDelivery = document.getElementById('checkDelivery')
         const btnAvailablity = document.getElementById('btnAvailablity')
 
         checkDelivery.addEventListener('click', function(event) {
-            // console.log(event.target)
             const alamatBox = document.getElementById('alamatBox')
 
             if (event.target.checked == true) {
@@ -351,48 +343,57 @@
                 }
             }
 
-
-            $('.js-select-first-disabled option:first').attr('disabled', true);
-
-            let date = new Date();
-            let date_off = new Date(Date.now() + (3600 * 1000 * 24));
-            $(".datepickr-on").datepicker({
-                dateFormat: "dd-MM-yyyy",
-                timepicker: false,
-                minDate: date,
-                onSelect: function(date) {
-                    // date ? $(".datepickr").removeClass('is-invalid').addClass('is-valid') : $(".datepickr").removeClass('is-valid').addClass('is-invalid');
-                    var selectedDate = new Date(date);
-                    var endDate = new Date(selectedDate.getTime() + (3600 * 1000 * 24));
-                    if (new Date($(".datepickr-off").val()) < new Date($(".datepickr-on").val())) {
-                        $(".datepickr-off").datepicker({
-                            'minDate': endDate
-                        }).val('');
-                    } else {
-                        $(".datepickr-off").datepicker({
-                            'minDate': endDate
-                        });
-                    }
-                }
+            $(function() {
+                $('[type="date"]').prop('min', function() {
+                    return new Date().toJSON().split('T')[0];
+                });
             });
-            $(".datepickr-off").datepicker({
-                dateFormat: "dd-MM-yyyy",
-                timepicker: false,
-                minDate: date_off,
-                onSelect: function(date) {
-                    // date ? $(".datepickr-off").removeClass('is-invalid').addClass('is-valid') : $(".datepickr-off").removeClass('is-valid').addClass('is-invalid');
-                },
-                onClose: function() {
-                    var dt1 = $(".datepickr-on").datepicker('getDate');
-                    var dt2 = $(".datepickr-off").datepicker('getDate');
-                    //check to prevent a user from entering a date below date of dt1
-                    if (dt2 <= dt1) {
-                        var minDate = $(".datepickr-off").datepicker('option', 'minDate');
-                        $(".datepickr-off").datepicker('setDate', minDate);
-                    }
 
-                }
-            });
+
+            // $('.js-select-first-disabled option:first').attr('disabled', true);
+
+            // let date = new Date();
+            // let date_off = new Date(Date.now() + (3600 * 1000 * 24));
+            // $(".datepickr-on").datepicker({
+            //     dateFormat: "dd-MM-yyyy",
+            //     timepicker: false,
+            //     minDate: date,
+            //     // setDate: date,
+            //     onSelect: function(date) {
+            //         // date ? $(".datepickr").removeClass('is-invalid').addClass('is-valid') : $(".datepickr").removeClass('is-valid').addClass('is-invalid');
+            //         var selectedDate = new Date(date);
+            //         var endDate = new Date(selectedDate.getTime() + (3600 * 1000 * 24));
+            //         if (new Date($(".datepickr-off").val()) < new Date($(".datepickr-on").val())) {
+            //             $(".datepickr-off").datepicker({
+            //                 'minDate': endDate
+            //             }).val('');
+            //         } else {
+            //             $(".datepickr-off").datepicker({
+            //                 'minDate': endDate
+            //             });
+            //         }
+            //     }
+            // });
+            // $('#datepickr-on').datepicker('setDate', date);
+            // $(".datepickr-off").datepicker({
+            //     dateFormat: "dd-MM-yyyy",
+            //     timepicker: false,
+            //     minDate: date_off,
+            //     onSelect: function(date) {
+            //         // date ? $(".datepickr-off").removeClass('is-invalid').addClass('is-valid') : $(".datepickr-off").removeClass('is-valid').addClass('is-invalid');
+            //     },
+            //     onClose: function() {
+            //         var dt1 = $(".datepickr-on").datepicker('getDate');
+            //         var dt2 = $(".datepickr-off").datepicker('getDate');
+            //         //check to prevent a user from entering a date below date of dt1
+            //         if (dt2 <= dt1) {
+            //             var minDate = $(".datepickr-off").datepicker('option', 'minDate');
+            //             $(".datepickr-off").datepicker('setDate', minDate);
+            //         }
+
+            //     }
+            // });
+
             $(".catatan-book").on('keyup', function() {
                 $(this).val() ? $(this).removeClass('is-invalid').addClass('is-valid') : $(this)
                     .removeClass('is-valid').addClass('is-invalid');

@@ -19,11 +19,10 @@ class HomepageController extends Controller
 {
     public function index(Request $request)
     {
-        // dd('asdas');
-        // $validator = Validator::make($request->all(), [
-        //     'end_date' => $request->start_date != null ? 'required' : 'nullable',
-        //     'start_date' => $request->end_date != null ? 'required' : 'nullable'
-        // ]);
+        $request->validate([
+            'end_date' => $request->start_date != null ? 'required' : 'nullable',
+            'start_date' => $request->end_date != null ? 'required' : 'nullable'
+        ]);
 
         // if ($validator->fails()) {
         //     dd($validator->getMessageBag());
@@ -43,6 +42,8 @@ class HomepageController extends Controller
         $sort = $request->input('id_sort');
         $start_date = $request->start_date;
         $end_date = $request->end_date;
+
+        // dd(Carbon::parse($start_date)->format('d-m-Y'));
 
         if ($category == 'all') {
             $category = null;
@@ -77,8 +78,22 @@ class HomepageController extends Controller
         $mobil = $this->paginate($init_filtered_mobil, $_GET['page'] ?? 1, 6, ['path' => route('homepage')]);
 
         $mobil_slider = Mobil::with('jenisMobil')->get();
+
+        // dd();
+
+        $data = [
+            'mobil' => $mobil, 
+            'mobil_slider' => $mobil_slider, 
+            'countmobil' => $countmobil, 
+            'navJumlahKursi' => $navJumlahKursi, 
+            'navCategory' => $navCategory, 
+            'kriteria' => $kriteria, 
+            'request' => $request,
+            'start_date' => $start_date != null ? Carbon::parse($start_date)->format('d-m-Y') : null,
+            'end_date' => $start_date != null ? Carbon::parse($end_date)->format('d-m-Y') : null,
+        ];
         
-        return view('frontend.welcome', compact('mobil', 'mobil_slider', 'countmobil', 'navJumlahKursi', 'navCategory', 'kriteria'));
+        return view('frontend.welcome', $data);
     }
 
     public function getmobil(Request $request, $data)

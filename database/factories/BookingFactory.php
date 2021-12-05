@@ -35,6 +35,8 @@ class BookingFactory extends Factory
         $dengan_sopir_val = $dengan_sopir[rand(0, 1)];
         $pengambilan_val = $pengambilan[rand(0, 1)];
 
+        $durasi_sewa = $booking_start_date->diffInDays($booking_end_date);
+
         return [
             'id_mobil' => Mobil::inRandomOrder()->first()->id,
             'id_user' => User::where('level', 2)->inRandomOrder()->first()->id,
@@ -46,7 +48,8 @@ class BookingFactory extends Factory
             'harga' => $this->faker->numberBetween(150000, 500000),
             'tgl_mulai_sewa' => $booking_start_date,
             'tgl_akhir_sewa' => $booking_end_date,
-            'bukti_trf' => 'default/default.jpeg'
+            'bukti_trf' => 'default/default.jpeg',
+            'biaya_sopir' => $dengan_sopir_val == 'ya' ? $durasi_sewa * 150000 : 0
         ];
     }
 }
