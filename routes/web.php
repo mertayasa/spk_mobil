@@ -32,7 +32,7 @@ Route::group(['prefix' => 'saw', 'as' => 'saw.'], function () {
     Route::post('saw-frontend', [SAWController::class, 'sawFrontend'])->name('frontend');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'check.order'])->group(function () {
     Route::group(['prefix' => 'bookingcar', 'as' => 'bookingcar.'], function () {
         Route::get('/{mobil}/{start_date?}/{end_date?}', [BookingcarController::class, 'index'])->name('index');
         Route::get('/', [BookingcarController::class, 'cek'])->name('cekIndex');

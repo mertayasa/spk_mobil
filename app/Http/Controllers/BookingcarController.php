@@ -196,12 +196,9 @@ class BookingcarController extends Controller
 
         $booking = Booking::where([
                         ['id_user', '=', Auth::user()->id],
-                        // ['status', '=', 'booking_baru']
+                        ['status', '!=', 'expired']
                     ])->latest()->get();
 
-        // if ($booking->isEmpty()) {
-        //     return redirect()->route('homepage', '#search')->with('error', 'Cart Kosong, Mohon Booking salah satu mobil');
-        // }
 
         return view('frontend.cart-book', compact('booking'));
     }
@@ -248,8 +245,8 @@ class BookingcarController extends Controller
             $data = $request->all();
 
             $now = Carbon::now();
-            // dd($now->diffInHours($booking->created_at));
-            if($now->diffInHours($booking->created_at)){
+
+            if($now >= $booking->created_at && $now->diffInMinutes($booking->created_at) >= 1440){
                 $booking->status = 'expired';
                 $booking->save();
                 return redirect()->back()->with('error', 'Batas waktu pembayaran sudah lebih dari 24jam');

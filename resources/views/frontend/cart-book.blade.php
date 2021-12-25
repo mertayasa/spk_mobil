@@ -76,7 +76,9 @@
                                                             </div>
                                                             <div class="col-12 col-md-2 col-lg-2 text-center">
                                                                 <div class="cart_meta_prices price">
-                                                                    <div class="cart_price">{{ getStatusBooking($item->status) }}</div>
+                                                                    <div class="cart_price">
+                                                                        {{ getStatusBooking($item->status) }}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-md-2 col-lg-2 text-center">
@@ -100,6 +102,7 @@
                                                                             <img class="w-100 mb-2" src="{{ asset('images/'.$item->bukti_trf) }}" alt="">
                                                                         </a>
                                                                     @else
+                                                                        <button class="btn btn-primary btn-sm w-100 mb-2 countdown" data-date-created="{{ \Carbon\Carbon::parse($item->created_at) }}" data-expiry-date="{{ \Carbon\Carbon::parse($item->created_at)->addHours(24) }}">Batas Pembayaran Sewa : <span></span> </button>
                                                                         <a href="{{route('upload_bukti', $item->id)}}" class="btn btn-danger btn-sm mb-2">Upload Bukti Pembayaran</a>
                                                                     @endif
                                                                 @endif
@@ -135,6 +138,33 @@
 @endsection
 
 @push('scriptplus')
+    <script>
+        const countdownEl = document.getElementsByClassName('countdown')
+        for (let index = 0; index < countdownEl.length; index++) {
+            setCountDown(countdownEl[index])
+        }
+
+        function setCountDown(element){
+            const createdAt = new Date(element.getAttribute('data-date-created')).getTime();
+            const expiryAt = new Date(element.getAttribute('data-expiry-date')).getTime();
+            
+            let x = setInterval(function() {
+                let now = new Date().getTime();
+                let distance = expiryAt - now;
+                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                element.querySelectorAll('span')[0].innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+                
+                if (distance < 0) {
+                    clearInterval(x);
+                    element.querySelectorAll('span')[0].innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        }
+    </script>
     <script>
         $(document).ready(function () {
             function formatRupiah(harga) {
