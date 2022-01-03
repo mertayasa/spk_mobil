@@ -38,7 +38,7 @@
     @endif
     
     <div class="col-12 col-md-6">
-        {!! Form::label('kelaminUser', 'Jenis Kelamain', ['class' => 'mb-3']) !!}
+        {!! Form::label('kelaminUser', 'Jenis Kelamin', ['class' => 'mb-3']) !!}
         {!! Form::select('jenis_kelamin', [0 => 'Laki-Laki', 1 => 'Perempuan'], null, ['class' => 'form-control', 'id' => 'kelaminUser']) !!}
     </div>
 
