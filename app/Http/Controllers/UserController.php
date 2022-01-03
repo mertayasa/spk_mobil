@@ -95,7 +95,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        // dd($user);
+        if($user->level == 2){
+            return view('frontend.user.edit', compact('user'));
+        }
+
         return view('user.edit', compact('user'));
     }
 
@@ -126,8 +129,6 @@ class UserController extends Controller
             }else{
                 unset($data['password']);
             }
-        
-            // $data['level'] = 2;
     
             $user->update($data);
         }catch(Exception $e){
@@ -136,10 +137,10 @@ class UserController extends Controller
         }
 
         if(isset($request->is_profile)){
-            return redirect()->back()->with('success', 'Berhasil mengubah profil pengguna');
+            return redirect()->back()->with('success', 'Berhasil memperbaharui profil');
         }
 
-        return redirect()->route('user.index')->with('success', 'Berhasil mengubah profil pengguna');
+        return redirect()->route('user.index')->with('success', 'Berhasil memperbaharui profil pengguna');
     }
 
     /**

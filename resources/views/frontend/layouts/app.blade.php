@@ -80,6 +80,9 @@
                                     @endif
                                 @else
                                     <li class="book-appointment">
+                                        <a href="{{ route('user.profile', Auth::id()) }}" onclick=""><i class="fa fa-user"></i>Profil</a>
+                                    </li>
+                                    <li class="book-appointment">
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
                                                 class="fa fa-unlock"></i>Log Out</a>
