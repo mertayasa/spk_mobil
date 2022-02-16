@@ -38,4 +38,9 @@ class DetailSaw extends Model
     {
         return $this->belongsTo(\App\Models\Kriteria::class);
     }
+
+    public function subKriteria()
+    {
+        return $this->belongsTo(\App\Models\SubKriteria::class, 'id_sub_kriteria');
+    }
 }

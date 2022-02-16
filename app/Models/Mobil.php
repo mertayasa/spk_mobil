@@ -103,14 +103,14 @@ class Mobil extends Model
 
     public function findKriteriaAndSub($id_mobil, $id_kriteria)
     {
-        $hasil_saw = HasilSaw::with('detailSaw')->where('id_mobil', $id_mobil)->get();
+        $hasil_saw = HasilSaw::with('detailSaw', 'detailSaw.subKriteria')->where('id_mobil', $id_mobil)->first();
 
         if($hasil_saw->count() == 0){
             return null;
         }
 
-        $detail = $hasil_saw[0]->detailSaw()->where('id_kriteria', $id_kriteria)->get();
+        $detail = $hasil_saw->detailSaw()->with('subKriteria')->where('id_kriteria', $id_kriteria)->first();
 
-        return $detail[0]->id_sub_kriteria ?? 0;
+        return $detail->subKriteria->sub_kriteria;
     }
 }

@@ -25,11 +25,7 @@ class SAWController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
         $datas = $request->all();
-
-        // dd($datas);
-
         $array_init = [];
 
         foreach($datas as $key => $data){
@@ -37,8 +33,6 @@ class SAWController extends Controller
                 array_push($array_init, $data);
             }
         }
-
-        // dd($array_init);
 
         $array_data = [];
 
@@ -54,8 +48,6 @@ class SAWController extends Controller
             $array_data += [$data['id_mobil'] => $array_kriteria];
         }
 
-        // dd($array_data);
-
         $array_kriteria = [];
 
         # Iterate over every associative array in the data array.
@@ -69,9 +61,6 @@ class SAWController extends Controller
                $array_kriteria[$key][] = $value;
             }
         }
-
-        // dd($array_kriteria);
-
 
         $normalisasi = [];
         foreach($array_kriteria as $key => $kriteria){
@@ -96,8 +85,6 @@ class SAWController extends Controller
                 $normalisasi += [$key => $array_normal];
             }
         }
-
-        // dd($normalisasi);
 
         $preferensi = [];
     
@@ -198,30 +185,32 @@ class SAWController extends Controller
                 $sanitize_data += [str_replace('kriteria', '', $key) => $da];
             }
 
+            // dd($sub_kriteria);
+
             $sanitize_data = ['id_mobil' => 'new'] + $sanitize_data;
 
             array_push($sub_kriteria, $sanitize_data);
-
             $saw = $this->calculateSaw($sub_kriteria);
             
             usort($saw, function($a, $b) {
                 return $a['nilai_akhir'] <=> $b['nilai_akhir'];
             });
-
+            
             // Log::info($saw);
-
+            
             $search_array = array_search('new', array_column($saw, 'id_mobil'));
-
+            
             if($search_array == 0){
                 $closest_mobil = $saw[1];
             }else{
-                if($saw[$search_array]['nilai_akhir'] - $saw[$search_array + 1]['nilai_akhir'] < $saw[$search_array]['nilai_akhir'] - $saw[$search_array -1 ]['nilai_akhir']){
+                if(abs($saw[$search_array]['nilai_akhir'] - $saw[$search_array + 1]['nilai_akhir']) < abs($saw[$search_array]['nilai_akhir'] - $saw[$search_array -1 ]['nilai_akhir'])){
                     $closest_mobil = $saw[$search_array + 1];
                 }else{
                     $closest_mobil = $saw[$search_array - 1];
                 };
             }
-
+            
+            // dd($closest_mobil);
             $mobil = Mobil::find($closest_mobil['id_mobil']);
             $html =  view('frontend.layouts.card_car', ['item' => $mobil, 'index' => $mobil->id])->render();
         }catch(Exception $e){

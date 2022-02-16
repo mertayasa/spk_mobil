@@ -20,7 +20,15 @@
                 @foreach ($kriteria as $krite)
                     <td>
                         {!! Form::hidden('kriteria_mobil'.$mob->id.'[id_mobil]', $mob->id, []) !!}
-                        {!! Form::select('kriteria_mobil'.$mob->id.'[kriteria'.$krite->id.']', $krite->subKriteria->pluck('sub_kriteria', 'skor'), $mob->findKriteriaAndSub($mob->id, $krite->id), ['class' => 'form-control']) !!}
+                        <select class="form-control" name="{{ 'kriteria_mobil'.$mob->id.'[kriteria'.$krite->id.']' }}" id="{{ 'kriteria_mobil'.$mob->id.'[id_mobil]' }}">
+                            @php
+                                $subKriteria = $krite->subKriteria->pluck('sub_kriteria', 'skor');
+                            @endphp
+                            @foreach ($subKriteria as $key => $subKrite)
+                                <option value="{{ $key }}" {{ $mob->findKriteriaAndSub($mob->id, $krite->id) == $subKrite ? 'selected' : '' }}>{{ $subKrite }}</option>
+                            @endforeach
+                        </select>
+                        {{-- {!! Form::select('kriteria_mobil'.$mob->id.'[kriteria'.$krite->id.']', $krite->subKriteria->pluck('sub_kriteria', 'skor'), null, ['class' => 'form-control']) !!} --}}
                     </td>
                 @endforeach
             </tr>
