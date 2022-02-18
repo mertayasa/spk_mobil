@@ -242,8 +242,11 @@
                         </div>
                         <div class="d-block ms-auto">
                             <div class="d-flex align-items-center text-end mb-2">
-                                <span class="dot rounded-circle bg-gray-800 me-2"></span>
-                                <span class="fw-normal small">2021</span>
+                                <select name="tahun" id="selectTahun" onchange="generateChartData(this.value)">
+                                    @foreach ($dashboard_data['tahun_pemasukan'] as $year)
+                                        <option value="{{ $year }}">{{ $year }}</option>
+                                    @endforeach        
+                                </select>
                             </div>
                         </div>
                     </div>

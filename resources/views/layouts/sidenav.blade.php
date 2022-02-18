@@ -86,21 +86,21 @@
             <li class="nav-item {{ isActive('kriteria') }}">
                 <a href="{{ route('kriteria.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
-                    <span class="sidebar-text">Kriteria</span>
+                    <span class="sidebar-text">Kriteria SAW</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('sub-kriteria') }}">
                 <a href="{{ route('sub_kriteria.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
-                    <span class="sidebar-text">Sub Kriteria</span>
+                    <span class="sidebar-text">Sub Kriteria SAW</span>
                 </a>
             </li>
 
             <li class="nav-item {{ isActive('saw') }}">
                 <a href="{{ route('saw.index') }}" class="nav-link">
                     <span class="sidebar-icon"> <i class="fas fa-dot-circle"></i> </span>
-                    <span class="sidebar-text">Perhitungan SAW</span>
+                    <span class="sidebar-text">Kriteria SAW Mobil</span>
                 </a>
             </li>
 

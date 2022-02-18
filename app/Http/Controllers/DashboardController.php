@@ -14,9 +14,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $booking = $this->getBookingChart($request);
-        // dd($booking);
         $dashboard_data = $this->getDashboardData();
-        // dd($dashboard_data);
         return view('dashboard.index', compact('dashboard_data'));
     }
 
@@ -29,6 +27,7 @@ class DashboardController extends Controller
         $pemasukan = $booking->where('status', 'selesai')->sum('harga');
 
         $data = [
+            'tahun_pemasukan' => Booking::selectRaw('DISTINCT year(created_at) year')->orderBy('year', 'DESC')->pluck('year', 'year')->toArray(),
             'mobil_count' => $mobil->count(),
             'pelanggan_count' => $pelanggan->count(),
             'sopir_count' => $sopir->count(),
@@ -48,7 +47,6 @@ class DashboardController extends Controller
     public function getBookingChart(Request $request)
     {
         $year = $request->year != 'now' ? $request->year : Carbon::now()->year;
-        // $year = Carbon::now()->year;
         $months = ['January',  'February',  'March',  'April',  'May',  'June',  'July',  'August',  'September',  'October',  'November',  'December'];
         $data_booking = Booking::where('status', 'selesai')->selectRaw('year(created_at) year, monthname(created_at) month, sum(harga) data')
             ->whereYear('created_at', $year)

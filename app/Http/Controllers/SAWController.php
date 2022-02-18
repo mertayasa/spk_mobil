@@ -199,22 +199,33 @@ class SAWController extends Controller
             // Log::info($saw);
             
             $search_array = array_search('new', array_column($saw, 'id_mobil'));
-            
+            $array_closest = [];
+
             if($search_array == 0){
+                array_push($array_closest, $saw[1]);
+                array_push($array_closest, $saw[2]);
                 $closest_mobil = $saw[1];
             }else{
                 if(abs($saw[$search_array]['nilai_akhir'] - $saw[$search_array + 1]['nilai_akhir']) < abs($saw[$search_array]['nilai_akhir'] - $saw[$search_array -1 ]['nilai_akhir'])){
                     $closest_mobil = $saw[$search_array + 1];
+                    array_push($array_closest, $saw[$search_array + 2]['id_mobil']);
+                    array_push($array_closest, $saw[$search_array + 1]['id_mobil']);
+                    array_push($array_closest, $saw[$search_array - 1]['id_mobil']);
                 }else{
                     $closest_mobil = $saw[$search_array - 1];
+                    array_push($array_closest, $saw[$search_array + 1]['id_mobil']);
+                    array_push($array_closest, $saw[$search_array - 1]['id_mobil']);
+                    array_push($array_closest, $saw[$search_array - 2]['id_mobil']);
                 };
             }
             
-            // dd($closest_mobil);
-            $mobil = Mobil::find($closest_mobil['id_mobil']);
-            $html =  view('frontend.layouts.card_car', ['item' => $mobil, 'index' => $mobil->id])->render();
+            // dd($array_closest);
+            $mobil = Mobil::whereIn('id', $array_closest)->get();
+            $html =  view('frontend.layouts.saw_result', ['item' => $mobil])->render();
+            // dd($html);
         }catch(Exception $e){
             Log::info($e->getMessage());
+            // dd($e->getMessage());
             return response(['code' => 0, 'message' => 'Gagal mencari mobil yang sesuai']);
         }
 

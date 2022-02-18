@@ -38,7 +38,7 @@
 
 <div class="btn-perhitungan p-3">
     {{-- <a href="{{route('saw.index')}}" class="btn btn-danger">Kembali</a> --}}
-        <button type="submit" class="btn btn-primary">Update Perhitungan</button>
+        <button type="submit" class="btn btn-primary">Update Kriteria Mobil</button>
 </div>
 
 {!! Form::close() !!}

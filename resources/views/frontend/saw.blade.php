@@ -47,7 +47,8 @@
 
 <section id="recommendation-section" class="d-none section-padding section-padding-bottom bg-light-white kategori-form">
     <div class="container">
-        <div class="row justify-content-center">
+        <div id="cardCar"></div>
+        {{-- <div class="row justify-content-center">
             <div class="col-lg-8 col-12">
                 <div class="tabs">
                     <div class="tab-content bg-custom-white bx-wrapper padding-20">
@@ -64,7 +65,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 
